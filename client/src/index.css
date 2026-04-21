@@ -1,0 +1,359 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Default theme variables (Blossom) — overridden by ThemeContext */
+  :root {
+    --color-primary: #D4829A;
+    --color-primary-light: #F2C4D0;
+    --color-accent: #C9A84C;
+    --color-accent-light: #F0E0A8;
+    --color-bg: #FFFDF7;
+    --color-surface: #FFF5F7;
+    --color-border: #F0D8DF;
+    --color-text: #4A2C35;
+    --color-text-muted: #9A7A82;
+    --color-success: #7BAE7F;
+    --color-warning: #E8A44A;
+    --color-danger: #C0505A;
+    --color-card-bg: #FFFFFF;
+    --color-navbar-bg: #FFFDF7;
+    --color-button-text: #FFFFFF;
+    --color-heading: #b5687a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+
+  /* ─── Buttons — pill shape with gradient ─────────────────────── */
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.97];
+    background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 70%, var(--color-accent)) 100%);
+    color: var(--color-button-text);
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.97];
+    background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 80%, var(--color-primary)));
+    color: #fff;
+  }
+  .btn-accent:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 border-2 active:scale-[0.97];
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: transparent;
+  }
+  .btn-outline:hover {
+    background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, var(--color-accent)));
+    color: var(--color-button-text);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-full font-medium text-sm transition-all duration-200 active:scale-[0.97];
+    color: var(--color-text-muted);
+    background-color: transparent;
+  }
+  .btn-ghost:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 shadow-md active:scale-[0.97];
+    background-color: var(--color-danger);
+    color: #fff;
+  }
+  .btn-danger:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+  /* ─── Cards ───────────────────────────────────────────────────── */
+
+  .card {
+    @apply rounded-2xl p-6 transition-all duration-200;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+  }
+
+  /* ─── Frosted Glass ───────────────────────────────────────────── */
+
+  .glass {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* ─── Form Inputs ─────────────────────────────────────────────── */
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border outline-none transition-all duration-200 text-sm;
+    background-color: var(--color-card-bg);
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+  .input-field:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+  }
+  .input-field::placeholder { color: var(--color-text-muted); }
+
+  .input-glass {
+    @apply w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 text-sm;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+  }
+  .input-glass::placeholder { color: rgba(255,255,255,0.6); }
+  .input-glass:focus {
+    background: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+  }
+
+  .label {
+    @apply block text-sm font-medium mb-2;
+    color: var(--color-text);
+  }
+
+  .label-light {
+    @apply block text-sm font-medium mb-2;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ─── Typography ──────────────────────────────────────────────── */
+
+  .section-title {
+    @apply text-3xl font-display font-bold mb-2;
+    color: var(--color-heading);
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    @apply text-sm mb-8;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .font-vibes { font-family: 'Great Vibes', cursive; }
+
+  /* ─── Progress Bars ───────────────────────────────────────────── */
+
+  .progress-bar-track {
+    @apply h-2.5 rounded-full overflow-hidden;
+    background-color: var(--color-surface);
+  }
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-700;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  }
+
+  /* ─── Tags / Badges ───────────────────────────────────────────── */
+
+  .tag {
+    @apply text-xs px-3 py-1 rounded-full font-medium;
+    background-color: var(--color-accent-light);
+    color: var(--color-text);
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  /* ─── Nav ─────────────────────────────────────────────────────── */
+
+  .nav-link { @apply px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-150; }
+  .nav-link.active {
+    background-color: var(--color-primary);
+    color: #ffffff; /* Always white — must be readable over any theme primary colour */
+  }
+
+  /* ─── Tabs ────────────────────────────────────────────────────── */
+
+  .tab-btn { @apply px-5 py-2 text-sm font-medium rounded-full transition-all duration-150 border; border-color: transparent; }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, var(--color-accent)));
+    color: var(--color-button-text);
+    border-color: transparent;
+  }
+  .tab-btn:not(.active) { color: var(--color-text-muted); }
+  .tab-btn:not(.active):hover {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  /* ─── Stat Card ───────────────────────────────────────────────── */
+
+  .stat-card { @apply card flex flex-col gap-1 p-5; }
+
+  /* ─── Hero Overlay ────────────────────────────────────────────── */
+
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.45) 0%,
+      rgba(0,0,0,0.3) 50%,
+      rgba(0,0,0,0.55) 100%
+    );
+  }
+
+  /* ─── Floral Divider ──────────────────────────────────────────── */
+
+  .floral-divider {
+    @apply flex items-center justify-center my-8 gap-4;
+  }
+  .floral-divider::before,
+  .floral-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+
+  /* ─── Celebration ─────────────────────────────────────────────── */
+
+  .celebration-overlay {
+    @apply fixed inset-0 flex items-center justify-center z-50 pointer-events-none;
+  }
+
+  @keyframes confettiFall {
+    0%   { transform: translateY(-100px) rotate(0deg);   opacity: 1; }
+    100% { transform: translateY(100vh)  rotate(720deg); opacity: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1);    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+
+  .animate-fade-in   { animation: fadeIn  0.45s ease-out both; }
+  .animate-scale-in  { animation: scaleIn 0.35s ease-out both; }
+  .animate-float     { animation: float 4s ease-in-out infinite; }
+
+  .divider {
+    @apply my-6;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* ─── Image Cards ─────────────────────────────────────────────── */
+
+  .venue-img {
+    @apply w-full rounded-xl object-cover;
+    height: 180px;
+  }
+
+  /* ─── Shimmer skeleton ───────────────────────────────────────── */
+
+  @keyframes shimmer {
+    0%   { background-position: -600px 0; }
+    100% { background-position:  600px 0; }
+  }
+
+  .shimmer-card,
+  .shimmer-bar {
+    background: linear-gradient(
+      90deg,
+      var(--color-surface) 25%,
+      var(--color-border)  50%,
+      var(--color-surface) 75%
+    );
+    background-size: 1200px 100%;
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+
+  /* ─── Scrollbar ───────────────────────────────────────────────── */
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--color-surface); }
+  ::-webkit-scrollbar-thumb { background: var(--color-primary-light); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+}
+
+/* ─── Print ───────────────────────────────────────────────────────── */
+
+.print-only { display: none; }
+
+@media print {
+  .no-print,
+  nav,
+  .navbar-solid,
+  .navbar-transparent,
+  .navbar-transition { display: none !important; }
+
+  .print-only { display: block !important; }
+
+  body {
+    background: #fff !important;
+    color: #333 !important;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pt-16 { padding-top: 0 !important; }
+
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+}
+
+/* ─── Navbar ──────────────────────────────────────────────────────── */
+/* Navbar appearance is now controlled entirely via inline styles in Navbar.jsx
+   so that solid state always uses var(--color-card-bg) (white/off-white across
+   all themes) with #2d2d2d dark text — guaranteeing readability in every theme.
+   These legacy classes are kept as no-ops to avoid breaking any stale references. */
+
+.navbar-transparent { background: transparent; }
+.navbar-solid       { background: var(--color-card-bg); }
+.navbar-transition  { background: var(--color-card-bg); }
