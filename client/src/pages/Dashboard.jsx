@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import CountdownClock from '../components/CountdownClock'
@@ -12,6 +13,144 @@ import BudgetIllustration from '../components/illustrations/BudgetIllustration'
 import ChecklistIllustration from '../components/illustrations/ChecklistIllustration'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
+
+const OWM_KEY = import.meta.env.VITE_OPENWEATHER_KEY
+
+function WeatherWidget({ venueLocation, weddingDate }) {
+  const [weather, setWeather] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (!venueLocation || !OWM_KEY) return
+    const city = venueLocation.split(',')[0].trim()
+    if (!city) return
+
+    setLoading(true)
+    setError(null)
+
+    const daysUntil = weddingDate
+      ? Math.ceil((new Date(weddingDate) - new Date()) / 864e5)
+      : null
+
+    const useForecast = daysUntil !== null && daysUntil >= 0 && daysUntil <= 5
+    const endpoint = useForecast
+      ? `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${OWM_KEY}&units=metric`
+      : `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${OWM_KEY}&units=metric`
+
+    fetch(endpoint)
+      .then((r) => r.json())
+      .then((data) => {
+        const cod = String(data.cod)
+        if (cod !== '200') throw new Error(data.message || 'Weather unavailable')
+
+        if (useForecast && data.list) {
+          const entry = data.list.find((item) => item.dt_txt?.startsWith(weddingDate)) || data.list[0]
+          setWeather({ ...entry, cityName: data.city?.name || city, isForecast: true, daysUntil })
+        } else {
+          setWeather({
+            main: data.main,
+            weather: data.weather,
+            wind: data.wind,
+            cityName: data.name || city,
+            isForecast: false,
+            daysUntil,
+          })
+        }
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false))
+  }, [venueLocation, weddingDate])
+
+  if (!venueLocation) {
+    return (
+      <div className="card p-8 text-center" style={{ background: 'var(--color-surface)', border: '1px dashed var(--color-border)' }}>
+        <div className="text-4xl mb-3 opacity-40">☁</div>
+        <p className="font-display text-base font-semibold mb-1" style={{ color: 'var(--color-text)' }}>
+          Wedding Day Weather
+        </p>
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Book a venue to see weather forecasts for your wedding location.
+        </p>
+      </div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className="card p-8 text-center" style={{ background: 'var(--color-surface)' }}>
+        <p className="text-2xl mb-2">☁</p>
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Loading weather for {venueLocation.split(',')[0]}...
+        </p>
+      </div>
+    )
+  }
+
+  if (error || !weather) {
+    return (
+      <div className="card p-6 text-center" style={{ background: 'var(--color-surface)', border: '1px dashed var(--color-border)' }}>
+        <div className="text-4xl mb-3 opacity-40">☁</div>
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Could not load weather for "{venueLocation.split(',')[0]}". Check your location or try again later.
+        </p>
+      </div>
+    )
+  }
+
+  const w = weather.weather?.[0]
+  const temp = Math.round(weather.main?.temp)
+  const feelsLike = Math.round(weather.main?.feels_like)
+  const humidity = weather.main?.humidity
+  const windSpeed = Math.round((weather.wind?.speed || 0) * 3.6)
+  const iconUrl = w?.icon ? `https://openweathermap.org/img/wn/${w.icon}@2x.png` : null
+
+  return (
+    <div className="card" style={{ background: 'var(--color-surface)' }}>
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h3 className="font-display font-semibold text-base" style={{ color: 'var(--color-accent)' }}>
+            {weather.isForecast ? 'Wedding Day Forecast' : 'Current Weather'}
+          </h3>
+          <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+            📍 {weather.cityName}
+            {weather.isForecast && weather.daysUntil !== null && (
+              <span> · {weather.daysUntil === 0 ? 'Today!' : weather.daysUntil === 1 ? 'Tomorrow!' : `In ${weather.daysUntil} days`}</span>
+            )}
+          </p>
+        </div>
+        {iconUrl && (
+          <img src={iconUrl} alt={w?.description} className="w-14 h-14 object-contain -mt-1" />
+        )}
+      </div>
+
+      <div className="flex items-end gap-6 mb-4">
+        <div>
+          <div className="font-display text-5xl font-bold leading-none" style={{ color: 'var(--color-primary)' }}>
+            {temp}°C
+          </div>
+          <div className="text-sm capitalize mt-1.5" style={{ color: 'var(--color-text-muted)' }}>
+            {w?.description || w?.main}
+          </div>
+        </div>
+        <div className="ml-auto text-right space-y-1 pb-1">
+          <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Feels like {feelsLike}°C</div>
+          <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>💧 Humidity {humidity}%</div>
+          <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>💨 Wind {windSpeed} km/h</div>
+        </div>
+      </div>
+
+      {!weather.isForecast && weddingDate && (
+        <div
+          className="text-xs p-3 rounded-lg text-center"
+          style={{ background: 'var(--color-primary-light)', color: 'var(--color-text-muted)' }}
+        >
+          5-day forecast becomes available within 5 days of your wedding date
+        </div>
+      )}
+    </div>
+  )
+}
 
 function QuickStatCard({ illustration, label, value, sub, to }) {
   const content = (
@@ -53,7 +192,7 @@ function QuickLink({ illustration, label, description, to }) {
 
 export default function Dashboard() {
   const {
-    partners, weddingDate,
+    partners, weddingDate, venueLocation,
     guestCount, confirmedCount,
     totalSpent, budgetTotal, budgetProgress,
     checklistProgress, checklistDone, checklistTotal,
@@ -164,20 +303,7 @@ export default function Dashboard() {
 
         <FloralDivider />
 
-        {/* Weather Widget Placeholder */}
-        <div
-          className="card p-8 text-center"
-          style={{ background: 'var(--color-surface)', border: '1px dashed var(--color-border)' }}
-        >
-          <div className="text-4xl mb-3 opacity-50">☁</div>
-          <p className="font-display text-base font-semibold mb-1" style={{ color: 'var(--color-text)' }}>
-            Wedding Day Weather
-          </p>
-          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-            {/* WEATHER WIDGET - wire up later */}
-            Forecast for your wedding day will appear here once your date and venue are confirmed.
-          </p>
-        </div>
+        <WeatherWidget venueLocation={venueLocation} weddingDate={weddingDate} />
       </div>
     </div>
   )

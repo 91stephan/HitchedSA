@@ -60,12 +60,14 @@ export default function SupplierCard({ supplier, categoryIcon }) {
         >
           🗺️ Maps
         </a>
-        <a
-          href={`tel:${supplier.contact}`}
-          className="btn-ghost text-xs px-3 py-1.5 inline-flex items-center gap-1"
-        >
-          📞 Contact
-        </a>
+        {supplier.contact && (
+          <a
+            href={`tel:${supplier.contact}`}
+            className="btn-ghost text-xs px-3 py-1.5 inline-flex items-center gap-1"
+          >
+            📞 Contact
+          </a>
+        )}
         <button
           onClick={toggle}
           className="text-xs px-3 py-1.5 rounded-lg border-2 transition-all ml-auto"

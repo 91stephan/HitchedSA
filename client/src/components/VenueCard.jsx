@@ -66,7 +66,7 @@ export default function VenueCard({ venue, onAddShortlist, onCompareToggle, comp
         </p>
 
         <div className="flex flex-wrap gap-1.5 mb-4">
-          <span className="tag">👥 {venue.capacity} guests</span>
+          {venue.capacity > 0 && <span className="tag">👥 {venue.capacity} guests</span>}
           <span className="tag" style={{ background: 'var(--color-primary-light)', color: 'var(--color-text)' }}>
             {venue.priceRange}
           </span>
@@ -83,12 +83,14 @@ export default function VenueCard({ venue, onAddShortlist, onCompareToggle, comp
           >
             🗺️ Maps
           </a>
-          <a
-            href={`tel:${venue.contact}`}
-            className="btn-ghost text-xs px-3 py-2"
-          >
-            📞 Call
-          </a>
+          {venue.contact && (
+            <a
+              href={`tel:${venue.contact}`}
+              className="btn-ghost text-xs px-3 py-2"
+            >
+              📞 Call
+            </a>
+          )}
           {showCompare && (
             <button
               onClick={() => onCompareToggle(venue)}
