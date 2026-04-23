@@ -1,169 +1,331 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react'
+import { supabase } from '../lib/supabase'
+import { useAuth } from './AuthContext'
 
 const AppContext = createContext(null)
 
-const LS_KEYS = {
-  PARTNERS: 'hitchedsa_partners',
-  WEDDING_DATE: 'hitchedsa_wedding_date',
-  FIRST_LAUNCH: 'hitchedsa_first_launch',
-  GUESTS: 'hitchedsa_guests',
-  BUDGET: 'hitchedsa_budget',
-  BUDGET_TOTAL: 'hitchedsa_budget_total',
-  CHECKLIST: 'hitchedsa_checklist',
-  IDEAS: 'hitchedsa_ideas',
-  VENUE_SHORTLIST: 'hitchedsa_venue_shortlist',
-  SUPPLIER_SHORTLIST: 'hitchedsa_supplier_shortlist',
-  VENUE_LOCATION: 'hitchedsa_venue_location',
+// ─── Supabase sync helpers ──────────────────────────────────────────────────
+
+async function syncTable(table, userId, rows) {
+  await supabase.from(table).delete().eq('user_id', userId)
+  if (rows.length > 0) await supabase.from(table).insert(rows)
 }
 
-function loadLS(key, fallback) {
-  try {
-    const val = localStorage.getItem(key)
-    return val !== null ? JSON.parse(val) : fallback
-  } catch {
-    return fallback
-  }
-}
+// ─── Row mappers ────────────────────────────────────────────────────────────
 
-function saveLS(key, value) {
-  localStorage.setItem(key, JSON.stringify(value))
-}
+const guestToDb = (g, userId) => ({
+  id:         g.id,
+  user_id:    userId,
+  name:       g.name       || '',
+  email:      g.email      || '',
+  phone:      g.phone      || '',
+  rsvp:       g.rsvp       || 'pending',
+  dietary:    g.dietary    || '',
+  table_id:   g.tableId    || '',
+  plus_one:   g.plusOne    || false,
+  created_at: g.createdAt  || new Date().toISOString(),
+})
+
+const guestFromDb = (r) => ({
+  id:        r.id,
+  name:      r.name,
+  email:     r.email,
+  phone:     r.phone,
+  rsvp:      r.rsvp,
+  dietary:   r.dietary,
+  tableId:   r.table_id,
+  plusOne:   r.plus_one,
+  createdAt: r.created_at,
+})
+
+const budgetToDb = (b, userId) => ({
+  id:           b.id,
+  user_id:      userId,
+  category:     b.category,
+  allocated:    b.allocated    || 0,
+  spent:        b.spent        || 0,
+  deposit_paid: b.depositPaid  || false,
+})
+
+const budgetFromDb = (r) => ({
+  id:          r.id,
+  category:    r.category,
+  allocated:   r.allocated,
+  spent:       r.spent,
+  depositPaid: r.deposit_paid,
+})
+
+const checklistToDb = (c, userId, idx) => ({
+  id:         c.id,
+  user_id:    userId,
+  phase:      c.phase      || '',
+  label:      c.label      || '',
+  done:       c.done       || false,
+  notes:      c.notes      || '',
+  due_date:   c.dueDate    || '',
+  sort_order: idx,
+})
+
+const checklistFromDb = (r) => ({
+  id:      r.id,
+  phase:   r.phase,
+  label:   r.label,
+  done:    r.done,
+  notes:   r.notes,
+  dueDate: r.due_date,
+})
+
+const ideaToDb = (i, userId) => ({
+  id:          i.id,
+  user_id:     userId,
+  title:       i.title       || '',
+  description: i.description || '',
+  category:    i.category    || 'General',
+  colour:      i.colour      || '',
+  image_url:   i.imageUrl    || '',
+  thumb_url:   i.thumbUrl    || '',
+  source:      i.source      || '',
+  note:        i.note        || '',
+  created_at:  i.createdAt   || new Date().toISOString(),
+})
+
+const ideaFromDb = (r) => ({
+  id:          r.id,
+  title:       r.title,
+  description: r.description,
+  category:    r.category,
+  colour:      r.colour,
+  imageUrl:    r.image_url,
+  thumbUrl:    r.thumb_url,
+  source:      r.source,
+  note:        r.note,
+  createdAt:   r.created_at,
+})
+
+// ─── Provider ────────────────────────────────────────────────────────────────
 
 export function AppProvider({ children }) {
-  const [partners, setPartnersState] = useState(() =>
-    loadLS(LS_KEYS.PARTNERS, { partner1: '', partner2: '' })
-  )
-  const [weddingDate, setWeddingDateState] = useState(() =>
-    loadLS(LS_KEYS.WEDDING_DATE, null)
-  )
-  const [firstLaunchDone, setFirstLaunchDone] = useState(() =>
-    loadLS(LS_KEYS.FIRST_LAUNCH, false)
-  )
-  const [guests, setGuestsState] = useState(() =>
-    loadLS(LS_KEYS.GUESTS, [])
-  )
-  const [budget, setBudgetState] = useState(() =>
-    loadLS(LS_KEYS.BUDGET, getDefaultBudget())
-  )
-  const [budgetTotal, setBudgetTotalState] = useState(() =>
-    loadLS(LS_KEYS.BUDGET_TOTAL, 200000)
-  )
-  const [checklist, setChecklistState] = useState(() =>
-    loadLS(LS_KEYS.CHECKLIST, getDefaultChecklist())
-  )
-  const [ideas, setIdeasState] = useState(() =>
-    loadLS(LS_KEYS.IDEAS, getDefaultIdeas())
-  )
-  const [venueShortlist, setVenueShortlistState] = useState(() =>
-    loadLS(LS_KEYS.VENUE_SHORTLIST, [])
-  )
-  const [supplierShortlist, setSupplierShortlistState] = useState(() =>
-    loadLS(LS_KEYS.SUPPLIER_SHORTLIST, [])
-  )
-  const [venueLocation, setVenueLocationState] = useState(() =>
-    loadLS(LS_KEYS.VENUE_LOCATION, '')
-  )
+  const { user } = useAuth()
+
+  const [appLoading, setAppLoading] = useState(true)
+
+  const [partners,         setPartnersState]        = useState({ partner1: '', partner2: '' })
+  const [weddingDate,      setWeddingDateState]      = useState(null)
+  const [firstLaunchDone,  setFirstLaunchDone]       = useState(false)
+  const [guests,           setGuestsState]           = useState([])
+  const [budget,           setBudgetState]           = useState(getDefaultBudget())
+  const [budgetTotal,      setBudgetTotalState]      = useState(200000)
+  const [checklist,        setChecklistState]        = useState(getDefaultChecklist())
+  const [ideas,            setIdeasState]            = useState([])
+  const [venueShortlist,   setVenueShortlistState]   = useState([])
+  const [supplierShortlist,setSupplierShortlistState]= useState([])
+  const [venueLocation,    setVenueLocationState]    = useState('')
+
+  // Refs so callbacks always have latest values without being recreated
+  const guestsRef           = useRef([])
+  const budgetRef           = useRef(getDefaultBudget())
+  const checklistRef        = useRef(getDefaultChecklist())
+  const ideasRef            = useRef([])
+  const venueShortlistRef   = useRef([])
+  const supplierShortlistRef= useRef([])
+
+  useEffect(() => { guestsRef.current            = guests           }, [guests])
+  useEffect(() => { budgetRef.current             = budget            }, [budget])
+  useEffect(() => { checklistRef.current          = checklist         }, [checklist])
+  useEffect(() => { ideasRef.current              = ideas             }, [ideas])
+  useEffect(() => { venueShortlistRef.current     = venueShortlist    }, [venueShortlist])
+  useEffect(() => { supplierShortlistRef.current  = supplierShortlist }, [supplierShortlist])
+
+  // ── Load all data when user changes ──────────────────────────────────────
+
+  useEffect(() => {
+    if (!user) { setAppLoading(false); return }
+    loadAllData(user.id)
+  }, [user])
+
+  async function loadAllData(userId) {
+    setAppLoading(true)
+    try {
+      const [profileRes, guestsRes, budgetRes, checklistRes, ideasRes] = await Promise.all([
+        supabase.from('profiles').select('*').eq('id', userId).single(),
+        supabase.from('guests').select('*').eq('user_id', userId),
+        supabase.from('budget_categories').select('*').eq('user_id', userId),
+        supabase.from('checklist_items').select('*').eq('user_id', userId).order('sort_order'),
+        supabase.from('ideas').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+      ])
+
+      if (profileRes.data) {
+        const p = profileRes.data
+        const p1 = p.partner1 || ''
+        const p2 = p.partner2 || ''
+        setPartnersState({ partner1: p1, partner2: p2 })
+        setWeddingDateState(p.wedding_date || null)
+        setBudgetTotalState(Number(p.budget_total) || 200000)
+        setVenueLocationState(p.venue_location || '')
+        setFirstLaunchDone(!!(p1 && p2))
+      }
+
+      if (guestsRes.data?.length) {
+        const mapped = guestsRes.data.map(guestFromDb)
+        setGuestsState(mapped)
+        guestsRef.current = mapped
+      }
+
+      if (budgetRes.data?.length) {
+        const mapped = budgetRes.data.map(budgetFromDb)
+        setBudgetState(mapped)
+        budgetRef.current = mapped
+      } else {
+        const defaults = getDefaultBudget()
+        setBudgetState(defaults)
+        budgetRef.current = defaults
+        await supabase.from('budget_categories').insert(defaults.map(b => budgetToDb(b, userId)))
+      }
+
+      if (checklistRes.data?.length) {
+        const mapped = checklistRes.data.map(checklistFromDb)
+        setChecklistState(mapped)
+        checklistRef.current = mapped
+      } else {
+        const defaults = getDefaultChecklist()
+        setChecklistState(defaults)
+        checklistRef.current = defaults
+        await supabase.from('checklist_items').insert(defaults.map((c, i) => checklistToDb(c, userId, i)))
+      }
+
+      if (ideasRes.data?.length) {
+        const mapped = ideasRes.data.map(ideaFromDb)
+        setIdeasState(mapped)
+        ideasRef.current = mapped
+      }
+    } catch (err) {
+      console.error('HitchedSA: failed to load data', err)
+    } finally {
+      setAppLoading(false)
+    }
+  }
+
+  // ── Profile setters ───────────────────────────────────────────────────────
 
   const setPartners = useCallback((val) => {
     setPartnersState(val)
-    saveLS(LS_KEYS.PARTNERS, val)
-  }, [])
+    if (user) supabase.from('profiles').upsert({ id: user.id, partner1: val.partner1, partner2: val.partner2 })
+  }, [user])
 
   const setWeddingDate = useCallback((val) => {
     setWeddingDateState(val)
-    saveLS(LS_KEYS.WEDDING_DATE, val)
-  }, [])
+    if (user) supabase.from('profiles').upsert({ id: user.id, wedding_date: val })
+  }, [user])
 
   const completeFirstLaunch = useCallback((data) => {
     setPartnersState(data.partners)
-    saveLS(LS_KEYS.PARTNERS, data.partners)
-    if (data.weddingDate) {
-      setWeddingDateState(data.weddingDate)
-      saveLS(LS_KEYS.WEDDING_DATE, data.weddingDate)
-    }
+    if (data.weddingDate) setWeddingDateState(data.weddingDate)
     setFirstLaunchDone(true)
-    saveLS(LS_KEYS.FIRST_LAUNCH, true)
-  }, [])
-
-  const setGuests = useCallback((val) => {
-    const next = typeof val === 'function' ? val(guests) : val
-    setGuestsState(next)
-    saveLS(LS_KEYS.GUESTS, next)
-  }, [guests])
-
-  const setBudget = useCallback((val) => {
-    const next = typeof val === 'function' ? val(budget) : val
-    setBudgetState(next)
-    saveLS(LS_KEYS.BUDGET, next)
-  }, [budget])
-
-  const setBudgetTotal = useCallback((val) => {
-    setBudgetTotalState(val)
-    saveLS(LS_KEYS.BUDGET_TOTAL, val)
-  }, [])
-
-  const setChecklist = useCallback((val) => {
-    const next = typeof val === 'function' ? val(checklist) : val
-    setChecklistState(next)
-    saveLS(LS_KEYS.CHECKLIST, next)
-  }, [checklist])
-
-  const setIdeas = useCallback((val) => {
-    const next = typeof val === 'function' ? val(ideas) : val
-    setIdeasState(next)
-    saveLS(LS_KEYS.IDEAS, next)
-  }, [ideas])
-
-  const setVenueShortlist = useCallback((val) => {
-    const next = typeof val === 'function' ? val(venueShortlist) : val
-    setVenueShortlistState(next)
-    saveLS(LS_KEYS.VENUE_SHORTLIST, next)
-  }, [venueShortlist])
-
-  const setSupplierShortlist = useCallback((val) => {
-    const next = typeof val === 'function' ? val(supplierShortlist) : val
-    setSupplierShortlistState(next)
-    saveLS(LS_KEYS.SUPPLIER_SHORTLIST, next)
-  }, [supplierShortlist])
+    if (user) {
+      supabase.from('profiles').upsert({
+        id:           user.id,
+        partner1:     data.partners.partner1,
+        partner2:     data.partners.partner2,
+        wedding_date: data.weddingDate || null,
+      })
+    }
+  }, [user])
 
   const setVenueLocation = useCallback((val) => {
     setVenueLocationState(val)
-    saveLS(LS_KEYS.VENUE_LOCATION, val)
+    if (user) supabase.from('profiles').upsert({ id: user.id, venue_location: val })
+  }, [user])
+
+  // ── Collection setters ────────────────────────────────────────────────────
+
+  const setGuests = useCallback((val) => {
+    const next = typeof val === 'function' ? val(guestsRef.current) : val
+    setGuestsState(next)
+    guestsRef.current = next
+    if (user) syncTable('guests', user.id, next.map(g => guestToDb(g, user.id)))
+  }, [user])
+
+  const setBudget = useCallback((val) => {
+    const next = typeof val === 'function' ? val(budgetRef.current) : val
+    setBudgetState(next)
+    budgetRef.current = next
+    if (user) syncTable('budget_categories', user.id, next.map(b => budgetToDb(b, user.id)))
+  }, [user])
+
+  const setBudgetTotal = useCallback((val) => {
+    setBudgetTotalState(val)
+    if (user) supabase.from('profiles').upsert({ id: user.id, budget_total: val })
+  }, [user])
+
+  const setChecklist = useCallback((val) => {
+    const next = typeof val === 'function' ? val(checklistRef.current) : val
+    setChecklistState(next)
+    checklistRef.current = next
+    if (user) syncTable('checklist_items', user.id, next.map((c, i) => checklistToDb(c, user.id, i)))
+  }, [user])
+
+  const setIdeas = useCallback((val) => {
+    const next = typeof val === 'function' ? val(ideasRef.current) : val
+    setIdeasState(next)
+    ideasRef.current = next
+    if (user) syncTable('ideas', user.id, next.map(i => ideaToDb(i, user.id)))
+  }, [user])
+
+  const setVenueShortlist = useCallback((val) => {
+    const next = typeof val === 'function' ? val(venueShortlistRef.current) : val
+    setVenueShortlistState(next)
+    venueShortlistRef.current = next
   }, [])
 
-  const clearAllData = useCallback(() => {
-    Object.values(LS_KEYS).forEach((k) => localStorage.removeItem(k))
-    localStorage.removeItem('hitchedsa_theme')
+  const setSupplierShortlist = useCallback((val) => {
+    const next = typeof val === 'function' ? val(supplierShortlistRef.current) : val
+    setSupplierShortlistState(next)
+    supplierShortlistRef.current = next
+  }, [])
+
+  // ── Clear all data ────────────────────────────────────────────────────────
+
+  const clearAllData = useCallback(async () => {
+    if (!user) return
+    await Promise.all([
+      supabase.from('guests').delete().eq('user_id', user.id),
+      supabase.from('budget_categories').delete().eq('user_id', user.id),
+      supabase.from('checklist_items').delete().eq('user_id', user.id),
+      supabase.from('ideas').delete().eq('user_id', user.id),
+      supabase.from('seating_tables').delete().eq('user_id', user.id),
+      supabase.from('profiles').update({
+        partner1: '', partner2: '', wedding_date: null, budget_total: 200000, venue_location: '',
+      }).eq('id', user.id),
+    ])
     window.location.reload()
-  }, [])
+  }, [user])
 
-  // Derived stats
-  const guestCount = guests.length
-  const confirmedCount = guests.filter((g) => g.rsvp === 'confirmed').length
-  const pendingCount = guests.filter((g) => g.rsvp === 'pending').length
-  const declinedCount = guests.filter((g) => g.rsvp === 'declined').length
+  // ── Derived stats ─────────────────────────────────────────────────────────
 
-  const totalSpent = budget.reduce((sum, cat) => sum + (Number(cat.spent) || 0), 0)
-  const budgetProgress = budgetTotal > 0 ? Math.min((totalSpent / budgetTotal) * 100, 100) : 0
-
-  const checklistDone = checklist.filter((t) => t.done).length
-  const checklistProgress = checklist.length > 0 ? Math.round((checklistDone / checklist.length) * 100) : 0
+  const guestCount       = guests.length
+  const confirmedCount   = guests.filter((g) => g.rsvp === 'confirmed').length
+  const pendingCount     = guests.filter((g) => g.rsvp === 'pending').length
+  const declinedCount    = guests.filter((g) => g.rsvp === 'declined').length
+  const totalSpent       = budget.reduce((sum, cat) => sum + (Number(cat.spent) || 0), 0)
+  const budgetProgress   = budgetTotal > 0 ? Math.min((totalSpent / budgetTotal) * 100, 100) : 0
+  const checklistDone    = checklist.filter((t) => t.done).length
+  const checklistProgress= checklist.length > 0 ? Math.round((checklistDone / checklist.length) * 100) : 0
 
   return (
     <AppContext.Provider value={{
-      partners, setPartners,
-      weddingDate, setWeddingDate,
-      firstLaunchDone, completeFirstLaunch,
-      guests, setGuests,
-      budget, setBudget,
-      budgetTotal, setBudgetTotal,
-      checklist, setChecklist,
-      ideas, setIdeas,
-      venueShortlist, setVenueShortlist,
+      appLoading,
+      partners,          setPartners,
+      weddingDate,       setWeddingDate,
+      firstLaunchDone,   completeFirstLaunch,
+      guests,            setGuests,
+      budget,            setBudget,
+      budgetTotal,       setBudgetTotal,
+      checklist,         setChecklist,
+      ideas,             setIdeas,
+      venueShortlist,    setVenueShortlist,
       supplierShortlist, setSupplierShortlist,
-      venueLocation, setVenueLocation,
+      venueLocation,     setVenueLocation,
       clearAllData,
-      // Derived
       guestCount, confirmedCount, pendingCount, declinedCount,
       totalSpent, budgetProgress,
       checklistDone, checklistProgress, checklistTotal: checklist.length,
@@ -179,117 +341,54 @@ export function useApp() {
   return ctx
 }
 
-// ─── Default Data ──────────────────────────────────────────────────────────
-
-function getDefaultIdeas() {
-  return [
-    {
-      id: 'idea_sample_1',
-      title: 'Romantic Garden Arch',
-      description: 'A lush floral arch draped with white roses and trailing greenery — perfect for an outdoor ceremony backdrop.',
-      category: 'Decor',
-      colour: '#D4829A',
-      imageUrl: 'https://images.unsplash.com/photo-1478145046317-8ba85df4bfb0?auto=format&fit=crop&w=600&q=80',
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'idea_sample_2',
-      title: 'Cascading Bridal Bouquet',
-      description: 'Elegant cascading bouquet with garden roses, peonies, eucalyptus, and trailing ribbons.',
-      category: 'Flowers',
-      colour: '#C8B89A',
-      imageUrl: 'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?auto=format&fit=crop&w=600&q=80',
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'idea_sample_3',
-      title: 'Elegant Wedding Cake',
-      description: 'Three-tier semi-naked cake with fresh flowers, gold leaf accents, and a touch of greenery.',
-      category: 'Cake',
-      colour: '#C9A84C',
-      imageUrl: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=600&q=80',
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'idea_sample_4',
-      title: 'Dreamy Reception Tables',
-      description: 'Long banquet tables with candlelight, floral runners, mismatched vintage glassware, and warm fairy lights overhead.',
-      category: 'Decor',
-      colour: '#6B9E78',
-      imageUrl: 'https://images.unsplash.com/photo-1460978812857-470ed1c77af0?auto=format&fit=crop&w=600&q=80',
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'idea_sample_5',
-      title: 'Vineyard Ceremony Setting',
-      description: 'An intimate outdoor ceremony nestled between the vines with mountain views — pure Western Cape magic.',
-      category: 'Venue Inspiration',
-      colour: '#7A9E7E',
-      imageUrl: 'https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&w=600&q=80',
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'idea_sample_6',
-      title: 'Flowing Boho Dress',
-      description: 'A soft chiffon gown with a plunging back, lace bodice, and long flowing train — effortlessly romantic.',
-      category: 'Dress',
-      colour: '#F2C4D0',
-      imageUrl: 'https://images.unsplash.com/photo-1594552072238-b8a33785b6cd?auto=format&fit=crop&w=600&q=80',
-      createdAt: new Date().toISOString(),
-    },
-  ]
-}
+// ─── Default data ─────────────────────────────────────────────────────────────
 
 function getDefaultBudget() {
   return [
-    { id: 'venue', category: 'Venue', allocated: 60000, spent: 0, depositPaid: false },
-    { id: 'catering', category: 'Catering', allocated: 40000, spent: 0, depositPaid: false },
-    { id: 'photography', category: 'Photography & Video', allocated: 25000, spent: 0, depositPaid: false },
-    { id: 'dj', category: 'DJ & Entertainment', allocated: 15000, spent: 0, depositPaid: false },
-    { id: 'flowers', category: 'Flowers & Floral', allocated: 12000, spent: 0, depositPaid: false },
-    { id: 'cake', category: 'Wedding Cake', allocated: 5000, spent: 0, depositPaid: false },
-    { id: 'dress', category: 'Dress & Attire', allocated: 20000, spent: 0, depositPaid: false },
-    { id: 'decor', category: 'Décor & Styling', allocated: 10000, spent: 0, depositPaid: false },
-    { id: 'transport', category: 'Transport', allocated: 8000, spent: 0, depositPaid: false },
-    { id: 'other', category: 'Other', allocated: 5000, spent: 0, depositPaid: false },
+    { id: 'venue',       category: 'Venue',                allocated: 60000, spent: 0, depositPaid: false },
+    { id: 'catering',    category: 'Catering',             allocated: 40000, spent: 0, depositPaid: false },
+    { id: 'photography', category: 'Photography & Video',  allocated: 25000, spent: 0, depositPaid: false },
+    { id: 'dj',          category: 'DJ & Entertainment',   allocated: 15000, spent: 0, depositPaid: false },
+    { id: 'flowers',     category: 'Flowers & Floral',     allocated: 12000, spent: 0, depositPaid: false },
+    { id: 'cake',        category: 'Wedding Cake',         allocated:  5000, spent: 0, depositPaid: false },
+    { id: 'dress',       category: 'Dress & Attire',       allocated: 20000, spent: 0, depositPaid: false },
+    { id: 'decor',       category: 'Décor & Styling',      allocated: 10000, spent: 0, depositPaid: false },
+    { id: 'transport',   category: 'Transport',            allocated:  8000, spent: 0, depositPaid: false },
+    { id: 'other',       category: 'Other',                allocated:  5000, spent: 0, depositPaid: false },
   ]
 }
 
 function getDefaultChecklist() {
   const tasks = [
-    // Early Planning
-    { phase: 'early', label: 'Set your wedding budget', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Decide on a rough guest list size', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Research and shortlist venues', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Book your venue', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Set your wedding date', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Choose your wedding theme and colours', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Start researching photographers', done: false, notes: '', dueDate: '' },
-    { phase: 'early', label: 'Start looking at wedding dresses', done: false, notes: '', dueDate: '' },
-    // Getting Serious
-    { phase: 'serious', label: 'Book photographer and videographer', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Book DJ or live band', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Book florist', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Send save-the-dates', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Book makeup artist and hair stylist', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Order wedding cake or dessert table', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Book wedding transport (car hire)', done: false, notes: '', dueDate: '' },
-    { phase: 'serious', label: 'Plan honeymoon', done: false, notes: '', dueDate: '' },
-    // Final Stretch
-    { phase: 'final', label: 'Send out formal invitations', done: false, notes: '', dueDate: '' },
-    { phase: 'final', label: 'Finalise menu with caterer', done: false, notes: '', dueDate: '' },
-    { phase: 'final', label: 'Arrange seating plan', done: false, notes: '', dueDate: '' },
-    { phase: 'final', label: 'Confirm all supplier bookings', done: false, notes: '', dueDate: '' },
-    { phase: 'final', label: 'Purchase wedding rings', done: false, notes: '', dueDate: '' },
-    { phase: 'final', label: 'Final dress fitting', done: false, notes: '', dueDate: '' },
-    { phase: 'final', label: 'Collect RSVPs and finalise guest list', done: false, notes: '', dueDate: '' },
-    // Wedding Week
-    { phase: 'week', label: 'Confirm venue setup details', done: false, notes: '', dueDate: '' },
-    { phase: 'week', label: 'Deliver items to venue', done: false, notes: '', dueDate: '' },
-    { phase: 'week', label: 'Prepare wedding day schedule', done: false, notes: '', dueDate: '' },
-    { phase: 'week', label: 'Delegate tasks to wedding party', done: false, notes: '', dueDate: '' },
-    { phase: 'week', label: 'Rehearsal dinner', done: false, notes: '', dueDate: '' },
-    { phase: 'week', label: 'Prepare supplier payments / envelopes', done: false, notes: '', dueDate: '' },
+    { phase: 'early',   label: 'Set your wedding budget' },
+    { phase: 'early',   label: 'Decide on a rough guest list size' },
+    { phase: 'early',   label: 'Research and shortlist venues' },
+    { phase: 'early',   label: 'Book your venue' },
+    { phase: 'early',   label: 'Set your wedding date' },
+    { phase: 'early',   label: 'Choose your wedding theme and colours' },
+    { phase: 'early',   label: 'Start researching photographers' },
+    { phase: 'early',   label: 'Start looking at wedding dresses' },
+    { phase: 'serious', label: 'Book photographer and videographer' },
+    { phase: 'serious', label: 'Book DJ or live band' },
+    { phase: 'serious', label: 'Book florist' },
+    { phase: 'serious', label: 'Send save-the-dates' },
+    { phase: 'serious', label: 'Book makeup artist and hair stylist' },
+    { phase: 'serious', label: 'Order wedding cake or dessert table' },
+    { phase: 'serious', label: 'Book wedding transport (car hire)' },
+    { phase: 'serious', label: 'Plan honeymoon' },
+    { phase: 'final',   label: 'Send out formal invitations' },
+    { phase: 'final',   label: 'Finalise menu with caterer' },
+    { phase: 'final',   label: 'Arrange seating plan' },
+    { phase: 'final',   label: 'Confirm all supplier bookings' },
+    { phase: 'final',   label: 'Purchase wedding rings' },
+    { phase: 'final',   label: 'Final dress fitting' },
+    { phase: 'final',   label: 'Collect RSVPs and finalise guest list' },
+    { phase: 'week',    label: 'Confirm venue setup details' },
+    { phase: 'week',    label: 'Deliver items to venue' },
+    { phase: 'week',    label: 'Prepare wedding day schedule' },
+    { phase: 'week',    label: 'Delegate tasks to wedding party' },
+    { phase: 'week',    label: 'Rehearsal dinner' },
+    { phase: 'week',    label: 'Prepare supplier payments / envelopes' },
   ]
-  return tasks.map((t, i) => ({ ...t, id: `task_${i}` }))
+  return tasks.map((t, i) => ({ ...t, id: `task_${i}`, done: false, notes: '', dueDate: '' }))
 }

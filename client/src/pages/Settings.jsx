@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useTheme } from '../context/ThemeContext'
+import { useAuth } from '../context/AuthContext'
 import ThemePreviewCard from '../components/ThemePreviewCard'
 import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
@@ -9,6 +11,13 @@ import WeddingRingsIllustration from '../components/illustrations/WeddingRingsIl
 export default function Settings() {
   const { partners, setPartners, weddingDate, setWeddingDate, clearAllData } = useApp()
   const { themeId, applyTheme, themes } = useTheme()
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  const handleSignOut = async () => {
+    await signOut()
+    navigate('/')
+  }
 
   const [partner1, setPartner1] = useState(partners.partner1)
   const [partner2, setPartner2] = useState(partners.partner2)
@@ -172,13 +181,23 @@ export default function Settings() {
         </div>
       </Modal>
 
+      {/* Account */}
+      <div className="card mb-6">
+        <h2 className="font-display text-lg font-semibold mb-1" style={{ color: 'var(--color-accent)' }}>
+          Account
+        </h2>
+        <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
+          Signed in as <strong>{user?.email}</strong>
+        </p>
+        <button className="btn-outline text-sm" onClick={handleSignOut}>
+          Sign Out
+        </button>
+      </div>
+
       {/* App Info */}
       <div className="text-center mt-6">
         <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-          HitchedSA v0.1.0 · All data stored locally on this device
-          <br />
-          {/* SUPABASE - wire up cloud sync later */}
-          Cloud sync coming soon
+          HitchedSA v0.2.0 · Data synced securely to the cloud
         </p>
       </div>
     </div>
