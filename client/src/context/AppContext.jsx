@@ -207,34 +207,42 @@ export function AppProvider({ children }) {
 
   // ── Profile setters ───────────────────────────────────────────────────────
 
+  const updateProfile = useCallback((fields) => {
+    if (!user) return
+    supabase.from('profiles').update(fields).eq('id', user.id)
+      .then(({ error }) => { if (error) console.error('Profile update error:', error) })
+  }, [user])
+
   const setPartners = useCallback((val) => {
     setPartnersState(val)
-    if (user) supabase.from('profiles').upsert({ id: user.id, partner1: val.partner1, partner2: val.partner2 })
-  }, [user])
+    updateProfile({ partner1: val.partner1, partner2: val.partner2 })
+  }, [updateProfile])
 
   const setWeddingDate = useCallback((val) => {
     setWeddingDateState(val)
-    if (user) supabase.from('profiles').upsert({ id: user.id, wedding_date: val })
-  }, [user])
+    updateProfile({ wedding_date: val })
+  }, [updateProfile])
 
   const completeFirstLaunch = useCallback((data) => {
     setPartnersState(data.partners)
     if (data.weddingDate) setWeddingDateState(data.weddingDate)
     setFirstLaunchDone(true)
     if (user) {
-      supabase.from('profiles').upsert({
-        id:           user.id,
-        partner1:     data.partners.partner1,
-        partner2:     data.partners.partner2,
-        wedding_date: data.weddingDate || null,
-      })
+      supabase.from('profiles')
+        .update({
+          partner1:     data.partners.partner1,
+          partner2:     data.partners.partner2,
+          wedding_date: data.weddingDate || null,
+        })
+        .eq('id', user.id)
+        .then(({ error }) => { if (error) console.error('completeFirstLaunch error:', error) })
     }
   }, [user])
 
   const setVenueLocation = useCallback((val) => {
     setVenueLocationState(val)
-    if (user) supabase.from('profiles').upsert({ id: user.id, venue_location: val })
-  }, [user])
+    updateProfile({ venue_location: val })
+  }, [updateProfile])
 
   // ── Collection setters ────────────────────────────────────────────────────
 
@@ -254,8 +262,8 @@ export function AppProvider({ children }) {
 
   const setBudgetTotal = useCallback((val) => {
     setBudgetTotalState(val)
-    if (user) supabase.from('profiles').upsert({ id: user.id, budget_total: val })
-  }, [user])
+    updateProfile({ budget_total: val })
+  }, [updateProfile])
 
   const setChecklist = useCallback((val) => {
     const next = typeof val === 'function' ? val(checklistRef.current) : val
