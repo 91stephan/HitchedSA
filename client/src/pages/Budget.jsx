@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
 import BudgetIllustration from '../components/illustrations/BudgetIllustration'
+import AdBanner from '../components/AdBanner'
 
 const CATEGORY_ICONS = {
   'Venue': '🏛️', 'Catering': '🍽️', 'Photography & Video': '📸',
@@ -89,6 +90,8 @@ export default function Budget() {
           </div>
         </div>
       </div>
+
+      <AdBanner slot="budget-mid" size="leaderboard" />
 
       {/* Category Breakdown */}
       <div className="space-y-3">

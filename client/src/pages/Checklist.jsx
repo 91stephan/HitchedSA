@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext'
 import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
 import ChecklistIllustration from '../components/illustrations/ChecklistIllustration'
+import AdBanner from '../components/AdBanner'
 
 // Time-based groups (when date is set)
 function getMonthsOut(weddingDate) {
@@ -174,6 +175,8 @@ export default function Checklist() {
           {checklistDone} of {checklist.length} tasks completed
         </p>
       </div>
+
+      <AdBanner slot="checklist-mid" size="leaderboard" />
 
       <FloralDivider />
 

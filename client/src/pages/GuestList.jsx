@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
 import GuestIllustration from '../components/illustrations/GuestIllustration'
+import AdBanner from '../components/AdBanner'
 
 const RSVP_OPTIONS = ['pending', 'confirmed', 'declined']
 const RSVP_STYLES = {
@@ -114,6 +115,8 @@ export default function GuestList() {
           </div>
         ))}
       </div>
+
+      <AdBanner slot="guests-mid" size="leaderboard" />
 
       {/* Add/Edit Form */}
       {showForm && (

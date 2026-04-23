@@ -2,6 +2,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import CountdownClock from '../components/CountdownClock'
 import FloralDivider from '../components/FloralDivider'
+import AdBanner from '../components/AdBanner'
 import WeddingRingsIllustration from '../components/illustrations/WeddingRingsIllustration'
 import VenueIllustration from '../components/illustrations/VenueIllustration'
 import SupplierIllustration from '../components/illustrations/SupplierIllustration'
@@ -127,6 +128,8 @@ export default function Dashboard() {
           <QuickStatCard illustration={<VenueIllustration size={36} />} label="Venue" value={weddingDate ? '✓' : '—'} sub={weddingDate ? 'Booked' : 'Not set'} to="/venues" />
         </div>
 
+        <AdBanner slot="dashboard-top" size="leaderboard" className="mb-6" />
+
         <FloralDivider />
 
         {/* Budget progress */}
@@ -156,6 +159,8 @@ export default function Dashboard() {
           <QuickLink illustration={<BudgetIllustration size={56} />} label="Budget Tracker" description="Allocate and track your wedding spend" to="/budget" />
           <QuickLink illustration={<ChecklistIllustration size={56} />} label="Checklist" description="Never miss an important task" to="/checklist" />
         </div>
+
+        <AdBanner slot="dashboard-mid" size="leaderboard" className="mb-6" />
 
         <FloralDivider />
 
