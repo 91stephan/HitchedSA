@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
+import AdBanner from '../components/AdBanner'
 import SeatingIllustration from '../components/illustrations/SeatingIllustration'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920&q=80'
@@ -450,6 +451,8 @@ export default function SeatingPlanner() {
             </div>
           ))}
         </div>
+
+        <AdBanner size="leaderboard" className="no-print" />
 
         <FloralDivider className="no-print" />
 

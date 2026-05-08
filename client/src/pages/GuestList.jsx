@@ -204,10 +204,12 @@ export default function GuestList() {
           <span style={{ color: 'var(--color-text)' }}>{selectedIds.length} selected</span>
           <button className="btn-ghost text-xs px-3 py-1" onClick={clearSelection}>Clear</button>
           <button className="btn-ghost text-xs px-3 py-1" onClick={selectAll}>Select All</button>
-          {/* EVITE SERVICE - wire up later */}
-          <button className="btn-outline text-xs px-3 py-1.5" onClick={() => alert('Evite sending — coming soon!')}>
+          <a
+            href={`mailto:?subject=You're Invited!&body=We'd love you to join us on our special day. Please RSVP at: https://hitchedsa.co.za`}
+            className="btn-outline text-xs px-3 py-1.5"
+          >
             📧 Send Evite
-          </button>
+          </a>
           <button className="btn-danger text-xs px-3 py-1.5 ml-auto" onClick={deleteSelected}>
             🗑️ Delete Selected
           </button>

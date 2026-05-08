@@ -230,12 +230,12 @@ export default function Suppliers() {
             <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
               Are you a wedding supplier?
             </p>
-            <button
-              className="btn-outline text-xs mt-2 px-3 py-1.5"
-              onClick={() => alert('Supplier listings coming soon!')}
+            <a
+              href="mailto:hello@hitchedsa.co.za?subject=Supplier Listing Enquiry"
+              className="btn-outline text-xs mt-2 px-3 py-1.5 inline-block"
             >
               List Your Business
-            </button>
+            </a>
           </div>
         </aside>
       </div>
