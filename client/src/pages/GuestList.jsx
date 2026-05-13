@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useApp } from '../context/AppContext'
 import GuestIllustration from '../components/illustrations/GuestIllustration'
 import AdBanner from '../components/AdBanner'
@@ -7,24 +7,25 @@ const RSVP_OPTIONS = ['pending', 'confirmed', 'declined']
 const RSVP_STYLES = {
   pending:   { bg: 'var(--color-warning)', text: '#fff' },
   confirmed: { bg: 'var(--color-success)', text: '#fff' },
-  declined:  { bg: 'var(--color-danger)', text: '#fff' },
+  declined:  { bg: 'var(--color-danger)',  text: '#fff' },
 }
 const RSVP_LABELS = { pending: '⏳ Pending', confirmed: '✅ Confirmed', declined: '❌ Declined' }
 
 const DIETARY_OPTIONS = ['None', 'Vegetarian', 'Vegan', 'Halal', 'Kosher', 'Gluten-Free', 'Dairy-Free', 'Nut Allergy', 'Other']
 
 const SORT_OPTIONS = [
-  { value: 'name', label: 'Name (A–Z)' },
-  { value: 'rsvp', label: 'RSVP Status' },
-  { value: 'table', label: 'Table Number' },
+  { value: 'name',     label: 'Name (A–Z)' },
+  { value: 'rsvp',    label: 'RSVP Status' },
+  { value: 'table',   label: 'Table Number' },
+  { value: 'age',     label: 'Age Group' },
 ]
 
-const EMPTY_FORM = { name: '', email: '', phone: '', rsvp: 'pending', dietary: 'None', table: '' }
+const EMPTY_FORM = { name: '', email: '', phone: '', rsvp: 'pending', dietary: 'None', table: '', ageGroup: 'adult' }
 
 function exportCSV(guests) {
-  const headers = ['Name', 'Email', 'Phone', 'RSVP', 'Dietary', 'Table']
-  const rows = guests.map((g) => [g.name, g.email, g.phone, g.rsvp, g.dietary, g.table])
-  const csv = [headers, ...rows].map((r) => r.map((c) => `"${c}"`).join(',')).join('\n')
+  const headers = ['Name', 'Email', 'Phone', 'RSVP', 'Dietary', 'Table', 'Age Group']
+  const rows = guests.map((g) => [g.name, g.email, g.phone, g.rsvp, g.dietary, g.table, g.ageGroup === 'child' ? 'Child (under 12)' : 'Adult'])
+  const csv = [headers, ...rows].map((r) => r.map((c) => `"${c ?? ''}"`).join(',')).join('\n')
   const blob = new Blob([csv], { type: 'text/csv' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
@@ -43,6 +44,10 @@ export default function GuestList() {
   const [filterRsvp, setFilterRsvp] = useState('all')
   const [selectedIds, setSelectedIds] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const formRef = useRef(null)
+
+  const adultsCount   = guests.filter((g) => g.ageGroup !== 'child').length
+  const childrenCount = guests.filter((g) => g.ageGroup === 'child').length
 
   const validate = () => {
     const e = {}
@@ -65,49 +70,54 @@ export default function GuestList() {
   }
 
   const startEdit = (guest) => {
-    setForm({ name: guest.name, email: guest.email, phone: guest.phone, rsvp: guest.rsvp, dietary: guest.dietary, table: guest.table })
+    setForm({
+      name: guest.name, email: guest.email, phone: guest.phone,
+      rsvp: guest.rsvp, dietary: guest.dietary, table: guest.table || '',
+      ageGroup: guest.ageGroup || 'adult',
+    })
     setEditId(guest.id)
     setShowForm(true)
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50)
   }
 
   const deleteGuest = (id) => setGuests((prev) => prev.filter((g) => g.id !== id))
 
-  const toggleSelect = (id) => setSelectedIds((prev) => prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id])
-  const selectAll = () => setSelectedIds(sortedFiltered.map((g) => g.id))
+  const toggleSelect  = (id) => setSelectedIds((prev) => prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id])
+  const selectAll     = () => setSelectedIds(sortedFiltered.map((g) => g.id))
   const clearSelection = () => setSelectedIds([])
-  const deleteSelected = () => {
-    setGuests((prev) => prev.filter((g) => !selectedIds.includes(g.id)))
-    setSelectedIds([])
-  }
+  const deleteSelected = () => { setGuests((prev) => prev.filter((g) => !selectedIds.includes(g.id))); setSelectedIds([]) }
 
   const sortedFiltered = [...guests]
     .filter((g) => filterRsvp === 'all' || g.rsvp === filterRsvp)
     .sort((a, b) => {
-      if (sortBy === 'name') return a.name.localeCompare(b.name)
-      if (sortBy === 'rsvp') return a.rsvp.localeCompare(b.rsvp)
+      if (sortBy === 'name')  return a.name.localeCompare(b.name)
+      if (sortBy === 'rsvp')  return a.rsvp.localeCompare(b.rsvp)
       if (sortBy === 'table') return (Number(a.table) || 0) - (Number(b.table) || 0)
+      if (sortBy === 'age')   return (a.ageGroup || 'adult').localeCompare(b.ageGroup || 'adult')
       return 0
     })
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 animate-fade-in">
-      <div className="flex items-start justify-between mb-2">
+      <div className="flex items-start justify-between mb-2" ref={formRef}>
         <div>
           <h1 className="section-title">Guest List</h1>
           <p className="section-subtitle">Manage your wedding guests and RSVPs</p>
         </div>
         <button className="btn-primary text-sm shrink-0" onClick={() => { setShowForm((s) => !s); setEditId(null); setForm(EMPTY_FORM) }}>
-          {showForm ? '✕ Close' : '+ Add Guest'}
+          {showForm && !editId ? '✕ Close' : '+ Add Guest'}
         </button>
       </div>
 
       {/* Summary Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
         {[
-          { label: 'Total Guests', value: guestCount, color: 'var(--color-primary)' },
+          { label: 'Total',     value: guestCount,     color: 'var(--color-primary)' },
+          { label: 'Adults',    value: adultsCount,    color: 'var(--color-accent)' },
+          { label: 'Children',  value: childrenCount,  color: 'var(--color-primary)' },
           { label: 'Confirmed', value: confirmedCount, color: 'var(--color-success)' },
-          { label: 'Pending', value: pendingCount, color: 'var(--color-warning)' },
-          { label: 'Declined', value: declinedCount, color: 'var(--color-danger)' },
+          { label: 'Pending',   value: pendingCount,   color: 'var(--color-warning)' },
+          { label: 'Declined',  value: declinedCount,  color: 'var(--color-danger)' },
         ].map((s) => (
           <div key={s.label} className="card py-3 px-4 text-center">
             <div className="text-2xl font-bold font-display" style={{ color: s.color }}>{s.value}</div>
@@ -146,6 +156,14 @@ export default function GuestList() {
               <select className="input-field" value={form.rsvp}
                 onChange={(e) => setForm((f) => ({ ...f, rsvp: e.target.value }))}>
                 {RSVP_OPTIONS.map((o) => <option key={o} value={o}>{RSVP_LABELS[o]}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="label">Age Group</label>
+              <select className="input-field" value={form.ageGroup}
+                onChange={(e) => setForm((f) => ({ ...f, ageGroup: e.target.value }))}>
+                <option value="adult">Adult</option>
+                <option value="child">Child (under 12)</option>
               </select>
             </div>
             <div>
@@ -241,6 +259,7 @@ export default function GuestList() {
                 <th className="py-3 px-4 text-left font-semibold" style={{ color: 'var(--color-text)' }}>Name</th>
                 <th className="py-3 px-4 text-left font-semibold hidden sm:table-cell" style={{ color: 'var(--color-text)' }}>Contact</th>
                 <th className="py-3 px-4 text-left font-semibold" style={{ color: 'var(--color-text)' }}>RSVP</th>
+                <th className="py-3 px-4 text-left font-semibold hidden md:table-cell" style={{ color: 'var(--color-text)' }}>Age</th>
                 <th className="py-3 px-4 text-left font-semibold hidden md:table-cell" style={{ color: 'var(--color-text)' }}>Dietary</th>
                 <th className="py-3 px-4 text-left font-semibold hidden lg:table-cell" style={{ color: 'var(--color-text)' }}>Table</th>
                 <th className="py-3 px-4 text-right font-semibold" style={{ color: 'var(--color-text)' }}>Actions</th>
@@ -267,6 +286,11 @@ export default function GuestList() {
                       style={{ background: RSVP_STYLES[guest.rsvp]?.bg, color: RSVP_STYLES[guest.rsvp]?.text }}
                     >
                       {guest.rsvp}
+                    </span>
+                  </td>
+                  <td className="py-2.5 px-4 hidden md:table-cell">
+                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                      {guest.ageGroup === 'child' ? '👶 Child' : '👤 Adult'}
                     </span>
                   </td>
                   <td className="py-2.5 px-4 hidden md:table-cell">

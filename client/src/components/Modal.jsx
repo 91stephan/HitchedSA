@@ -17,11 +17,11 @@ export default function Modal({ open, onClose, title, children, maxWidth = 'max-
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div
-        className={`relative w-full ${maxWidth} rounded-2xl shadow-2xl animate-scale-in`}
-        style={{ background: 'var(--color-card-bg)' }}
+        className={`relative w-full ${maxWidth} rounded-2xl shadow-2xl animate-scale-in flex flex-col`}
+        style={{ background: 'var(--color-card-bg)', maxHeight: '90vh' }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b" style={{ borderColor: 'var(--color-border)' }}>
+        <div className="flex items-center justify-between p-5 border-b shrink-0" style={{ borderColor: 'var(--color-border)' }}>
           <h2 className="text-lg font-display font-semibold" style={{ color: 'var(--color-text)' }}>
             {title}
           </h2>
@@ -34,7 +34,7 @@ export default function Modal({ open, onClose, title, children, maxWidth = 'max-
           </button>
         </div>
         {/* Body */}
-        <div className="p-5">
+        <div className="p-5 overflow-y-auto">
           {children}
         </div>
       </div>

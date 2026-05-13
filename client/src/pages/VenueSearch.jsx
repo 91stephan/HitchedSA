@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import VenueCard from '../components/VenueCard'
 import VenueIllustration from '../components/illustrations/VenueIllustration'
@@ -19,6 +19,13 @@ const STAR_RATINGS = [
   { value: '4.5', label: '4.5+ Stars' },
 ]
 
+const LS_NOTES   = 'hitchedsa_shortlist_notes'
+const LS_RATINGS = 'hitchedsa_shortlist_ratings'
+
+function lsLoad(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback } catch { return fallback }
+}
+
 function mapPlace(place) {
   const photo = place.photos?.[0]?.name
   const priceLevelMap = ['', 'R–RR', 'RR–RRR', 'RRR–RRRR', 'RRRR+']
@@ -35,6 +42,7 @@ function mapPlace(place) {
     accommodation: false,
     mapsQuery: encodeURIComponent(place.formattedAddress || place.displayName?.text || ''),
     contact: place.nationalPhoneNumber || '',
+    website: place.websiteUri || '',
   }
 }
 
@@ -45,7 +53,7 @@ async function searchPlaces(keywords, location) {
     headers: {
       'Content-Type': 'application/json',
       'X-Goog-Api-Key': PLACES_KEY,
-      'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos,places.editorialSummary,places.nationalPhoneNumber,places.priceLevel',
+      'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos,places.editorialSummary,places.nationalPhoneNumber,places.priceLevel,places.websiteUri',
     },
     body: JSON.stringify({ textQuery: q, maxResultCount: 20 }),
   })
@@ -69,8 +77,16 @@ export default function VenueSearch() {
   const [bookingVenue, setBookingVenue] = useState(null)
   const [bookingDate, setBookingDate] = useState(weddingDate || '')
   const [showCelebration, setShowCelebration] = useState(false)
-  const [shortlistNotes, setShortlistNotes] = useState({})
-  const [shortlistRatings, setShortlistRatings] = useState({})
+  const [shortlistNotes,   setShortlistNotes]   = useState(() => lsLoad(LS_NOTES, {}))
+  const [shortlistRatings, setShortlistRatings] = useState(() => lsLoad(LS_RATINGS, {}))
+
+  useEffect(() => {
+    try { localStorage.setItem(LS_NOTES, JSON.stringify(shortlistNotes)) } catch {}
+  }, [shortlistNotes])
+
+  useEffect(() => {
+    try { localStorage.setItem(LS_RATINGS, JSON.stringify(shortlistRatings)) } catch {}
+  }, [shortlistRatings])
 
   const doSearch = async (overrideLocation) => {
     const loc = (overrideLocation ?? location).trim()
@@ -200,8 +216,11 @@ export default function VenueSearch() {
                 )}
               </div>
 
+              <p className="text-xs mt-4" style={{ color: 'var(--color-text-muted)' }}>
+                Tip: click ⚖️ on 2–3 venues then compare them side by side.
+              </p>
               {compareList.length >= 2 && (
-                <button className="btn-accent w-full mt-4 text-sm" onClick={() => setShowCompare(true)}>
+                <button className="btn-accent w-full mt-2 text-sm" onClick={() => setShowCompare(true)}>
                   ⚖️ Compare ({compareList.length}) Venues
                 </button>
               )}
@@ -393,10 +412,11 @@ export default function VenueSearch() {
             </thead>
             <tbody>
               {[
-                { label: 'Location', key: 'location' },
+                { label: 'Location',    key: 'location' },
                 { label: 'Price Range', key: 'priceRange' },
-                { label: 'Rating', key: 'rating', fmt: (v) => v > 0 ? `★ ${v.toFixed(1)}` : 'N/A' },
-                { label: 'Contact', key: 'contact', fmt: (v) => v || '—' },
+                { label: 'Rating',      key: 'rating',  fmt: (v) => v > 0 ? `★ ${v.toFixed(1)}` : 'N/A' },
+                { label: 'Phone',       key: 'contact', fmt: (v) => v || '—' },
+                { label: 'Website',     key: 'website', fmt: (v) => v ? <a href={v} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)' }}>Visit site</a> : '—' },
               ].map((row) => (
                 <tr key={row.key} style={{ borderTop: '1px solid var(--color-border)' }}>
                   <td className="py-2.5 pr-4 font-medium" style={{ color: 'var(--color-text-muted)' }}>{row.label}</td>

@@ -20,6 +20,7 @@ import SeatingPlanner from './pages/SeatingPlanner'
 import Budget from './pages/Budget'
 import Checklist from './pages/Checklist'
 import Settings from './pages/Settings'
+import Notebook from './pages/Notebook'
 
 function LoadingScreen() {
   return (
@@ -93,6 +94,7 @@ function AppRoutes() {
       <Route path="/seating"   element={<ProtectedRoute><SeatingPlanner /></ProtectedRoute>} />
       <Route path="/budget"    element={<ProtectedRoute><Budget /></ProtectedRoute>} />
       <Route path="/checklist" element={<ProtectedRoute><Checklist /></ProtectedRoute>} />
+      <Route path="/notebook"  element={<ProtectedRoute><Notebook /></ProtectedRoute>} />
       <Route path="/settings"  element={<ProtectedRoute><Settings /></ProtectedRoute>} />
 
       {/* ── Catch-all ────────────────────────────────────────────────────── */}

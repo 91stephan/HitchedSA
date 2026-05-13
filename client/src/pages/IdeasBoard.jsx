@@ -328,8 +328,9 @@ function UrlModal({ open, onClose, onSave }) {
         {showPreview && (
           <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--color-border)' }}>
             {imgError ? (
-              <div className="h-32 flex items-center justify-center text-sm" style={{ background: 'var(--color-surface)', color: 'var(--color-danger)' }}>
-                Could not load image — check the URL
+              <div className="h-32 flex flex-col items-center justify-center gap-2 px-4 text-sm text-center" style={{ background: 'var(--color-surface)', color: 'var(--color-danger)' }}>
+                <span>Could not load image — the URL may be protected.</span>
+                <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Tip: right-click → "Copy image address" for a direct link.</span>
               </div>
             ) : (
               <img src={url} alt="preview" className="w-full h-44 object-cover" onError={() => setImgError(true)} />
@@ -646,8 +647,8 @@ export default function IdeasBoard() {
       ════════════════════════════════════════════════════════════ */}
       {mainTab === 'discover' && (
         <>
-          {/* Search bar + action buttons */}
-          <form onSubmit={handleSearch} className="flex gap-2 mb-5">
+          {/* Search bar */}
+          <form onSubmit={handleSearch} className="flex gap-2 mb-3">
             <div className="relative flex-1">
               <input
                 className="input-field rounded-full pl-5 pr-12 py-3.5 text-base shadow-sm w-full"
@@ -667,18 +668,34 @@ export default function IdeasBoard() {
                 </svg>
               </button>
             </div>
-            <button type="button" className="btn-outline text-sm px-4 shrink-0" onClick={() => setShowUrlModal(true)}>
-              + URL
+          </form>
+
+          {/* Add your own image row */}
+          <div
+            className="flex items-center gap-3 p-3 rounded-xl mb-5"
+            style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
+          >
+            <span className="text-xs font-medium shrink-0" style={{ color: 'var(--color-text-muted)' }}>
+              Add your own:
+            </span>
+            <button
+              type="button"
+              className="btn-primary text-sm px-4 py-2 shrink-0"
+              onClick={() => setShowUrlModal(true)}
+            >
+              🔗 Paste Image URL
             </button>
             <button
               type="button"
-              className="text-sm px-4 shrink-0 rounded-full border font-medium transition-all duration-150"
-              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)', background: 'transparent' }}
+              className="btn-outline text-sm px-4 py-2 shrink-0"
               onClick={() => setShowUploadModal(true)}
             >
-              Upload
+              📁 Upload Photo
             </button>
-          </form>
+            <span className="text-xs hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
+              Works with any direct image link (right-click → Copy image address)
+            </span>
+          </div>
 
           {/* Category chips */}
           <div className="flex gap-2 flex-wrap mb-8 overflow-x-auto pb-1">

@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { path: '/venues',    label: 'Venues'    },
   { path: '/suppliers', label: 'Suppliers' },
   { path: '/ideas',     label: 'Ideas'     },
+  { path: '/notebook',  label: 'Notebook'  },
   { path: '/budget',    label: 'Budget'    },
   { path: '/checklist', label: 'Checklist' },
   { path: '/settings',  label: 'Settings'  },

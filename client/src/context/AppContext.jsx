@@ -4,11 +4,27 @@ import { useAuth } from './AuthContext'
 
 const AppContext = createContext(null)
 
+// ─── localStorage helpers ───────────────────────────────────────────────────
+
+const LS_VENUE_SHORTLIST    = 'hitchedsa_venue_shortlist'
+const LS_SUPPLIER_SHORTLIST = 'hitchedsa_supplier_shortlist'
+
+function lsLoad(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback } catch { return fallback }
+}
+function lsSave(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)) } catch {}
+}
+
 // ─── Supabase sync helpers ──────────────────────────────────────────────────
 
 async function syncTable(table, userId, rows) {
-  await supabase.from(table).delete().eq('user_id', userId)
-  if (rows.length > 0) await supabase.from(table).insert(rows)
+  const { error: delErr } = await supabase.from(table).delete().eq('user_id', userId)
+  if (delErr) { console.error('[HitchedSA] syncTable delete error:', delErr); return }
+  if (rows.length > 0) {
+    const { error: insErr } = await supabase.from(table).insert(rows)
+    if (insErr) console.error('[HitchedSA] syncTable insert error:', insErr)
+  }
 }
 
 // ─── Row mappers ────────────────────────────────────────────────────────────
@@ -21,8 +37,9 @@ const guestToDb = (g, userId) => ({
   phone:      g.phone      || '',
   rsvp:       g.rsvp       || 'pending',
   dietary:    g.dietary    || '',
-  table_id:   g.tableId    || '',
+  table_id:   g.tableId    || g.table || '',
   plus_one:   g.plusOne    || false,
+  age_group:  g.ageGroup   || 'adult',
   created_at: g.createdAt  || new Date().toISOString(),
 })
 
@@ -34,7 +51,9 @@ const guestFromDb = (r) => ({
   rsvp:      r.rsvp,
   dietary:   r.dietary,
   tableId:   r.table_id,
+  table:     r.table_id    || '',
   plusOne:   r.plus_one,
+  ageGroup:  r.age_group   || 'adult',
   createdAt: r.created_at,
 })
 
@@ -117,8 +136,8 @@ export function AppProvider({ children }) {
   const [budgetTotal,      setBudgetTotalState]      = useState(200000)
   const [checklist,        setChecklistState]        = useState(getDefaultChecklist())
   const [ideas,            setIdeasState]            = useState([])
-  const [venueShortlist,   setVenueShortlistState]   = useState([])
-  const [supplierShortlist,setSupplierShortlistState]= useState([])
+  const [venueShortlist,   setVenueShortlistState]   = useState(() => lsLoad(LS_VENUE_SHORTLIST, []))
+  const [supplierShortlist,setSupplierShortlistState]= useState(() => lsLoad(LS_SUPPLIER_SHORTLIST, []))
   const [venueLocation,    setVenueLocationState]    = useState('')
 
   // Refs so callbacks always have latest values without being recreated
@@ -283,12 +302,14 @@ export function AppProvider({ children }) {
     const next = typeof val === 'function' ? val(venueShortlistRef.current) : val
     setVenueShortlistState(next)
     venueShortlistRef.current = next
+    lsSave(LS_VENUE_SHORTLIST, next)
   }, [])
 
   const setSupplierShortlist = useCallback((val) => {
     const next = typeof val === 'function' ? val(supplierShortlistRef.current) : val
     setSupplierShortlistState(next)
     supplierShortlistRef.current = next
+    lsSave(LS_SUPPLIER_SHORTLIST, next)
   }, [])
 
   // ── Clear all data ────────────────────────────────────────────────────────

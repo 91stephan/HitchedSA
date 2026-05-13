@@ -83,25 +83,37 @@ export default function VenueCard({ venue, onAddShortlist, onCompareToggle, comp
           >
             🗺️ Maps
           </a>
+          {venue.website && (
+            <a
+              href={venue.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost text-xs px-3 py-2"
+            >
+              🌐 Website
+            </a>
+          )}
           {venue.contact && (
             <a
               href={`tel:${venue.contact}`}
               className="btn-ghost text-xs px-3 py-2"
+              title={venue.contact}
             >
-              📞 Call
+              📞 {venue.contact}
             </a>
           )}
           {showCompare && (
             <button
               onClick={() => onCompareToggle(venue)}
               className="text-xs px-3 py-2 rounded-full border-2 transition-all font-semibold"
+              title="Select 2–3 venues to compare side by side"
               style={{
                 borderColor: 'var(--color-accent)',
                 background: compareSelected ? 'var(--color-accent)' : 'transparent',
                 color: compareSelected ? '#fff' : 'var(--color-accent)',
               }}
             >
-              {compareSelected ? '✓ Compare' : '⚖️'}
+              {compareSelected ? '✓ Compare' : '⚖️ Compare'}
             </button>
           )}
           <button
