@@ -11,6 +11,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
+import WeddingGuide from './pages/WeddingGuide'
 import Dashboard from './pages/Dashboard'
 import VenueSearch from './pages/VenueSearch'
 import Suppliers from './pages/Suppliers'
@@ -60,6 +61,7 @@ function AppRoutes() {
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><PrivacyPolicy /></PublicLayout>} />
       <Route path="/terms"   element={<PublicLayout><TermsOfService /></PublicLayout>} />
+      <Route path="/wedding-guide" element={<PublicLayout><WeddingGuide /></PublicLayout>} />
 
       {/* ── Auth ─────────────────────────────────────────────────────────── */}
       <Route

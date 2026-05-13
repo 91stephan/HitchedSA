@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import AdBanner from '../components/AdBanner'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
 
@@ -107,6 +108,31 @@ export default function Landing() {
                 </p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Ad — shown to public visitors, verifiable by Google */}
+        <div className="mb-12">
+          <AdBanner slot="landing-mid" size="leaderboard" />
+        </div>
+
+        {/* Guide teaser */}
+        <section className="mb-20">
+          <div className="card p-8" style={{ background: 'var(--color-surface)' }}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <div className="text-4xl shrink-0">📖</div>
+              <div className="flex-1">
+                <h2 className="font-display text-xl font-bold mb-1" style={{ color: 'var(--color-heading)' }}>
+                  The Complete SA Wedding Planning Guide
+                </h2>
+                <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)' }}>
+                  Timelines, budgets, venue tips, supplier advice, cultural traditions, and everything else you need to know — written for South African couples.
+                </p>
+                <Link to="/wedding-guide" className="btn-primary text-sm">
+                  Read the Guide →
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 

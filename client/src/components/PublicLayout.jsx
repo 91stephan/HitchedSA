@@ -19,6 +19,9 @@ function PublicNavbar() {
           </span>
         </Link>
         <div className="flex items-center gap-4">
+          <Link to="/wedding-guide" className="text-sm hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
+            Wedding Guide
+          </Link>
           <Link to="/about" className="text-sm hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
             About
           </Link>
@@ -41,6 +44,7 @@ function PublicFooter() {
             <span className="font-vibes text-2xl" style={{ color: 'var(--color-accent)' }}>HitchedSA</span>
           </div>
           <div className="flex flex-wrap justify-center gap-4 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+            <Link to="/wedding-guide" className="hover:underline">Wedding Guide</Link>
             <Link to="/about" className="hover:underline">About</Link>
             <Link to="/contact" className="hover:underline">Contact</Link>
             <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
