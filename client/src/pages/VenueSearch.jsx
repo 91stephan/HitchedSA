@@ -326,70 +326,47 @@ export default function VenueSearch() {
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {venueShortlist.map((venue) => (
-                  <div key={venue.id} className="card">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="font-display text-lg font-semibold" style={{ color: 'var(--color-heading)' }}>
-                        {venue.name}
-                      </h3>
-                      <div className="flex gap-2 shrink-0">
-                        <button
-                          className="text-xs px-2 py-1 rounded border-2 transition-all"
-                          style={{
-                            borderColor: 'var(--color-accent)',
-                            background: compareList.some((v) => v.id === venue.id) ? 'var(--color-accent)' : 'transparent',
-                            color: compareList.some((v) => v.id === venue.id) ? '#fff' : 'var(--color-accent)',
-                          }}
-                          onClick={() => toggleCompare(venue)}
-                        >
-                          ⚖️
-                        </button>
-                        <button
-                          onClick={() => setVenueShortlist((prev) => prev.filter((v) => v.id !== venue.id))}
-                          className="text-xs px-2 py-1 rounded border-2"
-                          style={{ borderColor: 'var(--color-danger)', color: 'var(--color-danger)' }}
-                        >
-                          ✕
-                        </button>
+                  <div key={venue.id} className="flex flex-col gap-3">
+                    <VenueCard
+                      venue={venue}
+                      onAddShortlist={addToShortlist}
+                      onCompareToggle={toggleCompare}
+                      compareSelected={compareList.some((v) => v.id === venue.id)}
+                      showCompare
+                    />
+                    <div className="card py-3 px-4 space-y-3">
+                      <div>
+                        <label className="label text-xs">Your Rating</label>
+                        <div className="flex gap-1">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <button
+                              key={star}
+                              onClick={() => setShortlistRatings((r) => ({ ...r, [venue.id]: star }))}
+                              className="text-xl transition-transform hover:scale-110"
+                              style={{ color: star <= (shortlistRatings[venue.id] || 0) ? 'var(--color-accent)' : 'var(--color-border)' }}
+                            >
+                              ★
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    <p className="text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>📍 {venue.location}</p>
-                    {venue.priceRange && venue.priceRange !== 'Contact for pricing' && (
-                      <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>💰 {venue.priceRange}</p>
-                    )}
-
-                    <div className="mb-3">
-                      <label className="label text-xs">Your Rating</label>
-                      <div className="flex gap-1">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <button
-                            key={star}
-                            onClick={() => setShortlistRatings((r) => ({ ...r, [venue.id]: star }))}
-                            className="text-xl transition-transform hover:scale-110"
-                            style={{ color: star <= (shortlistRatings[venue.id] || 0) ? 'var(--color-accent)' : 'var(--color-border)' }}
-                          >
-                            ★
-                          </button>
-                        ))}
+                      <div>
+                        <label className="label text-xs">Personal Notes</label>
+                        <textarea
+                          className="input-field text-xs"
+                          rows={2}
+                          placeholder="Add your notes, available dates, questions..."
+                          value={shortlistNotes[venue.id] || ''}
+                          onChange={(e) => setShortlistNotes((n) => ({ ...n, [venue.id]: e.target.value }))}
+                        />
                       </div>
+                      <button
+                        className="btn-primary w-full text-sm"
+                        onClick={() => { setBookingVenue(venue); setBookingDate(weddingDate || '') }}
+                      >
+                        📅 Book This Venue
+                      </button>
                     </div>
-
-                    <div className="mb-4">
-                      <label className="label text-xs">Personal Notes</label>
-                      <textarea
-                        className="input-field text-xs"
-                        rows={2}
-                        placeholder="Add your notes, available dates, questions..."
-                        value={shortlistNotes[venue.id] || ''}
-                        onChange={(e) => setShortlistNotes((n) => ({ ...n, [venue.id]: e.target.value }))}
-                      />
-                    </div>
-
-                    <button
-                      className="btn-primary w-full text-sm"
-                      onClick={() => { setBookingVenue(venue); setBookingDate(weddingDate || '') }}
-                    >
-                      📅 Book This Venue
-                    </button>
                   </div>
                 ))}
               </div>
