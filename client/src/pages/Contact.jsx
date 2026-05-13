@@ -1,4 +1,11 @@
+import { useMeta } from '../hooks/useMeta'
+
 export default function Contact() {
+  useMeta({
+    title: 'Contact HitchedSA',
+    description: 'Get in touch with the HitchedSA team — questions, bug reports, feature suggestions, or supplier listing enquiries.',
+    url: '/contact',
+  })
   return (
     <div className="max-w-2xl mx-auto px-4 py-16 animate-fade-in">
       <h1 className="section-title">Contact Us</h1>

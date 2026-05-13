@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useMeta } from '../hooks/useMeta'
 
 export default function About() {
+  useMeta({
+    title: 'About HitchedSA',
+    description: 'HitchedSA is a free, all-in-one wedding planning platform built specifically for South African couples. Learn about our tools and mission.',
+    url: '/about',
+  })
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 animate-fade-in">
       <h1 className="section-title">About HitchedSA</h1>

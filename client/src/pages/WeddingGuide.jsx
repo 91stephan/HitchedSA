@@ -1,5 +1,17 @@
 import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
+import { useMeta } from '../hooks/useMeta'
+
+const SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Complete South African Wedding Planning Guide',
+  description: 'Everything you need to plan a South African wedding — 12-month timeline, budget breakdown, venue guide, supplier tips, cultural traditions, and the final week.',
+  author: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
+  publisher: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
+  url: 'https://hitchedsa.co.za/wedding-guide',
+  dateModified: '2025-05-01',
+}
 
 const SECTIONS = [
   { id: 'timeline',   label: '12-Month Timeline' },
@@ -13,8 +25,18 @@ const SECTIONS = [
 ]
 
 export default function WeddingGuide() {
+  useMeta({
+    title: 'Complete South African Wedding Planning Guide',
+    description: 'The complete guide to planning a South African wedding — 12-month timeline, budget in Rands, venue tips, supplier advice, cultural traditions and more.',
+    url: '/wedding-guide',
+  })
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 animate-fade-in">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }}
+      />
 
       <h1 className="font-display text-4xl font-bold mb-3" style={{ color: 'var(--color-heading)' }}>
         The Complete South African Wedding Planning Guide

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
+import { useMeta } from '../hooks/useMeta'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
 
@@ -21,6 +22,11 @@ const STEPS = [
 ]
 
 export default function Landing() {
+  useMeta({
+    title: 'Free South African Wedding Planner',
+    description: 'Plan your perfect South African wedding for free — venue search, budget tracker, guest list, supplier directory, seating planner and more. Built for SA couples.',
+    url: '/',
+  })
   return (
     <div>
       {/* Hero */}

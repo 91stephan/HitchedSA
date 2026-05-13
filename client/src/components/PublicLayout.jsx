@@ -45,6 +45,7 @@ function PublicFooter() {
           </div>
           <div className="flex flex-wrap justify-center gap-4 text-xs" style={{ color: 'var(--color-text-muted)' }}>
             <Link to="/wedding-guide" className="hover:underline">Wedding Guide</Link>
+            <Link to="/wedding-venues-guide" className="hover:underline">Venues Guide</Link>
             <Link to="/about" className="hover:underline">About</Link>
             <Link to="/contact" className="hover:underline">Contact</Link>
             <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
