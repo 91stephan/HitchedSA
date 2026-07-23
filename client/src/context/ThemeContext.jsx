@@ -5,6 +5,8 @@ const ThemeContext = createContext(null)
 
 export function ThemeProvider({ children }) {
   const [themeId, setThemeId] = useState(() => {
+    // localStorage is unavailable during build-time prerendering (Node)
+    if (typeof localStorage === 'undefined') return DEFAULT_THEME
     return localStorage.getItem('hitchedsa_theme') || DEFAULT_THEME
   })
 

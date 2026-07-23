@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import { useMeta } from '../hooks/useMeta'
+import { PROVINCE_LIST } from '../content/provinces'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
 
@@ -142,6 +143,37 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* Venue guides by province */}
+        <section className="mb-20">
+          <div className="text-center mb-8">
+            <h2 className="font-display text-3xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
+              Find Wedding Venues by Province
+            </h2>
+            <p className="text-base" style={{ color: 'var(--color-text-muted)' }}>
+              In-depth local guides — areas, real price ranges, best seasons and booking tips
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            {PROVINCE_LIST.map((p) => (
+              <Link key={p.slug} to={`/wedding-venues/${p.slug}`} className="card p-6 block hover:shadow-md transition-shadow">
+                <div className="text-3xl mb-3">{p.emoji}</div>
+                <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
+                  {p.name}
+                </h3>
+                <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>{p.tagline}</p>
+                <span className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>
+                  Read the guide →
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link to="/wedding-venues" className="btn-outline text-sm px-8">
+              All Provinces →
+            </Link>
+          </div>
+        </section>
+
         {/* Why HitchedSA */}
         <section className="mb-20">
           <div className="card p-10 text-center" style={{ background: 'var(--color-surface)' }}>
@@ -163,6 +195,11 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
+        {/* Ad — bottom placement above final CTA */}
+        <div className="mb-12">
+          <AdBanner slot="landing-bottom" size="leaderboard" />
+        </div>
 
         {/* CTA */}
         <section className="text-center">

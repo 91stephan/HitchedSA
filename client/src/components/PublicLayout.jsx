@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import LogoRingIllustration from './illustrations/LogoRingIllustration'
 
 function PublicNavbar() {
+  const { user } = useAuth()
   return (
     <nav
       className="sticky top-0 z-50"
@@ -19,15 +21,24 @@ function PublicNavbar() {
           </span>
         </Link>
         <div className="flex items-center gap-4">
-          <Link to="/wedding-guide" className="text-sm hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
-            Wedding Guide
+          <Link to="/wedding-venues" className="text-sm hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
+            Venues
           </Link>
-          <Link to="/about" className="text-sm hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
+          <Link to="/articles" className="text-sm hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
+            Guides
+          </Link>
+          <Link to="/about" className="text-sm hidden md:block" style={{ color: 'var(--color-text-muted)' }}>
             About
           </Link>
-          <Link to="/login" className="btn-primary text-sm">
-            Sign In
-          </Link>
+          {user ? (
+            <Link to="/dashboard" className="btn-primary text-sm">
+              My Planner
+            </Link>
+          ) : (
+            <Link to="/login" className="btn-primary text-sm">
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </nav>
@@ -44,6 +55,8 @@ function PublicFooter() {
             <span className="font-vibes text-2xl" style={{ color: 'var(--color-accent)' }}>HitchedSA</span>
           </div>
           <div className="flex flex-wrap justify-center gap-4 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+            <Link to="/wedding-venues" className="hover:underline">Venues by Province</Link>
+            <Link to="/articles" className="hover:underline">Guides & Articles</Link>
             <Link to="/wedding-guide" className="hover:underline">Wedding Guide</Link>
             <Link to="/wedding-venues-guide" className="hover:underline">Venues Guide</Link>
             <Link to="/about" className="hover:underline">About</Link>

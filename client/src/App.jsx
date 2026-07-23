@@ -13,6 +13,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import WeddingGuide from './pages/WeddingGuide'
 import VenueGuide from './pages/VenueGuide'
+import Articles from './pages/Articles'
+import WeddingVenuesHub from './pages/WeddingVenuesHub'
+import ProvinceVenues from './pages/ProvinceVenues'
 import Dashboard from './pages/Dashboard'
 import VenueSearch from './pages/VenueSearch'
 import Suppliers from './pages/Suppliers'
@@ -64,6 +67,9 @@ function AppRoutes() {
       <Route path="/terms"   element={<PublicLayout><TermsOfService /></PublicLayout>} />
       <Route path="/wedding-guide"        element={<PublicLayout><WeddingGuide /></PublicLayout>} />
       <Route path="/wedding-venues-guide" element={<PublicLayout><VenueGuide /></PublicLayout>} />
+      <Route path="/articles"             element={<PublicLayout><Articles /></PublicLayout>} />
+      <Route path="/wedding-venues"       element={<PublicLayout><WeddingVenuesHub /></PublicLayout>} />
+      <Route path="/wedding-venues/:slug" element={<PublicLayout><ProvinceVenues /></PublicLayout>} />
 
       {/* ── Auth ─────────────────────────────────────────────────────────── */}
       <Route
@@ -77,17 +83,9 @@ function AppRoutes() {
         element={!user ? <Navigate to="/" replace /> : <Welcome />}
       />
 
-      {/* ── Root: Landing for guests, Dashboard for authenticated ────────── */}
-      <Route
-        path="/"
-        element={
-          user && firstLaunchDone
-            ? <Navigate to="/dashboard" replace />
-            : user && !firstLaunchDone
-            ? <Navigate to="/welcome-setup" replace />
-            : <PublicLayout><Landing /></PublicLayout>
-        }
-      />
+      {/* ── Root: always the public home page (ads render before entering the app).
+             Logged-in visitors get a "My Planner" button in the navbar instead. ── */}
+      <Route path="/" element={<PublicLayout><Landing /></PublicLayout>} />
 
       {/* ── Protected app routes ─────────────────────────────────────────── */}
       <Route path="/dashboard" element={<ProtectedRoute padTop={false}><Dashboard /></ProtectedRoute>} />

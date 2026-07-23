@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
+import ShareButtons from '../components/ShareButtons'
 import { useMeta } from '../hooks/useMeta'
 
 const SCHEMA = {
@@ -147,9 +148,15 @@ export default function VenueGuide() {
       <p className="text-base mb-2" style={{ color: 'var(--color-text-muted)' }}>
         Wine estates, beach venues, bush lodges, city rooftops — South Africa has extraordinary options. Here's how to find the right one for your wedding.
       </p>
-      <p className="text-xs mb-8" style={{ color: 'var(--color-text-muted)' }}>
+      <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>
         Updated May 2025 · 12 min read
       </p>
+      <div className="mb-8">
+        <ShareButtons
+          title="South African Wedding Venues Guide — HitchedSA"
+          url="https://hitchedsa.co.za/wedding-venues-guide"
+        />
+      </div>
 
       <div className="space-y-14" style={{ color: 'var(--color-text)', lineHeight: 1.8 }}>
 

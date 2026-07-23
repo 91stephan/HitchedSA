@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
+import ShareButtons from '../components/ShareButtons'
 import { useMeta } from '../hooks/useMeta'
 
 const SCHEMA = {
@@ -44,9 +45,15 @@ export default function WeddingGuide() {
       <p className="text-base mb-2" style={{ color: 'var(--color-text-muted)' }}>
         Everything you need to know to plan a beautiful, stress-free wedding in South Africa — from setting your budget to walking down the aisle.
       </p>
-      <p className="text-xs mb-8" style={{ color: 'var(--color-text-muted)' }}>
+      <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>
         Updated May 2025 · 15 min read
       </p>
+      <div className="mb-8">
+        <ShareButtons
+          title="Complete South African Wedding Planning Guide — HitchedSA"
+          url="https://hitchedsa.co.za/wedding-guide"
+        />
+      </div>
 
       {/* Jump links */}
       <nav className="card p-4 mb-10">
