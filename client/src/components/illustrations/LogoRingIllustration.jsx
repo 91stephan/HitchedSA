@@ -14,7 +14,7 @@ export default function LogoRingIllustration({ color = 'var(--color-accent)', si
       {/* Band */}
       <circle cx="14" cy="14" r="9" stroke={color} strokeWidth="2.6" fill="none" />
 
-      {/* Diamond / gem setting — small prong crown at top */}
+      {/* Diamond / gem setting - small prong crown at top */}
       <path d="M10.5,7.5 L13,5 L15.5,7.5 L14,9.5 Z"
         stroke={color} strokeWidth="1.2" strokeLinejoin="round"
         fill={color} fillOpacity="0.18" />

@@ -7,7 +7,7 @@ const SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: 'South African Wedding Venues: The Complete Regional Guide',
-  description: 'A comprehensive guide to finding and booking wedding venues across South Africa — Cape Town, Winelands, Johannesburg, Durban, Garden Route and beyond.',
+  description: 'A comprehensive guide to finding and booking wedding venues across South Africa: Cape Town, Winelands, Johannesburg, Durban, Garden Route and beyond.',
   author: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
   publisher: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
   url: 'https://hitchedsa.co.za/wedding-venues-guide',
@@ -18,7 +18,7 @@ const VENUE_TYPES = [
   {
     type: 'Wine Farm & Estate',
     icon: '🍷',
-    desc: 'The most sought-after venue style in South Africa. Wine farms in Stellenbosch, Franschhoek, and Paarl offer dramatic mountain backdrops, lush vineyards, historic Cape Dutch architecture, and excellent in-house catering. Usually includes accommodation for the bridal party. These venues book out fastest — sometimes 18 months ahead for popular weekends.',
+    desc: 'The most sought-after venue style in South Africa. Wine farms in Stellenbosch, Franschhoek, and Paarl offer dramatic mountain backdrops, lush vineyards, historic Cape Dutch architecture, and excellent in-house catering. Usually includes accommodation for the bridal party. These venues book out fastest, sometimes 18 months ahead for popular weekends.',
     budget: 'R35,000–R90,000+ venue hire',
     best: 'Couples who want a scenic, all-in-one experience',
   },
@@ -79,7 +79,7 @@ const REGIONS = [
     areas: 'Stellenbosch · Franschhoek · Paarl · Robertson',
     season: 'October – April (avoid December–January school holidays for pricing)',
     vibe: 'Romantic, scenic, world-class wine and food. The most in-demand wedding region in SA.',
-    tips: 'Book 12–18 months ahead. Almost all Winelands venues have exclusive caterer lists — factor this in. Weather is generally excellent from October–March but summer can be very hot inland.',
+    tips: 'Book 12–18 months ahead. Almost all Winelands venues have exclusive caterer lists, so factor this in. Weather is generally excellent from October–March but summer can be very hot inland.',
     price: 'R35,000–R90,000+ venue hire. Total weddings typically R250,000–R600,000.',
   },
   {
@@ -87,7 +87,7 @@ const REGIONS = [
     areas: 'Cape Town CBD · Constantia · Hout Bay · Clifton · Camps Bay',
     season: 'October – April',
     vibe: 'Cosmopolitan, beachfront, mountain views, cosmopolitan cuisine. More urban than the Winelands.',
-    tips: 'Wind is a significant factor on the Atlantic Seaboard — always have a wind contingency plan. Constantia venues offer a quieter, estate feel close to the city.',
+    tips: 'Wind is a significant factor on the Atlantic Seaboard, so always have a wind contingency plan. Constantia venues offer a quieter, estate feel close to the city.',
     price: 'R25,000–R75,000 venue hire. Total weddings typically R200,000–R500,000.',
   },
   {
@@ -103,7 +103,7 @@ const REGIONS = [
     areas: 'Durban · Umhlanga · Midlands Meander · Drakensberg · South Coast',
     season: 'April – October (avoid the humid Durban summer)',
     vibe: 'Tropical, beachfront or cool Midlands farmland. Strong Indian and Zulu cultural influences in the wedding scene.',
-    tips: 'Durban summers are hot and humid — coastal venues need good ventilation. The Midlands Meander offers beautiful misty farm venues at very reasonable prices.',
+    tips: 'Durban summers are hot and humid, so coastal venues need good ventilation. The Midlands Meander offers beautiful misty farm venues at very reasonable prices.',
     price: 'R12,000–R50,000 venue hire. Total weddings typically R120,000–R350,000.',
   },
   {
@@ -119,7 +119,7 @@ const REGIONS = [
     areas: 'Hazyview · White River · Magoebaskloof · Bela-Bela',
     season: 'April – September (dry, cooler)',
     vibe: 'Bush, escarpment, and waterfall settings. Ideal for intimate bush weddings and game lodge experiences.',
-    tips: 'Best for smaller weddings (under 80 guests). Guests need to travel — provide clear directions and accommodation options nearby. Magical African sunset ceremonies are possible here.',
+    tips: 'Best for smaller weddings (under 80 guests). Guests need to travel, so provide clear directions and accommodation options nearby. Magical African sunset ceremonies are possible here.',
     price: 'R20,000–R80,000 (often includes accommodation packages). Total weddings R150,000–R350,000.',
   },
 ]
@@ -127,7 +127,7 @@ const REGIONS = [
 export default function VenueGuide() {
   useMeta({
     title: 'South African Wedding Venues Guide',
-    description: 'The complete guide to wedding venues in South Africa — wine farms, bush lodges, beaches, and heritage estates. Regional breakdowns, price guides, and booking tips for SA couples.',
+    description: 'The complete guide to wedding venues in South Africa: wine farms, bush lodges, beaches, and heritage estates. Regional breakdowns, price guides, and booking tips for SA couples.',
     url: '/wedding-venues-guide',
   })
 
@@ -146,14 +146,14 @@ export default function VenueGuide() {
         South African Wedding Venues: The Complete Regional Guide
       </h1>
       <p className="text-base mb-2" style={{ color: 'var(--color-text-muted)' }}>
-        Wine estates, beach venues, bush lodges, city rooftops — South Africa has extraordinary options. Here's how to find the right one for your wedding.
+        Wine estates, beach venues, bush lodges, city rooftops: South Africa has extraordinary options. Here's how to find the right one for your wedding.
       </p>
       <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>
         Updated May 2025 · 12 min read
       </p>
       <div className="mb-8">
         <ShareButtons
-          title="South African Wedding Venues Guide — HitchedSA"
+          title="South African Wedding Venues Guide | HitchedSA"
           url="https://hitchedsa.co.za/wedding-venues-guide"
         />
       </div>
@@ -163,10 +163,10 @@ export default function VenueGuide() {
         {/* Intro */}
         <section>
           <p className="text-sm mb-4">
-            South Africa offers some of the most spectacular wedding venues on the planet — and at price points that are genuinely competitive with international alternatives. Whether you dream of exchanging vows against a Stellenbosch mountain backdrop, at sunset over a Mpumalanga game reserve, or beside the warm Indian Ocean in KwaZulu-Natal, there is a South African venue that can make it happen.
+            South Africa offers some of the most spectacular wedding venues on the planet, at price points that are genuinely competitive with international alternatives. You might picture exchanging vows against a Stellenbosch mountain backdrop, at sunset over a Mpumalanga game reserve, or beside the warm Indian Ocean in KwaZulu-Natal. There is a South African venue that can make it happen.
           </p>
           <p className="text-sm mb-4">
-            The challenge is not finding options — it's narrowing thousands of possibilities down to the venue that fits your vision, guest count, and budget. This guide breaks down every major venue type and every major region so you can make that decision confidently.
+            Finding options is easy. The hard part is narrowing thousands of possibilities down to the venue that fits your vision, guest count, and budget. This guide breaks down every major venue type and every major region so you can make that decision confidently.
           </p>
           <p className="text-sm">
             The single most important thing to know before you start venue hunting: <strong>popular South African venues book out 12–18 months in advance for peak season dates.</strong> Set your approximate guest count and total venue budget before you begin touring, and move quickly once you find a venue you love.
@@ -239,7 +239,7 @@ export default function VenueGuide() {
             What to Look For When Visiting a Venue
           </h2>
           <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
-            Never book a venue without visiting in person. Photos on a website are always the best-case scenario — you need to see and feel the space yourself. Visit at the same time of day as your planned ceremony if possible, so you can assess the natural light.
+            Never book a venue without visiting in person. Photos on a website are always the best-case scenario. You need to see and feel the space yourself. Visit at the same time of day as your planned ceremony if possible, so you can assess the natural light.
           </p>
 
           <h3 className="font-semibold text-base mb-3 mt-6" style={{ color: 'var(--color-accent)' }}>Practical Checks</h3>
@@ -258,14 +258,14 @@ export default function VenueGuide() {
             South African venues fall into three catering categories:
           </p>
           <ul className="text-sm space-y-2 list-disc list-inside mb-5" style={{ color: 'var(--color-text-muted)' }}>
-            <li><strong style={{ color: 'var(--color-text)' }}>Exclusive in-house catering:</strong> The venue has their own kitchen and chefs — you must use them. No outside food is allowed. Common at wine estates and hotels. Convenient but less flexible on menu and price.</li>
+            <li><strong style={{ color: 'var(--color-text)' }}>Exclusive in-house catering:</strong> The venue has their own kitchen and chefs, and you must use them. No outside food is allowed. Common at wine estates and hotels. Convenient but less flexible on menu and price.</li>
             <li><strong style={{ color: 'var(--color-text)' }}>Preferred supplier list:</strong> The venue requires you to choose from a vetted list of approved external caterers. You have some choice but cannot bring anyone.</li>
             <li><strong style={{ color: 'var(--color-text)' }}>Fully open:</strong> You can bring any caterer you like. Maximum flexibility and often lower total cost. Common on farm and DIY venues.</li>
           </ul>
 
           <h3 className="font-semibold text-base mb-3 mt-6" style={{ color: 'var(--color-accent)' }}>Accommodation</h3>
           <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
-            Check whether the venue has on-site accommodation for the bridal party and key guests. Many SA wine farm and country estate venues include a set number of on-site rooms in the hire package. If there is no accommodation on-site, research the nearest options and their distance — guests drinking alcohol need to be within reasonable distance of where they are staying.
+            Check whether the venue has on-site accommodation for the bridal party and key guests. Many SA wine farm and country estate venues include a set number of on-site rooms in the hire package. If there is no accommodation on-site, research the nearest options and their distance. Guests drinking alcohol need to be within reasonable distance of where they are staying.
           </p>
         </section>
 
@@ -275,20 +275,20 @@ export default function VenueGuide() {
             How to Book a Wedding Venue in South Africa
           </h2>
           <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
-            Once you have found a venue you love, move quickly. South African wedding venues — particularly in the Western Cape — have waiting lists for popular dates. Here is the typical booking process:
+            Once you have found a venue you love, move quickly. South African wedding venues, particularly in the Western Cape, have waiting lists for popular dates. Here is the typical booking process:
           </p>
           <ol className="text-sm space-y-3 list-decimal list-inside mb-5" style={{ color: 'var(--color-text-muted)' }}>
             <li><strong style={{ color: 'var(--color-text)' }}>Request a quote:</strong> Contact the venue with your proposed date, approximate guest count, and any specific requirements. Most venues will send a detailed quote within a few days.</li>
             <li><strong style={{ color: 'var(--color-text)' }}>Visit in person:</strong> Before committing, visit the venue in person (with your partner and if possible, your wedding planner). Ask all your questions face-to-face.</li>
             <li><strong style={{ color: 'var(--color-text)' }}>Review the contract carefully:</strong> Read every line of the venue contract. Pay particular attention to: cancellation terms, what happens if the venue is damaged, whether the quote is VAT-inclusive, deposit structure, and payment due dates.</li>
             <li><strong style={{ color: 'var(--color-text)' }}>Pay the holding deposit:</strong> SA venues typically require a 50% non-refundable holding deposit to secure the date. The balance is usually due 30–60 days before the wedding.</li>
-            <li><strong style={{ color: 'var(--color-text)' }}>Get everything in writing:</strong> Any verbal promises made by the venue coordinator must be confirmed in writing via email. Coordinators change — the contract is what matters.</li>
+            <li><strong style={{ color: 'var(--color-text)' }}>Get everything in writing:</strong> Any verbal promises made by the venue coordinator must be confirmed in writing via email. Coordinators change. The contract is what matters.</li>
           </ol>
 
           <div className="card p-5" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
             <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--color-heading)' }}>⚠️ The Most Common Venue Booking Mistake</h3>
             <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-              South African couples frequently book the venue before confirming the caterer's price. A venue that costs R30,000 hire may require you to use their exclusive caterer at R950 per head — for 100 guests, that's R95,000 on catering alone. Always get the total estimated cost (venue + catering + bar) before signing the venue contract.
+              South African couples frequently book the venue before confirming the caterer's price. A venue that costs R30,000 hire may require you to use their exclusive caterer at R950 per head. For 100 guests, that's R95,000 on catering alone. Always get the total estimated cost (venue + catering + bar) before signing the venue contract.
             </p>
           </div>
         </section>
@@ -303,7 +303,7 @@ export default function VenueGuide() {
               Search Real SA Wedding Venues
             </h2>
             <p className="text-sm mb-4 max-w-md mx-auto" style={{ color: 'var(--color-text-muted)' }}>
-              Use HitchedSA's venue search — powered by Google Maps — to browse real venues across every South African province. Shortlist your favourites and compare them side by side.
+              Use HitchedSA's venue search (powered by Google Maps) to browse real venues across every South African province. Shortlist your favourites and compare them side by side.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/login" className="btn-primary text-sm px-8">

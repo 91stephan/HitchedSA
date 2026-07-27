@@ -266,7 +266,7 @@ function PrintLayout({ tables, guests, partners }) {
                     <li key={g.id}>
                       {g.isCouple ? '💍 ' : ''}{g.name}
                       {g.dietary && g.dietary !== 'None' ? ` (${g.dietary})` : ''}
-                      {g.isCouple ? ' — Couple' : ''}
+                      {g.isCouple ? ' (Couple)' : ''}
                     </li>
                   ))}
                 </ol>
@@ -294,7 +294,7 @@ export default function SeatingPlanner() {
 
   // ── Derived ──────────────────────────────────────────────────────
 
-  // Build couple guest entries — added to the top of the assignable pool.
+  // Build couple guest entries - added to the top of the assignable pool.
   // Use stable IDs so assignment persists across refreshes in hitchedsa_seating.
   const coupleGuests = [
     partners.partner1?.trim() ? { id: 'couple_partner1', name: partners.partner1.trim(), isCouple: true } : null,
@@ -310,7 +310,7 @@ export default function SeatingPlanner() {
   const assignedCount = tables.reduce((sum, t) => sum + (t.guestIds?.length || 0), 0)
   const selectedTable = tables.find(t => t.id === selectedTableId)
 
-  // Resolves any assignable ID — regular guest or one of the couple
+  // Resolves any assignable ID - regular guest or one of the couple
   const getGuestById = (id) => allPeople.find(p => p.id === id)
 
   // ── Drag handlers ────────────────────────────────────────────────
@@ -685,7 +685,7 @@ export default function SeatingPlanner() {
               </div>
             )}
 
-            {/* Progress bar — denominator is everyone (couple + guests) */}
+            {/* Progress bar - denominator is everyone (couple + guests) */}
             {allPeople.length > 0 && allAssignedIds.size > 0 && (
               <div
                 className="border-t px-4 py-3"

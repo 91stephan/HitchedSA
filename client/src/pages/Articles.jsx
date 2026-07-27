@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCE_LIST } from '../content/provinces'
+import { ARTICLE_LIST } from '../content/articles'
 
 const GUIDES = [
   {
@@ -9,7 +10,7 @@ const GUIDES = [
     emoji: '📋',
     category: 'Planning',
     title: 'The Complete SA Wedding Planning Guide',
-    desc: 'Every step from engagement to "I do" — timelines, budgets, suppliers and SA-specific advice.',
+    desc: 'Every step from engagement to "I do": timelines, budgets, suppliers and SA-specific advice.',
     read: '15 min read',
   },
   {
@@ -17,7 +18,7 @@ const GUIDES = [
     emoji: '🗺️',
     category: 'Venues',
     title: 'South African Wedding Venues: The Complete Regional Guide',
-    desc: 'Wine farms, bush lodges, beaches and heritage estates — every venue type and region compared.',
+    desc: 'Wine farms, bush lodges, beaches and heritage estates: every venue type and region compared.',
     read: '12 min read',
   },
 ]
@@ -53,7 +54,7 @@ export default function Articles() {
   useMeta({
     title: 'Wedding Guides & Articles for SA Couples',
     description:
-      'Free wedding planning guides written for South Africa — venue guides by province, budgets in rand, seasonal advice and planning checklists.',
+      'Free wedding planning guides written for South Africa: venue guides by province, budgets in rand, seasonal advice and planning checklists.',
     url: '/articles',
   })
 
@@ -72,7 +73,7 @@ export default function Articles() {
         Wedding Guides for South African Couples
       </h1>
       <p className="text-base mb-10 max-w-2xl" style={{ color: 'var(--color-text-muted)' }}>
-        Practical, local, and free — budgets in rand, load shedding contingencies, seasonal
+        Practical, local, and free: budgets in rand, load shedding contingencies, seasonal
         advice for every province, and the honest prices venues actually charge.
       </p>
 
@@ -82,6 +83,23 @@ export default function Articles() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
         {GUIDES.map((g) => (
           <ArticleCard key={g.to} {...g} />
+        ))}
+      </div>
+
+      <h2 className="font-display text-xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+        Latest Articles
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+        {ARTICLE_LIST.map((a) => (
+          <ArticleCard
+            key={a.slug}
+            to={`/articles/${a.slug}`}
+            emoji={a.emoji}
+            category={a.category}
+            title={a.title}
+            desc={a.excerpt}
+            read={a.readTime}
+          />
         ))}
       </div>
 

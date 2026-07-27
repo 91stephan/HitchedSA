@@ -14,26 +14,26 @@ export const PROVINCES = {
     shortName: 'Western Cape',
     emoji: '🍷',
     tagline: 'Winelands estates, Atlantic beaches and the Garden Route',
-    metaTitle: 'Wedding Venues in the Western Cape — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in the Western Cape: Complete 2026 Guide',
     metaDescription:
       'Where to get married in the Western Cape: Stellenbosch and Franschhoek wine farms, Cape Town city venues, West Coast beaches and Garden Route forests. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '11 min read',
     intro: [
-      'The Western Cape is the most in-demand wedding destination in South Africa — and once you have seen a Franschhoek valley at golden hour, it is not hard to understand why. The province combines world-class wine estates, two oceans, historic Cape Dutch architecture and a mature wedding industry that has been hosting international destination weddings for decades.',
+      'The Western Cape is the most in-demand wedding destination in South Africa, and once you have seen a Franschhoek valley at golden hour, it is not hard to understand why. The province combines world-class wine estates, two oceans, historic Cape Dutch architecture and a mature wedding industry that has been hosting international destination weddings for decades.',
       'That popularity comes with a price tag and a queue. Peak-season Saturdays at sought-after Winelands venues are frequently booked 12–18 months out, and venue hire in the popular valleys runs well above the national average. The good news: the province is bigger than Stellenbosch. Couples willing to look at the Overberg, the West Coast, or a winter date can have a spectacular Cape wedding at a fraction of the headline prices.',
-      'This guide breaks the Western Cape down area by area — what each is known for, what it costs, when to book, and the practical details (wind, in particular) that Cape wedding veterans plan around.',
+      'This guide breaks the Western Cape down area by area: what each is known for, what it costs, when to book, and the practical details (wind, in particular) that Cape wedding veterans plan around.',
     ],
     areas: [
       {
         name: 'Stellenbosch',
         knownFor: 'Historic wine estates · mountain backdrops · in-house catering',
-        desc: 'The heart of the Cape Winelands and the single most competitive wedding market in the country. Stellenbosch estates offer vineyard ceremonies, Cape Dutch manor houses and professional in-house wedding teams. Expect exclusive-caterer requirements at most estates and book early — the famous names fill their summer Saturdays more than a year ahead.',
+        desc: 'The heart of the Cape Winelands and the single most competitive wedding market in the country. Stellenbosch estates offer vineyard ceremonies, Cape Dutch manor houses and professional in-house wedding teams. Expect exclusive-caterer requirements at most estates and book early, because the famous names fill their summer Saturdays more than a year ahead.',
       },
       {
         name: 'Franschhoek',
         knownFor: 'Luxury estates · food capital · destination weddings',
-        desc: 'Smaller and more polished than Stellenbosch, Franschhoek is South Africa\'s food-and-wine showpiece. The valley setting is extraordinary and the venues lean luxury: manicured gardens, chapels among the vines, and some of the country\'s best restaurant kitchens doing the catering. One of the priciest areas in SA — but for a high-end destination wedding it is hard to beat.',
+        desc: 'Smaller and more polished than Stellenbosch, Franschhoek is South Africa\'s food-and-wine showpiece. The valley setting is extraordinary and the venues lean luxury: manicured gardens, chapels among the vines, and some of the country\'s best restaurant kitchens doing the catering. It is one of the priciest areas in SA, but for a high-end destination wedding it is hard to beat.',
       },
       {
         name: 'Paarl & Wellington',
@@ -43,12 +43,12 @@ export const PROVINCES = {
       {
         name: 'Cape Town City & Atlantic Seaboard',
         knownFor: 'Rooftops · beach hotels · Table Mountain views',
-        desc: 'Urban venues from converted warehouses in Woodstock to five-star hotels in Camps Bay. The Atlantic Seaboard offers sunset-over-the-sea ceremonies, but plan around the summer south-easter — experienced coordinators here always hold an indoor contingency. City venues suit couples with many fly-in guests: no transfers, abundant accommodation.',
+        desc: 'Urban venues from converted warehouses in Woodstock to five-star hotels in Camps Bay. The Atlantic Seaboard offers sunset-over-the-sea ceremonies, but plan around the summer south-easter: experienced coordinators here always hold an indoor contingency. City venues suit couples with many fly-in guests: no transfers, abundant accommodation.',
       },
       {
         name: 'Constantia & Southern Suburbs',
         knownFor: 'Historic wine farms 20 minutes from town',
-        desc: 'The oldest wine-growing valley in the country puts estate weddings within 20 minutes of central Cape Town. Constantia venues are leafy, established and quietly upmarket — a strong choice when you want vineyards without moving guests out to the Winelands proper.',
+        desc: 'The oldest wine-growing valley in the country puts estate weddings within 20 minutes of central Cape Town. Constantia venues are leafy, established and quietly upmarket, a strong choice when you want vineyards without moving guests out to the Winelands proper.',
       },
       {
         name: 'Overberg & Hermanus',
@@ -58,12 +58,12 @@ export const PROVINCES = {
       {
         name: 'Garden Route',
         knownFor: 'Forest, lagoon and beach venues · destination feel',
-        desc: 'Knysna, Plettenberg Bay and Wilderness anchor a string of forest-and-ocean venues along the N2. The Garden Route is effectively a destination wedding within South Africa — budget for guest travel and accommodation, and avoid the December holiday crush when the whole route is at capacity.',
+        desc: 'Knysna, Plettenberg Bay and Wilderness anchor a string of forest-and-ocean venues along the N2. The Garden Route is effectively a destination wedding within South Africa, so budget for guest travel and accommodation, and avoid the December holiday crush when the whole route is at capacity.',
       },
       {
         name: 'West Coast & Swartland',
         knownFor: 'Beach boho · spring flowers · budget-friendly',
-        desc: 'Paternoster\'s whitewashed beach cottages and the Swartland\'s wheat-and-wine farmland offer the Cape\'s most relaxed, affordable weddings. Spring (August–September) brings the famous wild flowers. Venues are simpler — often blank-canvas spaces where you bring your own suppliers — which rewards DIY-minded couples.',
+        desc: 'Paternoster\'s whitewashed beach cottages and the Swartland\'s wheat-and-wine farmland offer the Cape\'s most relaxed, affordable weddings. Spring (August–September) brings the famous wild flowers. Venues are simpler, often blank-canvas spaces where you bring your own suppliers, which rewards DIY-minded couples.',
       },
     ],
     pricing: [
@@ -76,15 +76,15 @@ export const PROVINCES = {
     ],
     season: {
       best: 'October – April for guaranteed summer weather; February–March offers the most settled conditions with harvest-season vineyards.',
-      avoid: 'Mid-December to mid-January: peak tourist pricing, venue minimums and accommodation shortages. June–August is winter and rainy — but venues discount heavily, and a fireside Winelands winter wedding is a genuine (and much cheaper) option.',
-      wind: 'The Cape Doctor — the summer south-easter — is the region\'s defining planning factor. Ask every venue directly: "What happens to my ceremony in a 40km/h south-easter?" Good venues have a practised answer.',
+      avoid: 'Mid-December to mid-January: peak tourist pricing, venue minimums and accommodation shortages. June–August is winter and rainy, but venues discount heavily, and a fireside Winelands winter wedding is a genuine (and much cheaper) option.',
+      wind: 'The Cape Doctor, the summer south-easter, is the region\'s defining planning factor. Ask every venue directly: "What happens to my ceremony in a 40km/h south-easter?" Good venues have a practised answer.',
     },
     tips: [
       'Book 12–18 months ahead for a peak-season Saturday at a known Winelands estate; Fridays and Sundays can shave 20–30% off and free up dates.',
-      'Most estate venues require their in-house or preferred caterers — always price venue + catering + bar together before signing.',
+      'Most estate venues require their in-house or preferred caterers, so always price venue + catering + bar together before signing.',
       'Load shedding is a real risk to outdoor receptions: confirm generator backup in writing.',
-      'For fly-in guests, build a mini-itinerary (shuttle times, accommodation blocks) — Winelands venues are 45–75 minutes from the airport.',
-      'Winter (June–August) weddings can cost 30–40% less at the same venues — ask for the off-season rate card.',
+      'For fly-in guests, build a mini-itinerary (shuttle times, accommodation blocks). Winelands venues are 45–75 minutes from the airport.',
+      'Winter (June–August) weddings can cost 30–40% less at the same venues, so ask for the off-season rate card.',
     ],
     faqs: [
       {
@@ -97,7 +97,7 @@ export const PROVINCES = {
       },
       {
         q: 'Is wind really a problem for Cape Town weddings?',
-        a: 'Yes — the summer south-easter can reach gale force on the Atlantic Seaboard and across the Cape Flats. It is the number-one reason experienced planners insist on a proper indoor or marquee backup for any outdoor ceremony between November and February.',
+        a: 'Yes. The summer south-easter can reach gale force on the Atlantic Seaboard and across the Cape Flats. It is the number-one reason experienced planners insist on a proper indoor or marquee backup for any outdoor ceremony between November and February.',
       },
       {
         q: 'Can I have a cheaper wedding in the Western Cape?',
@@ -105,7 +105,7 @@ export const PROVINCES = {
       },
       {
         q: 'Which Western Cape areas suit a destination wedding with overseas guests?',
-        a: 'Franschhoek and Stellenbosch are the classic choices — world-class food and wine, plentiful guesthouses, and 60 minutes from Cape Town International. Cape Town city venues are even simpler logistically, and the Garden Route works beautifully if guests will make a holiday of it.',
+        a: 'Franschhoek and Stellenbosch are the classic choices: world-class food and wine, plentiful guesthouses, and 60 minutes from Cape Town International. Cape Town city venues are even simpler logistically, and the Garden Route works beautifully if guests will make a holiday of it.',
       },
     ],
     venues: [
@@ -191,21 +191,21 @@ export const PROVINCES = {
     shortName: 'Gauteng',
     emoji: '🌳',
     tagline: 'Muldersdrift farms, Pretoria estates and big-city glamour',
-    metaTitle: 'Wedding Venues in Gauteng — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in Gauteng: Complete 2026 Guide',
     metaDescription:
       'Where to get married in Gauteng: Muldersdrift and the Cradle of Humankind, Pretoria East estates, Hartbeespoort, Johannesburg rooftops and southern farm venues. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '10 min read',
     intro: [
-      'Gauteng is South Africa\'s biggest wedding market by volume — thousands of weddings a year, served by a dense belt of purpose-built venues ringing Johannesburg and Pretoria. What the province lacks in oceans and vineyards it makes up for in choice: within an hour of Sandton you can pick from French-provincial estates, thatched bushveld lodges, glass chapels in forest gardens, and industrial-chic city rooftops.',
-      'Because supply is deep, Gauteng is one of the best-value wedding regions in the country. Competition keeps packages sharp, most venues have refined all-inclusive offerings, and you can genuinely comparison-shop — something far harder in the booked-out Cape valleys.',
-      'The planning factor that shapes everything here is the highveld thunderstorm. Summer afternoons (October–March) bring short, violent storms; the classic Gauteng wedding calendar therefore peaks in the dry, golden months of April to September — the reverse of the Cape.',
+      'Gauteng is South Africa\'s biggest wedding market by volume, with thousands of weddings a year served by a dense belt of purpose-built venues ringing Johannesburg and Pretoria. What the province lacks in oceans and vineyards it makes up for in choice: within an hour of Sandton you can pick from French-provincial estates, thatched bushveld lodges, glass chapels in forest gardens, and industrial-chic city rooftops.',
+      'Because supply is deep, Gauteng is one of the best-value wedding regions in the country. Competition keeps packages sharp, most venues have refined all-inclusive offerings, and you can genuinely comparison-shop, something far harder in the booked-out Cape valleys.',
+      'The planning factor that shapes everything here is the highveld thunderstorm. Summer afternoons (October–March) bring short, violent storms; the classic Gauteng wedding calendar therefore peaks in the dry, golden months of April to September, the reverse of the Cape.',
     ],
     areas: [
       {
         name: 'Muldersdrift & Cradle of Humankind',
         knownFor: 'SA\'s densest venue belt · gardens, chapels, lakes',
-        desc: 'Forty-five minutes north-west of Johannesburg lies the highest concentration of wedding venues in South Africa. Muldersdrift and the Cradle offer everything from intimate forest chapels to 400-seat estates, most with all-inclusive packages, on-site accommodation and generator backup. The density means real negotiating power — view three or four venues in a single day.',
+        desc: 'Forty-five minutes north-west of Johannesburg lies the highest concentration of wedding venues in South Africa. Muldersdrift and the Cradle offer everything from intimate forest chapels to 400-seat estates, most with all-inclusive packages, on-site accommodation and generator backup. The density means real negotiating power: view three or four venues in a single day.',
       },
       {
         name: 'Pretoria East & Bronkhorstspruit',
@@ -215,7 +215,7 @@ export const PROVINCES = {
       {
         name: 'Hartbeespoort & Magaliesburg',
         knownFor: 'Dam and mountain scenery · weekend-away feel',
-        desc: 'An hour from both cities, the Magaliesberg range and Hartbeespoort Dam supply Gauteng\'s most scenic backdrops — water, mountains and bushveld sunsets. Many venues double as lodges, so the wedding becomes a weekend: ceremony Saturday, family brunch Sunday. Book summer dates with a storm plan; the dam area sits right in the hail belt.',
+        desc: 'An hour from both cities, the Magaliesberg range and Hartbeespoort Dam supply Gauteng\'s most scenic backdrops: water, mountains and bushveld sunsets. Many venues double as lodges, so the wedding becomes a weekend: ceremony Saturday, family brunch Sunday. Book summer dates with a storm plan; the dam area sits right in the hail belt.',
       },
       {
         name: 'Johannesburg City & Sandton',
@@ -230,7 +230,7 @@ export const PROVINCES = {
       {
         name: 'Vaal River & Southern Gauteng',
         knownFor: 'Riverside ceremonies · relaxed pricing',
-        desc: 'South of Johannesburg, the Vaal offers waterfront venues, sunset river cruises for pre-drinks, and some of the lowest venue hire in the province. A strong option for relaxed, informal weddings — and close enough for Joburg guests to drive home after the last dance.',
+        desc: 'South of Johannesburg, the Vaal offers waterfront venues, sunset river cruises for pre-drinks, and some of the lowest venue hire in the province. A strong option for relaxed, informal weddings, and close enough for Joburg guests to drive home after the last dance.',
       },
     ],
     pricing: [
@@ -242,14 +242,14 @@ export const PROVINCES = {
       { item: 'Typical all-in wedding (100 guests)', range: 'R150,000 – R400,000' },
     ],
     season: {
-      best: 'April – September: dry, sunny days, golden light and near-zero rain risk. May and September are the sweet spots — warm days without the mid-winter evening chill.',
-      avoid: 'October – March afternoons carry a daily thunderstorm risk, often with hail. Summer weddings absolutely happen — but only book a venue whose indoor backup you would be happy to use, not merely tolerate.',
-      wind: 'Winter evenings on the highveld drop close to freezing — budget for patio heaters and blankets for any outdoor element after sunset from June to August.',
+      best: 'April – September: dry, sunny days, golden light and near-zero rain risk. May and September are the sweet spots: warm days without the mid-winter evening chill.',
+      avoid: 'October – March afternoons carry a daily thunderstorm risk, often with hail. Summer weddings absolutely happen, but only book a venue whose indoor backup you would be happy to use, not merely tolerate.',
+      wind: 'Winter evenings on the highveld drop close to freezing, so budget for patio heaters and blankets for any outdoor element after sunset from June to August.',
     },
     tips: [
-      'Venue density is your leverage: get three comparable quotes and negotiate — Gauteng venues expect it.',
+      'Venue density is your leverage: get three comparable quotes and negotiate; Gauteng venues expect it.',
       'Ask about hail history and covered parking for summer dates; highveld hailstorms damage cars, not just marquees.',
-      'All-inclusive packages (venue + catering + décor + DJ) are a Gauteng speciality and genuinely good value — but itemise the quote so you can swap out what you do not need.',
+      'All-inclusive packages (venue + catering + décor + DJ) are a Gauteng speciality and genuinely good value, but itemise the quote so you can swap out what you do not need.',
       'Confirm generator capacity covers the kitchen and the band, not just the lights.',
       'Winter ceremonies should start earlier (14:00–15:00) to use the warm afternoon and golden hour before the temperature drops.',
     ],
@@ -263,7 +263,7 @@ export const PROVINCES = {
         a: 'Venue-only hire runs roughly R15,000–R55,000 across the main wedding belts, while the province\'s popular all-inclusive packages (venue, catering, basic décor) typically land between R1,200 and R2,500 per guest.',
       },
       {
-        q: 'Muldersdrift or Pretoria East — which is better?',
+        q: 'Muldersdrift or Pretoria East: which is better?',
         a: 'Muldersdrift/Cradle has the widest choice and the most scenic garden venues; Pretoria East generally wins on package price and large-capacity venues. If your guests are split between Joburg and Pretoria, Midrand is the diplomatic answer.',
       },
       {
@@ -272,7 +272,7 @@ export const PROVINCES = {
       },
       {
         q: 'Do Gauteng venues handle load shedding?',
-        a: 'The established wedding venues almost all run full generator or solar backup — but confirm in writing that backup power covers kitchen, sound and lighting simultaneously, and ask what happens if the generator fails.',
+        a: 'The established wedding venues almost all run full generator or solar backup, but confirm in writing that backup power covers kitchen, sound and lighting simultaneously, and ask what happens if the generator fails.',
       },
     ],
     venues: [
@@ -358,21 +358,21 @@ export const PROVINCES = {
     shortName: 'KZN',
     emoji: '🌊',
     tagline: 'Warm-ocean beaches, misty Midlands farms and the Drakensberg',
-    metaTitle: 'Wedding Venues in KwaZulu-Natal — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in KwaZulu-Natal: Complete 2026 Guide',
     metaDescription:
       'Where to get married in KZN: Umhlanga and Ballito beach venues, Midlands Meander farms, Drakensberg mountain lodges and South Coast hideaways. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '10 min read',
     intro: [
-      'KwaZulu-Natal is the only province where you can marry barefoot on a warm-ocean beach, in a misty green farm valley, or beneath 3,000-metre mountain peaks — all within a three-hour drive. That range, plus prices well below the Western Cape, makes KZN one of South Africa\'s most underrated wedding regions.',
-      'The province\'s wedding scene has two centres of gravity. The subtropical coast — Umhlanga, Ballito and the Dolphin Coast — delivers beach and ocean-view weddings with resort-grade hotels. Inland, the Midlands Meander between Nottingham Road and Howick is a pocket of England-in-Africa: dairy farms, oak avenues, craft breweries and some of the most photogenic country venues anywhere.',
-      'KZN\'s calendar is its own: the coast\'s subtropical summer (November–March) is hot, humid and rainy, so coastal weddings peak in the glorious dry winter — May to September, when Durban days sit around 23°C and the sea is still warm enough to swim.',
+      'KwaZulu-Natal is the only province where you can marry barefoot on a warm-ocean beach, in a misty green farm valley, or beneath 3,000-metre mountain peaks, all within a three-hour drive. That range, plus prices well below the Western Cape, makes KZN one of South Africa\'s most underrated wedding regions.',
+      'The province\'s wedding scene has two centres of gravity. The subtropical coast (Umhlanga, Ballito and the Dolphin Coast) delivers beach and ocean-view weddings with resort-grade hotels. Inland, the Midlands Meander between Nottingham Road and Howick is a pocket of England-in-Africa: dairy farms, oak avenues, craft breweries and some of the most photogenic country venues anywhere.',
+      'KZN\'s calendar is its own: the coast\'s subtropical summer (November–March) is hot, humid and rainy, so coastal weddings peak in the glorious dry winter, May to September, when Durban days sit around 23°C and the sea is still warm enough to swim.',
     ],
     areas: [
       {
         name: 'Umhlanga & Durban North',
         knownFor: 'Ocean-view hotels · resort weddings · fly-in convenience',
-        desc: 'The province\'s upmarket coastal strip: five-star hotels and function venues with the Indian Ocean as the backdrop, fifteen minutes from King Shaka airport. Ideal for larger, logistics-heavy weddings — on-site accommodation, in-house kitchens and coordination teams that run weddings every weekend.',
+        desc: 'The province\'s upmarket coastal strip: five-star hotels and function venues with the Indian Ocean as the backdrop, fifteen minutes from King Shaka airport. Ideal for larger, logistics-heavy weddings: on-site accommodation, in-house kitchens and coordination teams that run weddings every weekend.',
       },
       {
         name: 'Ballito & Dolphin Coast',
@@ -382,7 +382,7 @@ export const PROVINCES = {
       {
         name: 'Midlands Meander',
         knownFor: 'Misty farm venues · country chapels · best value in SA',
-        desc: 'Between Howick and Nottingham Road lies KZN\'s wedding jewel: working farms, forest chapels, trout dams and mountain views toward the Drakensberg. Venue hire is remarkably reasonable for the quality, and the area\'s guesthouses, breweries and food producers turn a wedding into a country weekend. The signature Midlands mist is atmospheric in photos — and a real scheduling consideration.',
+        desc: 'Between Howick and Nottingham Road lies KZN\'s wedding jewel: working farms, forest chapels, trout dams and mountain views toward the Drakensberg. Venue hire is remarkably reasonable for the quality, and the area\'s guesthouses, breweries and food producers turn a wedding into a country weekend. The signature Midlands mist is atmospheric in photos, and a real scheduling consideration.',
       },
       {
         name: 'Drakensberg',
@@ -392,12 +392,12 @@ export const PROVINCES = {
       {
         name: 'South Coast',
         knownFor: 'Affordable beach weddings · lagoons and banana palms',
-        desc: 'From Scottburgh down to Port Edward, the South Coast offers the province\'s most affordable coastal venues — lagoon-mouth settings, tropical gardens and small resorts. Less polished than Umhlanga, far friendlier on the budget, and the winter sardine run adds a uniquely KZN spectacle for June guests.',
+        desc: 'From Scottburgh down to Port Edward, the South Coast offers the province\'s most affordable coastal venues: lagoon-mouth settings, tropical gardens and small resorts. Less polished than Umhlanga, far friendlier on the budget, and the winter sardine run adds a uniquely KZN spectacle for June guests.',
       },
       {
         name: 'Pietermaritzburg & Tala Valley',
         knownFor: 'Game-reserve ceremonies an hour from Durban',
-        desc: 'The valley between Durban and PMB hides bushveld and game-farm venues — giraffe on the ceremony horizon, an hour from the beach. A practical way to give guests the "African bush wedding" without remote-lodge logistics.',
+        desc: 'The valley between Durban and PMB hides bushveld and game-farm venues, with giraffe on the ceremony horizon an hour from the beach. A practical way to give guests the "African bush wedding" without remote-lodge logistics.',
       },
     ],
     pricing: [
@@ -409,21 +409,21 @@ export const PROVINCES = {
       { item: 'Typical all-in wedding (100 guests)', range: 'R120,000 – R350,000' },
     ],
     season: {
-      best: 'May – September on the coast: dry, sunny, low humidity, sea still swimmable — the exact opposite of the Cape calendar. The Midlands and Berg shine in autumn (April–May) and spring (September–October).',
-      avoid: 'December–February on the coast is hot, humid and thundery, and Durban beaches are packed with holidaymakers. In the Midlands, plan around morning mist year-round — it burns off, but schedule photos accordingly.',
+      best: 'May – September on the coast: dry, sunny, low humidity, sea still swimmable, the exact opposite of the Cape calendar. The Midlands and Berg shine in autumn (April–May) and spring (September–October).',
+      avoid: 'December–February on the coast is hot, humid and thundery, and Durban beaches are packed with holidaymakers. In the Midlands, plan around morning mist year-round; it burns off, but schedule photos accordingly.',
       wind: 'Coastal afternoon breezes are gentler than the Cape\'s, but beach ceremonies should still finish by late afternoon before the onshore wind peaks.',
     },
     tips: [
-      'KZN\'s winter-peak season means genuine bargains at coastal venues in "summer off-season" — if your date is flexible, ask for November or February rates.',
-      'Beach ceremonies on public beaches need a municipal permit — most coastal venues arrange this, but confirm who applies and pays.',
+      'KZN\'s winter-peak season means genuine bargains at coastal venues in "summer off-season". If your date is flexible, ask for November or February rates.',
+      'Beach ceremonies on public beaches need a municipal permit. Most coastal venues arrange this, but confirm who applies and pays.',
       'In the Midlands, schedule couple photos for late afternoon; morning mist and midday glare are the classic photographic traps.',
       'Humidity is the détail that catches out summer coastal weddings: think breathable fabrics, ventilated venues and hair/makeup planned for it.',
-      'Drakensberg and Midlands venues often include or require weekend-long bookings — price the whole weekend, then compare per-guest against a single-day coastal package.',
+      'Drakensberg and Midlands venues often include or require weekend-long bookings, so price the whole weekend, then compare per-guest against a single-day coastal package.',
     ],
     faqs: [
       {
         q: 'When is the best time for a beach wedding in KZN?',
-        a: 'May to September. KZN\'s dry winter delivers sunny 22–25°C days, low humidity and a warm sea — the reverse of the Cape season. December and January are hot, humid, stormy and crowded.',
+        a: 'May to September. KZN\'s dry winter delivers sunny 22–25°C days, low humidity and a warm sea, the reverse of the Cape season. December and January are hot, humid, stormy and crowded.',
       },
       {
         q: 'How much does a KZN wedding cost compared to Cape Town?',
@@ -435,7 +435,7 @@ export const PROVINCES = {
       },
       {
         q: 'Can I get married on a Durban beach?',
-        a: 'Yes — public-beach ceremonies require a permit from the municipality, and most beachfront venues and planners handle the application. Private and resort beaches north of the city (Ballito, Zimbali area) simplify the process considerably.',
+        a: 'Yes. Public-beach ceremonies require a permit from the municipality, and most beachfront venues and planners handle the application. Private and resort beaches north of the city (Ballito, Zimbali area) simplify the process considerably.',
       },
       {
         q: 'Is a Drakensberg wedding practical for guests?',
@@ -525,21 +525,21 @@ export const PROVINCES = {
     shortName: 'Eastern Cape',
     emoji: '🐘',
     tagline: 'Wild Coast beaches, Addo bushveld and friendly-city charm',
-    metaTitle: 'Wedding Venues in the Eastern Cape — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in the Eastern Cape: Complete 2026 Guide',
     metaDescription:
       'Where to get married in the Eastern Cape: Gqeberha beachfront venues, St Francis Bay, Addo game reserves, Kenton-on-Sea and misty Hogsback. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '9 min read',
     intro: [
-      'The Eastern Cape is South Africa\'s best-kept wedding secret. It offers the same raw ingredients as its famous neighbours — beaches, bushveld, forest and Karoo — at prices that consistently undercut the Western Cape and KZN, with venues that still treat every wedding as an event rather than a production line.',
+      'The Eastern Cape is South Africa\'s best-kept wedding secret. It offers the same raw ingredients as its famous neighbours (beaches, bushveld, forest and Karoo) at prices that consistently undercut the Western Cape and KZN, with venues that still treat every wedding as an event rather than a production line.',
       'The province\'s wedding scene clusters around Gqeberha (Port Elizabeth) and its holiday-coast satellites: St Francis Bay\'s canals and thatch, Kenton-on-Sea\'s twin rivers, and the malaria-free game reserves of the Sundays River Valley around Addo. Inland, Hogsback\'s misty forests supply one of the most otherworldly ceremony settings in the country.',
-      'For couples with family spread across the country, the Eastern Cape\'s trump card is Addo: a malaria-free Big Five wedding — something Mpumalanga and Limpopo cannot offer — within 45 minutes of an international airport.',
+      'For couples with family spread across the country, the Eastern Cape\'s trump card is Addo: a malaria-free Big Five wedding, something Mpumalanga and Limpopo cannot offer, within 45 minutes of an international airport.',
     ],
     areas: [
       {
         name: 'Gqeberha (Port Elizabeth)',
         knownFor: 'Beachfront hotels · boardwalk venues · airport convenience',
-        desc: 'The friendly city delivers practical coastal weddings: beachfront hotels and function venues along Marine Drive, historic buildings in Central, and a full supplier ecosystem. PE\'s reputation as the "windy city" is earned — venues here are experienced at reading the afternoon south-westerly, and most ceremonies are planned for mornings or sheltered spots.',
+        desc: 'The friendly city delivers practical coastal weddings: beachfront hotels and function venues along Marine Drive, historic buildings in Central, and a full supplier ecosystem. PE\'s reputation as the "windy city" is earned, and venues here are experienced at reading the afternoon south-westerly, and most ceremonies are planned for mornings or sheltered spots.',
       },
       {
         name: 'St Francis Bay & Cape St Francis',
@@ -549,7 +549,7 @@ export const PROVINCES = {
       {
         name: 'Addo & Sundays River Valley',
         knownFor: 'Malaria-free Big Five · citrus valleys · lodge weddings',
-        desc: 'The Addo region\'s private game reserves and lodges host intimate bush weddings with elephants on the horizon — all malaria-free and under an hour from the airport. Citrus-farm venues in the valley offer a more affordable countryside alternative with the reserves on the doorstep for guest safaris.',
+        desc: 'The Addo region\'s private game reserves and lodges host intimate bush weddings with elephants on the horizon, all malaria-free and under an hour from the airport. Citrus-farm venues in the valley offer a more affordable countryside alternative with the reserves on the doorstep for guest safaris.',
       },
       {
         name: 'Kenton-on-Sea & Bushmans River',
@@ -564,7 +564,7 @@ export const PROVINCES = {
       {
         name: 'East London & Wild Coast fringe',
         knownFor: 'River mouths · rural beaches · authentic Xhosa heartland',
-        desc: 'East London\'s river and beach venues serve the province\'s eastern half, while the Wild Coast beyond offers raw, beautiful settings for adventurous couples. Infrastructure thins out quickly — the venues that do operate here are well-practised at self-sufficiency.',
+        desc: 'East London\'s river and beach venues serve the province\'s eastern half, while the Wild Coast beyond offers raw, beautiful settings for adventurous couples. Infrastructure thins out quickly, and the venues that do operate here are well-practised at self-sufficiency.',
       },
     ],
     pricing: [
@@ -577,24 +577,24 @@ export const PROVINCES = {
     ],
     season: {
       best: 'March – May and September – November: settled autumn and spring weather, mild temperatures and the coast at its calmest. Winter is mild by SA standards and a genuine budget option.',
-      avoid: 'Mid-December to early January on the holiday coast — St Francis and Kenton triple in population and accommodation vanishes. August–September can be windy in Gqeberha.',
+      avoid: 'Mid-December to early January on the holiday coast, when St Francis and Kenton triple in population and accommodation vanishes. August–September can be windy in Gqeberha.',
       wind: 'Wind is the Eastern Cape\'s planning factor: morning ceremonies, sheltered courtyards and venues with a practised wind plan are the local playbook.',
     },
     tips: [
-      'The Eastern Cape is the value province — comparable venues run 30–50% below Western Cape prices, so stretch the budget to the venue you really want.',
-      'For an Addo bush wedding, book the lodge\'s full accommodation for the weekend — intimate guest counts (under 80) work best.',
+      'The Eastern Cape is the value province: comparable venues run 30–50% below Western Cape prices, so stretch the budget to the venue you really want.',
+      'For an Addo bush wedding, book the lodge\'s full accommodation for the weekend; intimate guest counts (under 80) work best.',
       'Coastal villages have limited guest accommodation: block-book early, especially for December–January dates.',
-      'Ask Gqeberha venues about their wind contingency the same way you\'d ask a Cape Town venue — locals plan around it, and so should you.',
+      'Ask Gqeberha venues about their wind contingency the same way you\'d ask a Cape Town venue. Locals plan around it, and so should you.',
       'Hogsback\'s mountain roads deserve a daylight arrival plan for elderly guests.',
     ],
     faqs: [
       {
         q: 'Why choose the Eastern Cape for a wedding?',
-        a: 'Value and variety. You get beach, bush and mountain venues at prices 30–50% below the Cape, a malaria-free Big Five option at Addo, and venues that host far fewer weddings per year — which usually means more flexibility and personal attention.',
+        a: 'Value and variety. You get beach, bush and mountain venues at prices 30–50% below the Cape, a malaria-free Big Five option at Addo, and venues that host far fewer weddings per year, which usually means more flexibility and personal attention.',
       },
       {
         q: 'Can I have a safari wedding in the Eastern Cape?',
-        a: 'Yes — the private reserves around Addo host full wedding weekends with game drives for guests, and unlike the Lowveld reserves the region is malaria-free, which matters for pregnant guests and small children.',
+        a: 'Yes. The private reserves around Addo host full wedding weekends with game drives for guests, and unlike the Lowveld reserves the region is malaria-free, which matters for pregnant guests and small children.',
       },
       {
         q: 'When is the best time for an Eastern Cape wedding?',
@@ -602,11 +602,11 @@ export const PROVINCES = {
       },
       {
         q: 'How much does an Eastern Cape wedding cost?',
-        a: 'A typical 100-guest wedding lands between R100,000 and R300,000 all-in — meaningfully below the national big-city average. Country and citrus-farm venues near Addo start under R10,000 for hire.',
+        a: 'A typical 100-guest wedding lands between R100,000 and R300,000 all-in, meaningfully below the national big-city average. Country and citrus-farm venues near Addo start under R10,000 for hire.',
       },
       {
         q: 'Is Gqeberha too windy for an outdoor wedding?',
-        a: 'No — but plan like a local: morning or early-afternoon ceremony, a sheltered or indoor reception, and a venue coordinator who watches the forecast. The wind typically builds through the afternoon, so timing is the main defence.',
+        a: 'No, but plan like a local: morning or early-afternoon ceremony, a sheltered or indoor reception, and a venue coordinator who watches the forecast. The wind typically builds through the afternoon, so timing is the main defence.',
       },
     ],
     venues: [
@@ -683,14 +683,14 @@ export const PROVINCES = {
     shortName: 'Free State',
     emoji: '⛰️',
     tagline: 'Clarens sandstone, Vaal river banks and golden Maluti light',
-    metaTitle: 'Wedding Venues in the Free State — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in the Free State: Complete 2026 Guide',
     metaDescription:
       'Where to get married in the Free State: Clarens and the Maluti mountains, Parys on the Vaal, Bloemfontein estates and Eastern Free State sandstone farms. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '9 min read',
     intro: [
-      'The Free State rarely makes the glossy wedding shortlists — which is precisely why its best venues feel like discoveries. The province\'s eastern edge, where sandstone cliffs meet the Maluti mountains around Clarens, produces some of the most photogenic golden-hour light in South Africa, and its venue prices remain among the gentlest in the country.',
-      'Two areas anchor the scene. Clarens, the sandstone art village beneath the Malutis, has grown into a genuine destination-wedding town — galleries, craft beer, trout dams and mountain venues within walking distance of guest cottages. Parys, on the banks of the Vaal an hour from Johannesburg, serves the Gauteng market with riverside ceremonies inside the ancient Vredefort Dome.',
+      'The Free State rarely makes the glossy wedding shortlists, which is precisely why its best venues feel like discoveries. The province\'s eastern edge, where sandstone cliffs meet the Maluti mountains around Clarens, produces some of the most photogenic golden-hour light in South Africa, and its venue prices remain among the gentlest in the country.',
+      'Two areas anchor the scene. Clarens, the sandstone art village beneath the Malutis, has grown into a genuine destination-wedding town, with galleries, craft beer, trout dams and mountain venues within walking distance of guest cottages. Parys, on the banks of the Vaal an hour from Johannesburg, serves the Gauteng market with riverside ceremonies inside the ancient Vredefort Dome.',
       'For Johannesburg and Bloemfontein couples the Free State maths is compelling: half the venue price of the fashionable regions, uncrowded dates, and scenery that photographs like the Drakensberg without the drive.',
     ],
     areas: [
@@ -702,7 +702,7 @@ export const PROVINCES = {
       {
         name: 'Parys & Vredefort Dome',
         knownFor: 'Vaal River ceremonies · an hour from Joburg · adventure add-ons',
-        desc: 'Parys puts riverside weddings — willows, water and island venues in the Vaal — within easy reach of Gauteng guests who can drive home after the dancing. The surrounding Vredefort Dome (a UNESCO site, the world\'s oldest meteorite crater) adds koppie scenery and river-rafting entertainment for the wedding weekend.',
+        desc: 'Parys puts riverside weddings (willows, water and island venues in the Vaal) within easy reach of Gauteng guests who can drive home after the dancing. The surrounding Vredefort Dome (a UNESCO site, the world\'s oldest meteorite crater) adds koppie scenery and river-rafting entertainment for the wedding weekend.',
       },
       {
         name: 'Bloemfontein & surrounds',
@@ -729,28 +729,28 @@ export const PROVINCES = {
     ],
     season: {
       best: 'April – May for golden autumn poplars and settled weather; September – October for spring blossoms (and Ficksburg cherries). Winter delivers crisp sunny days, fireside receptions and occasional Maluti snow for the brave.',
-      avoid: 'October – March afternoons carry highveld thunderstorm risk, as in Gauteng. June–July nights drop well below freezing in the east — winter weddings need heated venues, not just blankets.',
-      wind: 'The eastern Free State\'s light is the province\'s secret weapon: late-afternoon golden hour on sandstone is spectacular — schedule couple photos for the hour before sunset.',
+      avoid: 'October – March afternoons carry highveld thunderstorm risk, as in Gauteng. June–July nights drop well below freezing in the east, so winter weddings need heated venues, not just blankets.',
+      wind: 'The eastern Free State\'s light is the province\'s secret weapon: late-afternoon golden hour on sandstone is spectacular, so schedule couple photos for the hour before sunset.',
     },
     tips: [
       'Clarens works best as a weekend wedding: guests book village cottages, and the town does the entertaining between events.',
-      'Free State farm venues are often family-run with genuine flexibility — own caterers, own bar, late checkout — ask, because the answer is usually yes.',
+      'Free State farm venues are often family-run with genuine flexibility (own caterers, own bar, late checkout). Ask, because the answer is usually yes.',
       'For Parys, confirm river levels and a flood-season plan for deck ceremonies (late summer is the risk window).',
-      'Winter (June–August) dates are heavily discounted and photograph beautifully — but confirm indoor heating capacity in writing.',
-      'Cherry-blossom dates around Ficksburg book out a year ahead for September — move early.',
+      'Winter (June–August) dates are heavily discounted and photograph beautifully, but confirm indoor heating capacity in writing.',
+      'Cherry-blossom dates around Ficksburg book out a year ahead for September, so move early.',
     ],
     faqs: [
       {
         q: 'Is Clarens a good wedding destination?',
-        a: 'One of the best-value destination-wedding towns in South Africa. Mountain scenery, walkable guest accommodation, galleries and restaurants for the weekend, and venue hire typically R12,000–R40,000 — a fraction of comparable Drakensberg or Winelands settings.',
+        a: 'One of the best-value destination-wedding towns in South Africa. Mountain scenery, walkable guest accommodation, galleries and restaurants for the weekend, and venue hire typically R12,000–R40,000, a fraction of comparable Drakensberg or Winelands settings.',
       },
       {
         q: 'How far is Parys from Johannesburg for a wedding?',
-        a: 'About an hour from the southern suburbs — close enough that Gauteng guests can attend a full evening reception and drive home, which materially cuts your guests\' accommodation costs.',
+        a: 'About an hour from the southern suburbs, close enough that Gauteng guests can attend a full evening reception and drive home, which materially cuts your guests\' accommodation costs.',
       },
       {
         q: 'When do the Ficksburg cherry blossoms bloom?',
-        a: 'September, typically peaking mid-month. It is a short, weather-dependent window — venues in the area book their September Saturdays far in advance, so secure the date a year out.',
+        a: 'September, typically peaking mid-month. It is a short, weather-dependent window, and venues in the area book their September Saturdays far in advance, so secure the date a year out.',
       },
       {
         q: 'How much does a Free State wedding cost?',
@@ -840,15 +840,15 @@ export const PROVINCES = {
     shortName: 'Limpopo',
     emoji: '🦒',
     tagline: 'Waterberg bushveld, misty Magoebaskloof and big-sky sunsets',
-    metaTitle: 'Wedding Venues in Limpopo — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in Limpopo: Complete 2026 Guide',
     metaDescription:
       'Where to get married in Limpopo: Bela-Bela and the Waterberg, Magoebaskloof forests, Tzaneen tropics, Polokwane and Hoedspruit big-game country. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '9 min read',
     intro: [
-      'Limpopo is bushveld wedding country. The province delivers the classic African-sunset ceremony — thorn trees, amber light, giraffe on the horizon — closer to Gauteng and at gentler prices than the famous Lowveld reserves, with the Waterberg\'s malaria-free plateau as its trump card.',
+      'Limpopo is bushveld wedding country. The province delivers the classic African-sunset ceremony (thorn trees, amber light, giraffe on the horizon) closer to Gauteng and at gentler prices than the famous Lowveld reserves, with the Waterberg\'s malaria-free plateau as its trump card.',
       'The southern gateway towns of Bela-Bela and Modimolle put bushveld lodges within two hours of Pretoria, which is why they host hundreds of Gauteng weddings a year. Deeper in, the Waterberg proper offers big-sky wilderness weddings, while the province\'s east hides a complete surprise: the misty avocado-and-forest highlands of Magoebaskloof and Tzaneen, which feel more like Mpumalanga\'s escarpment than anyone\'s idea of Limpopo.',
-      'The planning rhythm is the highveld\'s: dry, golden, storm-free winters (April–September) are peak wedding season, with winter evenings cold enough to need fire pits and blankets — which, at a bush venue, is exactly the atmosphere you booked.',
+      'The planning rhythm is the highveld\'s: dry, golden, storm-free winters (April–September) are peak wedding season, with winter evenings cold enough to need fire pits and blankets, which, at a bush venue, is exactly the atmosphere you booked.',
     ],
     areas: [
       {
@@ -859,17 +859,17 @@ export const PROVINCES = {
       {
         name: 'Waterberg & Vaalwater',
         knownFor: 'Malaria-free wilderness · plateau scenery · lodge weekends',
-        desc: 'The Waterberg\'s UNESCO biosphere is proper big-sky wilderness — red cliffs, plains game and profound quiet — and it is malaria-free, unlike the Kruger lowveld. Lodge weddings here are weekend affairs with the whole property booked for your party. Best for guest lists under 100.',
+        desc: 'The Waterberg\'s UNESCO biosphere is proper big-sky wilderness of red cliffs, plains game and profound quiet, and it is malaria-free, unlike the Kruger lowveld. Lodge weddings here are weekend affairs with the whole property booked for your party. Best for guest lists under 100.',
       },
       {
         name: 'Magoebaskloof & Haenertsburg',
         knownFor: 'Misty indigenous forest · azaleas · mountain passes',
-        desc: 'Limpopo\'s green secret: forest venues and mountain gardens in the mist belt between Polokwane and Tzaneen. Spring (September–October) brings the famous azalea and cherry displays. The atmosphere is closer to the KZN Midlands than to bushveld — and so is the photography.',
+        desc: 'Limpopo\'s green secret: forest venues and mountain gardens in the mist belt between Polokwane and Tzaneen. Spring (September–October) brings the famous azalea and cherry displays. The atmosphere is closer to the KZN Midlands than to bushveld, and so is the photography.',
       },
       {
         name: 'Tzaneen & Letaba Valley',
         knownFor: 'Tropical valleys · avocado and macadamia farms · warm winters',
-        desc: 'The subtropical Letaba valley grows fruit — and increasingly, weddings. Farm venues among avocado and macadamia orchards offer lush green settings with the Wolkberg mountains behind, and winters here are warm when the highveld shivers.',
+        desc: 'The subtropical Letaba valley grows fruit and, increasingly, weddings. Farm venues among avocado and macadamia orchards offer lush green settings with the Wolkberg mountains behind, and winters here are warm when the highveld shivers.',
       },
       {
         name: 'Polokwane & surrounds',
@@ -879,7 +879,7 @@ export const PROVINCES = {
       {
         name: 'Hoedspruit & Kruger fringe',
         knownFor: 'Big-game reserves · safari weddings · fly-in guests',
-        desc: 'On the province\'s eastern edge, the private reserves around Hoedspruit deliver full safari weddings — Big Five game drives, boma dinners, bush ceremonies. Note this lowveld strip is seasonal malaria territory; plan accordingly and brief guests.',
+        desc: 'On the province\'s eastern edge, the private reserves around Hoedspruit deliver full safari weddings: Big Five game drives, boma dinners, bush ceremonies. Note this lowveld strip is seasonal malaria territory; plan accordingly and brief guests.',
       },
     ],
     pricing: [
@@ -890,25 +890,25 @@ export const PROVINCES = {
       { item: 'Typical all-in wedding (100 guests)', range: 'R110,000 – R320,000' },
     ],
     season: {
-      best: 'April – September: dry, sunny, storm-free days with golden bushveld light — peak season for a reason. May and August offer warm days without the deep-winter evening cold.',
+      best: 'April – September: dry, sunny, storm-free days with golden bushveld light, peak season for a reason. May and August offer warm days without the deep-winter evening cold.',
       avoid: 'October – March is hot (regularly 35°C+ in the bushveld) with afternoon thunderstorms. If you must marry in summer, choose the cooler Magoebaskloof highlands or an air-conditioned reception venue.',
-      wind: 'Winter bushveld evenings drop sharply after sunset — fire pits, blankets and heaters are part of the standard Limpopo winter-wedding kit, and honestly part of the charm.',
+      wind: 'Winter bushveld evenings drop sharply after sunset. Fire pits, blankets and heaters are part of the standard Limpopo winter-wedding kit, and honestly part of the charm.',
     },
     tips: [
-      'The Waterberg is malaria-free; the Hoedspruit/Kruger lowveld is not — if guests include small children or pregnant women, this should drive your area choice.',
+      'The Waterberg is malaria-free; the Hoedspruit/Kruger lowveld is not. If guests include small children or pregnant women, this should drive your area choice.',
       'Bush venues are remote by design: book the venue\'s full accommodation and shuttle guests from a single meeting point.',
-      'Sunset is the ceremony slot — work the day backwards from golden hour (roughly 17:00–17:45 in winter).',
+      'Sunset is the ceremony slot, so work the day backwards from golden hour (roughly 17:00–17:45 in winter).',
       'Confirm generator and water-backup arrangements; rural Limpopo infrastructure rewards venues that are self-sufficient, and the good ones are.',
-      'For Magoebaskloof, spring blossom season (September–October) is the photographic jackpot — and books accordingly.',
+      'For Magoebaskloof, spring blossom season (September–October) is the photographic jackpot, and books accordingly.',
     ],
     faqs: [
       {
         q: 'Can I have a malaria-free safari wedding in Limpopo?',
-        a: 'Yes — that is the Waterberg\'s specialty. The plateau\'s reserves and lodges around Vaalwater offer plains-game wilderness weddings entirely outside the malaria zone, unlike the Kruger lowveld to the east.',
+        a: 'Yes, that is the Waterberg\'s specialty. The plateau\'s reserves and lodges around Vaalwater offer plains-game wilderness weddings entirely outside the malaria zone, unlike the Kruger lowveld to the east.',
       },
       {
         q: 'How far is Bela-Bela from Johannesburg and Pretoria?',
-        a: 'Roughly 2 hours from Johannesburg and 90 minutes from Pretoria on the N1 — close enough for Gauteng day guests, far enough to feel like the bushveld. It is the most accessible bush-wedding cluster in the country.',
+        a: 'Roughly 2 hours from Johannesburg and 90 minutes from Pretoria on the N1, close enough for Gauteng day guests, far enough to feel like the bushveld. It is the most accessible bush-wedding cluster in the country.',
       },
       {
         q: 'When is the best time for a Limpopo bushveld wedding?',
@@ -993,26 +993,26 @@ export const PROVINCES = {
     shortName: 'Mpumalanga',
     emoji: '🌄',
     tagline: 'Lowveld safari country, Dullstroom mists and escarpment waterfalls',
-    metaTitle: 'Wedding Venues in Mpumalanga — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in Mpumalanga: Complete 2026 Guide',
     metaDescription:
       'Where to get married in Mpumalanga: Hazyview and White River near Kruger, Dullstroom highlands, Mbombela, and the Sabie–Graskop waterfall country. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '9 min read',
     intro: [
-      'Mpumalanga compresses two entirely different wedding provinces into one. Down in the Lowveld, Hazyview and White River host safari-adjacent weddings on Kruger\'s doorstep — boma fires, tropical gardens and game drives between the ceremony and the dancing. Up on the escarpment, Dullstroom\'s misty trout-country highlands feel like the Scottish moors with better light.',
+      'Mpumalanga compresses two entirely different wedding provinces into one. Down in the Lowveld, Hazyview and White River host safari-adjacent weddings on Kruger\'s doorstep: boma fires, tropical gardens and game drives between the ceremony and the dancing. Up on the escarpment, Dullstroom\'s misty trout-country highlands feel like the Scottish moors with better light.',
       'That vertical range is the planning key. The Lowveld is warm year-round (and properly hot in summer), making it South Africa\'s most reliable winter wedding destination. Dullstroom, at 2,100 metres, is the reverse: crisp, cool and atmospheric, with fireside winter receptions and genuinely cold nights.',
-      'Between the two, the Sabie–Graskop escarpment edge — waterfalls, forests and the views of the Panorama Route — provides ceremony backdrops that need no décor budget whatsoever.',
+      'Between the two, the Sabie–Graskop escarpment edge (waterfalls, forests and the views of the Panorama Route) provides ceremony backdrops that need no décor budget whatsoever.',
     ],
     areas: [
       {
         name: 'Hazyview & White River',
         knownFor: 'Kruger\'s doorstep · tropical gardens · safari add-ons',
-        desc: 'The Lowveld\'s wedding heartland: lodge and garden venues minutes from Kruger\'s Phabeni and Numbi gates. Couples build wedding weekends around game drives, and venues are geared for fly-in guests via KMIA airport. Summer is lush and hot; winter is dry, mild and mosquito-light — the local peak season.',
+        desc: 'The Lowveld\'s wedding heartland: lodge and garden venues minutes from Kruger\'s Phabeni and Numbi gates. Couples build wedding weekends around game drives, and venues are geared for fly-in guests via KMIA airport. Summer is lush and hot; winter is dry, mild and mosquito-light, the local peak season.',
       },
       {
         name: 'Dullstroom & Steenkampsberg',
         knownFor: 'Highland mists · trout dams · fireside winters',
-        desc: 'South Africa\'s highest town does cool-climate romance: stone lodges, trout dams, whisky bars and mist rolling over the moors. A Dullstroom winter wedding — fires lit, mist outside — is an aesthetic all of its own. Only 2.5 hours from Pretoria, which keeps Gauteng guest logistics simple.',
+        desc: 'South Africa\'s highest town does cool-climate romance: stone lodges, trout dams, whisky bars and mist rolling over the moors. A Dullstroom winter wedding, fires lit and mist outside, is an aesthetic all of its own. Only 2.5 hours from Pretoria, which keeps Gauteng guest logistics simple.',
       },
       {
         name: 'Mbombela (Nelspruit) & surrounds',
@@ -1022,7 +1022,7 @@ export const PROVINCES = {
       {
         name: 'Sabie, Graskop & the Panorama Route',
         knownFor: 'Waterfalls · forest ceremonies · God\'s Window country',
-        desc: 'The escarpment edge stacks waterfalls, pine forests and canyon views into a compact wedding-photography paradise. Venues are smaller and simpler than the Lowveld estates — the scenery is the point. Mist and afternoon summer storms demand flexible scheduling.',
+        desc: 'The escarpment edge stacks waterfalls, pine forests and canyon views into a compact wedding-photography paradise. Venues are smaller and simpler than the Lowveld estates; the scenery is the point. Mist and afternoon summer storms demand flexible scheduling.',
       },
       {
         name: 'Highveld (Middelburg – Belfast – Chrissiesmeer)',
@@ -1038,25 +1038,25 @@ export const PROVINCES = {
       { item: 'Typical all-in wedding (100 guests)', range: 'R120,000 – R350,000' },
     ],
     season: {
-      best: 'April – August in the Lowveld: dry, mild, low malaria risk and reliable sunshine — the safest winter wedding bet in South Africa. Dullstroom shines in autumn (April–May) and misty mid-winter for fireside weddings.',
-      avoid: 'Lowveld summers (November – February) are hot, humid and stormy, with higher malaria activity — if you must, plan air-conditioned receptions and evening ceremonies. Dullstroom summer afternoons bring highveld storms.',
+      best: 'April – August in the Lowveld: dry, mild, low malaria risk and reliable sunshine, the safest winter wedding bet in South Africa. Dullstroom shines in autumn (April–May) and misty mid-winter for fireside weddings.',
+      avoid: 'Lowveld summers (November – February) are hot, humid and stormy, with higher malaria activity. If you must, plan air-conditioned receptions and evening ceremonies. Dullstroom summer afternoons bring highveld storms.',
       wind: 'The Lowveld sits in a seasonal malaria zone: winter dates minimise risk, and guests should still get travel-clinic advice. The Waterberg (Limpopo) or highveld venues are alternatives if this is a dealbreaker.',
     },
     tips: [
-      'Winter (May–August) is the Lowveld\'s secret superpower: dry guaranteed weather when the rest of the country gambles — it books out accordingly.',
-      'Build the safari in: venues near Kruger gates can arrange guest game drives the morning after — it turns a wedding into the trip of a lifetime for overseas guests.',
+      'Winter (May–August) is the Lowveld\'s secret superpower: dry guaranteed weather when the rest of the country gambles, and it books out accordingly.',
+      'Build the safari in: venues near Kruger gates can arrange guest game drives the morning after, which turns a wedding into the trip of a lifetime for overseas guests.',
       'Dullstroom weddings need a cold plan: heated marquees or stone-walled venues, and blankets as favours never go to waste.',
       'Brief guests on malaria precautions for Lowveld dates, especially November–April.',
-      'Fly-in guests land at KMIA (Kruger Mpumalanga International) — 30–60 minutes from most Lowveld venues; build shuttles around it.',
+      'Fly-in guests land at KMIA (Kruger Mpumalanga International), 30–60 minutes from most Lowveld venues; build shuttles around it.',
     ],
     faqs: [
       {
         q: 'Is winter a good time for a Mpumalanga wedding?',
-        a: 'It is the best time — for the Lowveld. May to August brings dry, sunny 22–26°C days, minimal malaria activity and zero storm risk. Dullstroom in winter is a different, deliberate choice: cold, misty and firelit — atmospheric if you dress the wedding for it.',
+        a: 'For the Lowveld, it is the best time. May to August brings dry, sunny 22–26°C days, minimal malaria activity and zero storm risk. Dullstroom in winter is a different, deliberate choice: cold, misty and firelit, and atmospheric if you dress the wedding for it.',
       },
       {
         q: 'Can guests do a Kruger safari around the wedding?',
-        a: 'Easily — Hazyview and White River venues sit minutes from Kruger\'s southern gates, and most lodges arrange guest game drives. Many couples schedule the wedding on Saturday and a group safari on Sunday morning.',
+        a: 'Easily. Hazyview and White River venues sit minutes from Kruger\'s southern gates, and most lodges arrange guest game drives. Many couples schedule the wedding on Saturday and a group safari on Sunday morning.',
       },
       {
         q: 'Do I need to worry about malaria for a Lowveld wedding?',
@@ -1102,7 +1102,7 @@ export const PROVINCES = {
         capacity: null,
         priceBand: null,
         website: "https://www.shilohweddingvenue.co.za/",
-        description: "A romantic bushveld property outside Nelspruit where zebra and nyala roam the grounds, centred on a striking glass chapel overlooking a dam — complete with a small boat for the couple's arrival. The design language blends stone, warm timber, black steel accents and expansive glazing, and there are also a mini chapel and open-air bush ceremony spots. All-inclusive packages, on-site accommodation and a Best of Mbombela award make it a standout in the area.",
+        description: "A romantic bushveld property outside Nelspruit where zebra and nyala roam the grounds, centred on a striking glass chapel overlooking a dam, complete with a small boat for the couple's arrival. The design language blends stone, warm timber, black steel accents and expansive glazing, and there are also a mini chapel and open-air bush ceremony spots. All-inclusive packages, on-site accommodation and a Best of Mbombela award make it a standout in the area.",
       },
       {
         name: "Angels View",
@@ -1141,21 +1141,21 @@ export const PROVINCES = {
     shortName: 'North West',
     emoji: '🌅',
     tagline: 'Hartbeespoort dam views, Magaliesberg kloofs and Pilanesberg game',
-    metaTitle: 'Wedding Venues in North West Province — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in North West Province: Complete 2026 Guide',
     metaDescription:
       'Where to get married in North West: Hartbeespoort, Magaliesburg, Sun City and Pilanesberg, Rustenburg kloofs and Potchefstroom. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '9 min read',
     intro: [
-      'North West province is Gauteng\'s wedding backyard — and its best venues rival anything in the country. The Magaliesberg range and Hartbeespoort Dam sit barely an hour from Johannesburg and Pretoria, which is why the province quietly hosts a huge share of "Joburg" weddings: dam-view estates, mountain-kloof hideaways and bushveld lodges, all close enough for guests to skip the accommodation bill.',
-      'Beyond the dam, the province scales up: Sun City\'s resort machinery can host weddings from intimate to enormous with a casino-weekend built in, and the adjacent Pilanesberg — a malaria-free Big Five reserve inside an ancient volcano crater — turns the wedding into a safari weekend.',
+      'North West province is Gauteng\'s wedding backyard, and its best venues rival anything in the country. The Magaliesberg range and Hartbeespoort Dam sit barely an hour from Johannesburg and Pretoria, which is why the province quietly hosts a huge share of "Joburg" weddings: dam-view estates, mountain-kloof hideaways and bushveld lodges, all close enough for guests to skip the accommodation bill.',
+      'Beyond the dam, the province scales up: Sun City\'s resort machinery can host weddings from intimate to enormous with a casino-weekend built in, and the adjacent Pilanesberg, a malaria-free Big Five reserve inside an ancient volcano crater, turns the wedding into a safari weekend.',
       'The calendar is pure highveld: dry, golden April-to-September days are peak season, and summer dates come with the afternoon-thunderstorm rulebook every Gauteng couple already knows.',
     ],
     areas: [
       {
         name: 'Hartbeespoort',
         knownFor: 'Dam sunsets · mountain backdrop · 45 minutes from Pretoria',
-        desc: 'The dam\'s northern and eastern shores are stacked with wedding estates trading on one asset: sunset over the water with the Magaliesberg behind. French-provincial gardens, glass chapels and lakeside lawns dominate. Proximity to both cities makes it the province\'s most competitive — and convenient — wedding zone.',
+        desc: 'The dam\'s northern and eastern shores are stacked with wedding estates trading on one asset: sunset over the water with the Magaliesberg behind. French-provincial gardens, glass chapels and lakeside lawns dominate. Proximity to both cities makes it the province\'s most competitive and convenient wedding zone.',
       },
       {
         name: 'Magaliesburg & Skeerpoort',
@@ -1165,7 +1165,7 @@ export const PROVINCES = {
       {
         name: 'Sun City & Pilanesberg',
         knownFor: 'Resort weddings · malaria-free Big Five · all-in weekends',
-        desc: 'Sun City handles weddings at resort scale — multiple venues, entertainment, golf and the Valley of Waves for the guest kids — while Pilanesberg\'s crater reserve next door offers malaria-free game-drive add-ons and lodge ceremonies with wilderness views.',
+        desc: 'Sun City handles weddings at resort scale (multiple venues, entertainment, golf and the Valley of Waves for the guest kids), while Pilanesberg\'s crater reserve next door offers malaria-free game-drive add-ons and lodge ceremonies with wilderness views.',
       },
       {
         name: 'Rustenburg & Kgaswane',
@@ -1175,7 +1175,7 @@ export const PROVINCES = {
       {
         name: 'Potchefstroom & Parys corridor',
         knownFor: 'River venues · student-town energy · value',
-        desc: 'Along the Mooi and Vaal rivers, Potch\'s farm and riverside venues serve the province\'s south at some of its friendliest prices — with the Parys weekend scene just across the provincial line.',
+        desc: 'Along the Mooi and Vaal rivers, Potch\'s farm and riverside venues serve the province\'s south at some of its friendliest prices, with the Parys weekend scene just across the provincial line.',
       },
     ],
     pricing: [
@@ -1188,28 +1188,28 @@ export const PROVINCES = {
     ],
     season: {
       best: 'April – September: the highveld dry season delivers golden light, storm-free skies and mild days. May and September are the sweet spots before and after the winter-evening cold.',
-      avoid: 'October – March afternoons carry the daily thunderstorm-and-hail risk shared with Gauteng — summer bookings need a real indoor backup, not a gazebo.',
-      wind: 'Dam-side venues get a reliable early-evening breeze off the water — plan décor and hair accordingly, and ask the venue where the wind comes from in your month.',
+      avoid: 'October – March afternoons carry the daily thunderstorm-and-hail risk shared with Gauteng, so summer bookings need a real indoor backup, not a gazebo.',
+      wind: 'Dam-side venues get a reliable early-evening breeze off the water, so plan décor and hair accordingly, and ask the venue where the wind comes from in your month.',
     },
     tips: [
-      'Hartbeespoort sunset ceremonies should be timed to face the dam at golden hour — visit the venue at your actual ceremony time before booking.',
-      'Pilanesberg is malaria-free, unlike the Kruger lowveld — a safari wedding here needs no medical briefing for guests.',
-      'The province\'s proximity to Gauteng means most guests drive home — which cuts your accommodation-block burden but demands a hard bar-closing plan.',
-      'Sun City packages span a huge range — itemise what is included (venues, rooms, entertainment passes) before comparing against estate quotes.',
+      'Hartbeespoort sunset ceremonies should be timed to face the dam at golden hour. Visit the venue at your actual ceremony time before booking.',
+      'Pilanesberg is malaria-free, unlike the Kruger lowveld, so a safari wedding here needs no medical briefing for guests.',
+      'The province\'s proximity to Gauteng means most guests drive home, which cuts your accommodation-block burden but demands a hard bar-closing plan.',
+      'Sun City packages span a huge range, so itemise what is included (venues, rooms, entertainment passes) before comparing against estate quotes.',
       'Winter evening temperatures drop fast at the dam; heaters and blankets from June to August.',
     ],
     faqs: [
       {
         q: 'How far is Hartbeespoort from Johannesburg and Pretoria?',
-        a: 'Roughly 45 minutes from Pretoria and just over an hour from most of Johannesburg — close enough that the majority of guests drive home after the reception, which is precisely why the dam hosts so many Gauteng weddings.',
+        a: 'Roughly 45 minutes from Pretoria and just over an hour from most of Johannesburg, close enough that the majority of guests drive home after the reception, which is precisely why the dam hosts so many Gauteng weddings.',
       },
       {
         q: 'Can I have a safari wedding near Sun City?',
-        a: 'Yes — Pilanesberg National Park and its private lodges border the resort, offering malaria-free Big Five game drives and lodge ceremonies. Many couples combine a Sun City reception with a Pilanesberg mini-moon.',
+        a: 'Yes. Pilanesberg National Park and its private lodges border the resort, offering malaria-free Big Five game drives and lodge ceremonies. Many couples combine a Sun City reception with a Pilanesberg mini-moon.',
       },
       {
         q: 'When is the best time for a North West wedding?',
-        a: 'April to September, in the dry season: reliable sunshine, golden bushveld light and zero storm anxiety. Summer weddings work with a solid indoor backup — the afternoon storms are dramatic but brief.',
+        a: 'April to September, in the dry season: reliable sunshine, golden bushveld light and zero storm anxiety. Summer weddings work with a solid indoor backup; the afternoon storms are dramatic but brief.',
       },
       {
         q: 'What do North West wedding venues cost?',
@@ -1281,13 +1281,13 @@ export const PROVINCES = {
     shortName: 'Northern Cape',
     emoji: '🌵',
     tagline: 'Kalahari dunes, Orange River banks and Namaqualand flower season',
-    metaTitle: 'Wedding Venues in the Northern Cape — Complete 2026 Guide',
+    metaTitle: 'Wedding Venues in the Northern Cape: Complete 2026 Guide',
     metaDescription:
       'Where to get married in the Northern Cape: Kimberley, the Orange River around Upington, Kalahari lodges, Namaqualand spring flowers and Karoo star country. Areas, prices, seasons and booking tips.',
     updated: 'July 2026',
     readTime: '8 min read',
     intro: [
-      'The Northern Cape is South Africa\'s frontier wedding country — vast, spare and unforgettable. Nobody chooses it for convenience; couples come for red Kalahari dunes, the green ribbon of the Orange River through desert rock, spring\'s Namaqualand flower explosion, and night skies dark enough that the Milky Way gatecrashes the photos.',
+      'The Northern Cape is South Africa\'s frontier wedding country: vast, spare and like nowhere else. Nobody chooses it for convenience; couples come for red Kalahari dunes, the green ribbon of the Orange River through desert rock, spring\'s Namaqualand flower explosion, and night skies dark enough that the Milky Way gatecrashes the photos.',
       'Venue supply is thin by big-province standards, which shapes the planning: weddings here are usually intimate, weekend-long and venue-exclusive, with guests travelling deliberately. The reward is total privacy and settings no crowded wedding region can match.',
       'Two practical anchors make it workable: Kimberley, with real city infrastructure and historic venues, and Upington, the Green Kalahari\'s hub, where riverside lodges host ceremonies between vineyards and desert.',
     ],
@@ -1305,17 +1305,17 @@ export const PROVINCES = {
       {
         name: 'Kalahari & Augrabies',
         knownFor: 'Red dunes · desert lodges · thundering waterfall gorge',
-        desc: 'North of Upington, desert lodges among the red dunes host small, cinematic weddings — think ceremony on a dune crest at sunset. Augrabies Falls adds a granite-gorge backdrop unlike anything else in the country.',
+        desc: 'North of Upington, desert lodges among the red dunes host small, cinematic weddings. Think ceremony on a dune crest at sunset. Augrabies Falls adds a granite-gorge backdrop unlike anything else in the country.',
       },
       {
         name: 'Namaqualand & Springbok',
         knownFor: 'Spring flower carpets · quiver trees · coastal desert',
-        desc: 'For roughly six weeks from August to mid-September, Namaqualand\'s daisy carpets create South Africa\'s most spectacular natural wedding décor. The window is short and weather-dependent — flower-season dates need flexibility and early booking at the region\'s handful of guest farms.',
+        desc: 'For roughly six weeks from August to mid-September, Namaqualand\'s daisy carpets create South Africa\'s most spectacular natural wedding décor. The window is short and weather-dependent, so flower-season dates need flexibility and early booking at the region\'s handful of guest farms.',
       },
       {
         name: 'Karoo & Sutherland',
         knownFor: 'Star-gazing country · frontier towns · profound quiet',
-        desc: 'The Hantam Karoo around Sutherland — home of SALT, the southern hemisphere\'s giant telescope — offers guest-farm weddings under the darkest skies in the country. Winter nights are freezing; autumn and spring are the season.',
+        desc: 'The Hantam Karoo around Sutherland, home of SALT, the southern hemisphere\'s giant telescope, offers guest-farm weddings under the darkest skies in the country. Winter nights are freezing; autumn and spring are the season.',
       },
     ],
     pricing: [
@@ -1327,14 +1327,14 @@ export const PROVINCES = {
     ],
     season: {
       best: 'March – May and August – October: mild desert days, cold-but-clear nights, and the August–September Namaqualand flower window. Flower-season and Kalahari autumn dates are the province\'s prizes.',
-      avoid: 'December – February: the interior regularly exceeds 40°C — genuinely dangerous for an outdoor afternoon event. If summer is unavoidable, plan a night ceremony under the stars instead.',
-      wind: 'The night sky is a feature to plan for, not around: moonless (new-moon) dates give the Milky Way photos their drama — check the lunar calendar before setting the date.',
+      avoid: 'December – February: the interior regularly exceeds 40°C, which is genuinely dangerous for an outdoor afternoon event. If summer is unavoidable, plan a night ceremony under the stars instead.',
+      wind: 'The night sky is a feature to plan for, not around: moonless (new-moon) dates give the Milky Way photos their drama, so check the lunar calendar before setting the date.',
     },
     tips: [
       'Keep it intimate: the province\'s venues, distances and accommodation stock all favour guest lists under 80.',
       'Book venue-exclusive: most Northern Cape lodges host one wedding at a time with the whole property yours for the weekend.',
-      'Flower-season (Aug–Sep) Namaqualand dates should be booked a year out, with a plan B — blooms depend on winter rains.',
-      'Brief guests honestly on distances: Upington is 8+ hours\' drive from Johannesburg — flights to Upington or Kimberley save the weekend.',
+      'Flower-season (Aug–Sep) Namaqualand dates should be booked a year out, with a plan B, because blooms depend on winter rains.',
+      'Brief guests honestly on distances: Upington is 8+ hours\' drive from Johannesburg, so flights to Upington or Kimberley save the weekend.',
       'Summer weddings should run at night: desert evenings are magical and the star-scape does the décor.',
     ],
     faqs: [
@@ -1344,11 +1344,11 @@ export const PROVINCES = {
       },
       {
         q: 'Is a Kalahari wedding practical for guests?',
-        a: 'For small groups, yes — fly guests into Upington or Kimberley, then shuttle to the lodge. Most desert lodges host the whole party for the weekend, which turns the travel into part of the experience.',
+        a: 'For small groups, yes: fly guests into Upington or Kimberley, then shuttle to the lodge. Most desert lodges host the whole party for the weekend, which turns the travel into part of the experience.',
       },
       {
         q: 'How hot does it get for a Northern Cape wedding?',
-        a: 'Interior summer days regularly pass 40°C — avoid December–February daytime events entirely. Autumn and spring days sit in the pleasant 20s, and winter offers crisp sunny days with sub-zero nights.',
+        a: 'Interior summer days regularly pass 40°C, so avoid December–February daytime events entirely. Autumn and spring days sit in the pleasant 20s, and winter offers crisp sunny days with sub-zero nights.',
       },
       {
         q: 'What does a Northern Cape wedding cost?',

@@ -13,7 +13,7 @@ export default function GuestIllustration({ size = 160 }) {
       <path d="M112,30 C112,30 109,27 106,27 C102.5,27 100,30 100,33 C100,37.5 105,42 112,46 C119,42 124,37.5 124,33 C124,30 121.5,27 118,27 C115,27 112,30 112,30 Z"
         fill="var(--color-accent)" fillOpacity="0.28" />
 
-      {/* Left figure — partner 1 (primary) */}
+      {/* Left figure - partner 1 (primary) */}
       {/* Head */}
       <circle cx="52" cy="78" r="16" stroke="var(--color-primary)" strokeWidth="1.8" fill="var(--color-primary)" fillOpacity="0.1" />
       {/* Neck */}
@@ -25,7 +25,7 @@ export default function GuestIllustration({ size = 160 }) {
       <path d="M32,112 Q40,110 52,108" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
       <path d="M72,112 Q64,110 52,108" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
 
-      {/* Right figure — partner 2 (accent) */}
+      {/* Right figure - partner 2 (accent) */}
       {/* Head */}
       <circle cx="108" cy="78" r="16" stroke="var(--color-accent)" strokeWidth="1.8" fill="var(--color-accent)" fillOpacity="0.1" />
       {/* Neck */}

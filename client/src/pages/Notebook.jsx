@@ -53,7 +53,7 @@ export default function Notebook() {
           className="flex items-center justify-between px-6 py-3"
           style={{ background: 'var(--color-accent)', color: '#fff' }}
         >
-          <span className="font-vibes text-2xl">{coupleLabel} — Wedding Notebook</span>
+          <span className="font-vibes text-2xl">{coupleLabel} · Wedding Notebook</span>
           <span
             className="text-xs font-medium px-2 py-0.5 rounded-full"
             style={{ background: 'rgba(255,255,255,0.22)' }}
@@ -113,7 +113,7 @@ export default function Notebook() {
             </span>
           </div>
 
-          {/* Text area — lined */}
+          {/* Text area - lined */}
           <textarea
             className="w-full focus:outline-none resize-none"
             style={{

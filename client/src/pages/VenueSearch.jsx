@@ -392,8 +392,8 @@ export default function VenueSearch() {
                 { label: 'Location',    key: 'location' },
                 { label: 'Price Range', key: 'priceRange' },
                 { label: 'Rating',      key: 'rating',  fmt: (v) => v > 0 ? `★ ${v.toFixed(1)}` : 'N/A' },
-                { label: 'Phone',       key: 'contact', fmt: (v) => v || '—' },
-                { label: 'Website',     key: 'website', fmt: (v) => v ? <a href={v} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)' }}>Visit site</a> : '—' },
+                { label: 'Phone',       key: 'contact', fmt: (v) => v || '–' },
+                { label: 'Website',     key: 'website', fmt: (v) => v ? <a href={v} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)' }}>Visit site</a> : '–' },
               ].map((row) => (
                 <tr key={row.key} style={{ borderTop: '1px solid var(--color-border)' }}>
                   <td className="py-2.5 pr-4 font-medium" style={{ color: 'var(--color-text-muted)' }}>{row.label}</td>

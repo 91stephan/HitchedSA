@@ -264,7 +264,7 @@ export default function Dashboard() {
           <QuickStatCard illustration={<GuestIllustration size={36} />} label="Guests" value={guestCount} sub={`${confirmedCount} confirmed`} to="/guests" />
           <QuickStatCard illustration={<BudgetIllustration size={36} />} label="Budget Used" value={budgetUsedFormatted} sub={`of ${budgetTotalFormatted}`} to="/budget" />
           <QuickStatCard illustration={<ChecklistIllustration size={36} />} label="Checklist" value={`${checklistProgress}%`} sub={`${checklistDone} of ${checklistTotal} done`} to="/checklist" />
-          <QuickStatCard illustration={<VenueIllustration size={36} />} label="Venue" value={weddingDate ? '✓' : '—'} sub={weddingDate ? 'Booked' : 'Not set'} to="/venues" />
+          <QuickStatCard illustration={<VenueIllustration size={36} />} label="Venue" value={weddingDate ? '✓' : '–'} sub={weddingDate ? 'Booked' : 'Not set'} to="/venues" />
         </div>
 
         <AdBanner slot="dashboard-top" size="leaderboard" className="mb-6" />

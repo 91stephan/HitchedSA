@@ -3,7 +3,7 @@ import { useMeta } from '../hooks/useMeta'
 export default function Contact() {
   useMeta({
     title: 'Contact HitchedSA',
-    description: 'Get in touch with the HitchedSA team — questions, bug reports, feature suggestions, or supplier listing enquiries.',
+    description: 'Get in touch with the HitchedSA team: questions, bug reports, feature suggestions, or supplier listing enquiries.',
     url: '/contact',
   })
   return (
@@ -17,7 +17,7 @@ export default function Contact() {
             Get in Touch
           </h2>
           <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
-            Whether you have a question about the platform, want to report a bug, or have a feature suggestion, we want to hear from you.
+            Got a question about the platform, found a bug, or have a feature suggestion? We want to hear from you.
           </p>
           <div className="space-y-3 text-sm" style={{ color: 'var(--color-text)' }}>
             <div className="flex items-center gap-3">

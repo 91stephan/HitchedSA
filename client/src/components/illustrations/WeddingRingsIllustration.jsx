@@ -14,13 +14,13 @@ export default function WeddingRingsIllustration({ size = 160 }) {
         </clipPath>
       </defs>
 
-      {/* Left ring — bottom half sits behind right ring */}
+      {/* Left ring - bottom half sits behind right ring */}
       <circle cx="63" cy="82" r="35" stroke="var(--color-primary)" strokeWidth="7" fill="none" clipPath={`url(#${id}-b)`} />
 
-      {/* Right ring — full, sits in middle layer */}
+      {/* Right ring - full, sits in middle layer */}
       <circle cx="97" cy="82" r="35" stroke="var(--color-accent)" strokeWidth="7" fill="none" />
 
-      {/* Left ring — top half sits in front of right ring */}
+      {/* Left ring - top half sits in front of right ring */}
       <circle cx="63" cy="82" r="35" stroke="var(--color-primary)" strokeWidth="7" fill="none" clipPath={`url(#${id}-t)`} />
 
       {/* Five-petal flower at the top junction */}

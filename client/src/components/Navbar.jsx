@@ -29,7 +29,7 @@ export default function Navbar() {
   const isHeroPage = HERO_PATHS.includes(location.pathname)
 
   // On hero pages: transparent until scrolled past 40px.
-  // On all other pages: always solid — text starts dark immediately.
+  // On all other pages: always solid - text starts dark immediately.
   const isSolid = !isHeroPage || scrolled
 
   useEffect(() => {
@@ -124,7 +124,7 @@ export default function Navbar() {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                        // Active pill: always theme primary bg + white text — clear on any bg
+                        // Active pill: always theme primary bg + white text - clear on any bg
                         background: 'var(--color-primary)',
                         color: '#ffffff',
                       }

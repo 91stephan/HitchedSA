@@ -83,7 +83,7 @@ export default function ProvinceVenues() {
       </p>
       <div className="mb-8">
         <ShareButtons
-          title={`Wedding Venues in ${p.inName} — ${p.tagline}`}
+          title={`Wedding Venues in ${p.inName}: ${p.tagline}`}
           url={`https://hitchedsa.co.za/wedding-venues/${p.slug}`}
         />
       </div>
@@ -103,7 +103,7 @@ export default function ProvinceVenues() {
             Where to Get Married in {p.shortName}
           </h2>
           <p className="text-sm mb-6" style={{ color: 'var(--color-text-muted)' }}>
-            The province area by area — each with its own character, venues and price point.
+            The province area by area, each with its own character, venues and price point.
           </p>
           <div className="space-y-5">
             {p.areas.map((a) => (
@@ -120,14 +120,14 @@ export default function ProvinceVenues() {
 
         <AdBanner slot={`province-${p.slug}-mid-1`} size="leaderboard" />
 
-        {/* Featured venue listings — researched, real venues per province */}
+        {/* Featured venue listings - researched, real venues per province */}
         {p.venues.length > 0 && (
           <section>
             <h2 className="font-display text-2xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
               Featured {p.shortName} Wedding Venues
             </h2>
             <p className="text-sm mb-6" style={{ color: 'var(--color-text-muted)' }}>
-              A hand-picked selection of real, operating venues across {p.inName} — visit their websites for current packages and availability.
+              A hand-picked selection of real, operating venues across {p.inName}. Visit their websites for current packages and availability.
             </p>
             <div className="space-y-5">
               {p.venues.map((v, i) => (
@@ -278,7 +278,7 @@ export default function ProvinceVenues() {
               Planning a {p.shortName} Wedding?
             </h2>
             <p className="text-sm mb-4 max-w-md mx-auto" style={{ color: 'var(--color-text-muted)' }}>
-              Use HitchedSA's free planner — venue search, budget tracker, guest list, seating and checklist — built for South African couples.
+              Use HitchedSA's free planner (venue search, budget tracker, guest list, seating and checklist), built for South African couples.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/login" className="btn-primary text-sm px-8">

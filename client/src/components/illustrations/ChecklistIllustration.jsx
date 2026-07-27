@@ -12,25 +12,25 @@ export default function ChecklistIllustration({ size = 160 }) {
       <line x1="80" y1="28" x2="80" y2="38" stroke="var(--color-primary)" strokeWidth="1.2" opacity="0.5" />
 
       {/* Checklist items */}
-      {/* Item 1 — checked */}
+      {/* Item 1 - checked */}
       <rect x="48" y="58" width="11" height="11" rx="2.5" stroke="var(--color-primary)" strokeWidth="1.5" fill="var(--color-primary)" fillOpacity="0.15" />
       <path d="M50,63.5 L53,67 L58,60" stroke="var(--color-primary)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       <rect x="65" y="61" width="42" height="5" rx="2.5" fill="var(--color-primary)" fillOpacity="0.2" />
 
-      {/* Item 2 — checked */}
+      {/* Item 2 - checked */}
       <rect x="48" y="76" width="11" height="11" rx="2.5" stroke="var(--color-primary)" strokeWidth="1.5" fill="var(--color-primary)" fillOpacity="0.15" />
       <path d="M50,81.5 L53,85 L58,78" stroke="var(--color-accent)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       <rect x="65" y="79" width="36" height="5" rx="2.5" fill="var(--color-primary)" fillOpacity="0.18" />
 
-      {/* Item 3 — unchecked */}
+      {/* Item 3 - unchecked */}
       <rect x="48" y="94" width="11" height="11" rx="2.5" stroke="var(--color-primary)" strokeWidth="1.5" fill="none" />
       <rect x="65" y="97" width="44" height="5" rx="2.5" fill="var(--color-primary)" fillOpacity="0.12" />
 
-      {/* Item 4 — unchecked */}
+      {/* Item 4 - unchecked */}
       <rect x="48" y="112" width="11" height="11" rx="2.5" stroke="var(--color-primary)" strokeWidth="1.5" fill="none" />
       <rect x="65" y="115" width="30" height="5" rx="2.5" fill="var(--color-primary)" fillOpacity="0.1" />
 
-      {/* Quill pen — diagonal across the clipboard (decorative) */}
+      {/* Quill pen - diagonal across the clipboard (decorative) */}
       <g transform="translate(95, 125) rotate(-42)">
         {/* Feather shaft */}
         <line x1="0" y1="-32" x2="0" y2="8" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" />

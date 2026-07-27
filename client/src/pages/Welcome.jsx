@@ -63,7 +63,7 @@ export default function Welcome() {
           </p>
         </div>
 
-        {/* Partner Names — frosted glass card */}
+        {/* Partner Names - frosted glass card */}
         <div className="glass rounded-2xl p-6 mb-4 w-full animate-fade-in" style={{ animationDelay: '0.1s' }}>
           <h2 className="font-display text-xl font-semibold mb-4 text-white">
             Tell us about you two
@@ -92,7 +92,7 @@ export default function Welcome() {
           </div>
         </div>
 
-        {/* Wedding Date — frosted glass card */}
+        {/* Wedding Date - frosted glass card */}
         <div className="glass rounded-2xl p-6 mb-4 w-full animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <h2 className="font-display text-xl font-semibold mb-4 text-white">
             When's the big day?
@@ -128,13 +128,13 @@ export default function Welcome() {
               className="w-4 h-4"
             />
             <div>
-              <div className="text-sm font-medium text-white">Still looking — skip for now</div>
+              <div className="text-sm font-medium text-white">Still looking? Skip for now</div>
               <div className="text-xs text-white/70">You can set your date later from any venue booking or Settings</div>
             </div>
           </label>
         </div>
 
-        {/* Theme Selector — frosted glass card */}
+        {/* Theme Selector - frosted glass card */}
         <div className="glass rounded-2xl p-6 mb-8 w-full animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <h2 className="font-display text-xl font-semibold mb-1 text-white">Choose your wedding theme</h2>
           <p className="text-sm mb-4 text-white/70">You can always change this in Settings.</p>
@@ -167,7 +167,7 @@ export default function Welcome() {
         </button>
 
         <p className="text-center text-xs mt-4 text-white/60 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          All your data is stored privately on this device — no account needed.
+          All your data is stored privately on this device. No account needed.
         </p>
       </div>
     </div>

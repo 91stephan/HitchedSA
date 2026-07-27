@@ -79,11 +79,11 @@ export default function PrivacyPolicy() {
           <h2 className="font-display text-lg font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>7. Third-Party Services</h2>
           <p className="mb-2" style={{ color: 'var(--color-text-muted)' }}>We use the following third-party services:</p>
           <ul className="space-y-1 list-disc pl-5" style={{ color: 'var(--color-text-muted)' }}>
-            <li><strong>Supabase</strong> — database and authentication</li>
-            <li><strong>Google AdSense</strong> — advertising</li>
-            <li><strong>Google Maps Places API</strong> — venue and supplier search</li>
-            <li><strong>OpenWeatherMap</strong> — weather forecasts</li>
-            <li><strong>Netlify</strong> — hosting and deployment</li>
+            <li><strong>Supabase</strong>: database and authentication</li>
+            <li><strong>Google AdSense</strong>: advertising</li>
+            <li><strong>Google Maps Places API</strong>: venue and supplier search</li>
+            <li><strong>OpenWeatherMap</strong>: weather forecasts</li>
+            <li><strong>Netlify</strong>: hosting and deployment</li>
           </ul>
         </section>
 

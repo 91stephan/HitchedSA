@@ -14,6 +14,7 @@ import TermsOfService from './pages/TermsOfService'
 import WeddingGuide from './pages/WeddingGuide'
 import VenueGuide from './pages/VenueGuide'
 import Articles from './pages/Articles'
+import ArticlePage from './pages/ArticlePage'
 import WeddingVenuesHub from './pages/WeddingVenuesHub'
 import ProvinceVenues from './pages/ProvinceVenues'
 import Dashboard from './pages/Dashboard'
@@ -38,7 +39,7 @@ function LoadingScreen() {
   )
 }
 
-// Wraps authenticated app pages — handles auth guard + navbar
+// Wraps authenticated app pages - handles auth guard + navbar
 function ProtectedRoute({ children, padTop = true }) {
   const { user } = useAuth()
   const { firstLaunchDone } = useApp()
@@ -68,6 +69,7 @@ function AppRoutes() {
       <Route path="/wedding-guide"        element={<PublicLayout><WeddingGuide /></PublicLayout>} />
       <Route path="/wedding-venues-guide" element={<PublicLayout><VenueGuide /></PublicLayout>} />
       <Route path="/articles"             element={<PublicLayout><Articles /></PublicLayout>} />
+      <Route path="/articles/:slug"       element={<PublicLayout><ArticlePage /></PublicLayout>} />
       <Route path="/wedding-venues"       element={<PublicLayout><WeddingVenuesHub /></PublicLayout>} />
       <Route path="/wedding-venues/:slug" element={<PublicLayout><ProvinceVenues /></PublicLayout>} />
 

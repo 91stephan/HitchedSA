@@ -6,10 +6,10 @@ import { PROVINCE_LIST } from '../content/provinces'
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
 
 const FEATURES = [
-  { icon: '📋', title: 'Interactive Checklist', desc: 'A comprehensive South African wedding checklist with 50+ tasks grouped by how far out you are — 12 months, 6 months, 3 months, and wedding week.' },
+  { icon: '📋', title: 'Interactive Checklist', desc: 'A comprehensive South African wedding checklist with 50+ tasks grouped by how far out you are: 12 months, 6 months, 3 months, and wedding week.' },
   { icon: '💰', title: 'Budget Tracker', desc: 'Set your total wedding budget and track spending across 10 categories including venue, catering, photography, décor, and more. Never go over budget again.' },
   { icon: '👥', title: 'Guest List Manager', desc: 'Add guests, track RSVPs, manage dietary requirements, and assign table numbers. Export your full guest list to CSV anytime.' },
-  { icon: '🏛️', title: 'Venue Search', desc: 'Search real South African wedding venues powered by Google Maps — Cape Town, Stellenbosch, Franschhoek, Johannesburg, Durban and beyond.' },
+  { icon: '🏛️', title: 'Venue Search', desc: 'Search real South African wedding venues powered by Google Maps: Cape Town, Stellenbosch, Franschhoek, Johannesburg, Durban and beyond.' },
   { icon: '📸', title: 'Supplier Directory', desc: 'Find photographers, DJs, florists, caterers, makeup artists, cake designers, car hire and décor suppliers across South Africa.' },
   { icon: '💡', title: 'Ideas & Mood Board', desc: 'Save wedding inspiration images from the web, organise them into categories, and share your vision with your partner and suppliers.' },
   { icon: '🪑', title: 'Seating Planner', desc: 'Create tables, assign guests, and visualise your reception layout. Plan the perfect seating arrangement with an easy drag-and-drop interface.' },
@@ -17,15 +17,15 @@ const FEATURES = [
 ]
 
 const STEPS = [
-  { num: '1', title: 'Create your free account', desc: 'Sign up in under 30 seconds. No credit card required, no hidden fees — HitchedSA is completely free for couples.' },
+  { num: '1', title: 'Create your free account', desc: 'Sign up in under 30 seconds. No credit card required, no hidden fees. HitchedSA is completely free for couples.' },
   { num: '2', title: 'Set your date and venue', desc: 'Enter your wedding date and location. Your countdown clock starts immediately and your checklist phases update automatically.' },
-  { num: '3', title: 'Plan everything in one place', desc: 'Budget, guests, suppliers, checklist, seating, ideas — every tool you need, all connected, all synced to the cloud.' },
+  { num: '3', title: 'Plan everything in one place', desc: 'Budget, guests, suppliers, checklist, seating, ideas: every tool you need, all connected, all synced to the cloud.' },
 ]
 
 export default function Landing() {
   useMeta({
     title: 'Free South African Wedding Planner',
-    description: 'Plan your perfect South African wedding for free — venue search, budget tracker, guest list, supplier directory, seating planner and more. Built for SA couples.',
+    description: 'Plan your perfect South African wedding for free: venue search, budget tracker, guest list, supplier directory, seating planner and more. Built for SA couples.',
     url: '/',
   })
   return (
@@ -39,7 +39,7 @@ export default function Landing() {
             HitchedSA
           </p>
           <h1 className="text-white text-2xl md:text-3xl font-display font-semibold mb-4 max-w-2xl leading-snug" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}>
-            Plan Your Perfect South African Wedding — Free
+            Plan Your Perfect South African Wedding, Free
           </h1>
           <p className="text-white/85 text-base md:text-lg mb-8 max-w-xl font-display italic">
             The all-in-one wedding planner built for South African couples
@@ -118,7 +118,7 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Ad — shown to public visitors, verifiable by Google */}
+        {/* Ad - shown to public visitors, verifiable by Google */}
         <div className="mb-12">
           <AdBanner slot="landing-mid" size="leaderboard" />
         </div>
@@ -133,7 +133,7 @@ export default function Landing() {
                   The Complete SA Wedding Planning Guide
                 </h2>
                 <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)' }}>
-                  Timelines, budgets, venue tips, supplier advice, cultural traditions, and everything else you need to know — written for South African couples.
+                  Timelines, budgets, venue tips, supplier advice, cultural traditions, and everything else you need to know, written for South African couples.
                 </p>
                 <Link to="/wedding-guide" className="btn-primary text-sm">
                   Read the Guide →
@@ -150,7 +150,7 @@ export default function Landing() {
               Find Wedding Venues by Province
             </h2>
             <p className="text-base" style={{ color: 'var(--color-text-muted)' }}>
-              In-depth local guides — areas, real price ranges, best seasons and booking tips
+              In-depth local guides: areas, real price ranges, best seasons and booking tips
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
@@ -182,7 +182,7 @@ export default function Landing() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto text-left">
               {[
-                { icon: '🇿🇦', title: 'South African Venues & Suppliers', desc: 'Search real wedding venues and suppliers in Cape Town, Johannesburg, Durban, Pretoria, the Winelands and beyond — powered by Google Maps.' },
+                { icon: '🇿🇦', title: 'South African Venues & Suppliers', desc: 'Search real wedding venues and suppliers in Cape Town, Johannesburg, Durban, Pretoria, the Winelands and beyond, powered by Google Maps.' },
                 { icon: '☁️', title: 'Synced to the Cloud', desc: 'Your wedding data is securely stored and synced across all your devices via Supabase. Access your planner on your phone, tablet or laptop.' },
                 { icon: '💎', title: 'Free Forever', desc: 'HitchedSA is completely free for couples. No subscriptions, no paywalls, no premium tiers. Every feature is available to every couple.' },
               ].map((item) => (
@@ -196,7 +196,7 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Ad — bottom placement above final CTA */}
+        {/* Ad - bottom placement above final CTA */}
         <div className="mb-12">
           <AdBanner slot="landing-bottom" size="leaderboard" />
         </div>

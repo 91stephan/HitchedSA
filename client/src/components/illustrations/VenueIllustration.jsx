@@ -19,7 +19,7 @@ export default function VenueIllustration({ size = 160 }) {
       {/* Arch (filled gently) */}
       <path d="M36,66 Q36,18 80,18 Q124,18 124,66" stroke="var(--color-primary)" strokeWidth="2.5" fill="var(--color-primary)" fillOpacity="0.05" />
 
-      {/* Door — rounded top */}
+      {/* Door - rounded top */}
       <path d="M57,130 L57,88 Q57,70 80,70 Q103,70 103,88 L103,130 Z"
         stroke="var(--color-accent)" strokeWidth="1.5" fill="var(--color-accent)" fillOpacity="0.1" />
       {/* Door panel lines */}

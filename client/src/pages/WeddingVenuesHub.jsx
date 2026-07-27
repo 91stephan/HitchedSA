@@ -8,7 +8,7 @@ const SCHEMA = {
   '@type': 'CollectionPage',
   name: 'South African Wedding Venues by Province',
   description:
-    'Browse wedding venue guides for every South African province — areas, prices, seasons and booking advice for Western Cape, Gauteng, KwaZulu-Natal and more.',
+    'Browse wedding venue guides for every South African province: areas, prices, seasons and booking advice for Western Cape, Gauteng, KwaZulu-Natal and more.',
   url: 'https://hitchedsa.co.za/wedding-venues',
   publisher: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
 }
@@ -17,7 +17,7 @@ export default function WeddingVenuesHub() {
   useMeta({
     title: 'South African Wedding Venues by Province',
     description:
-      'Find your wedding venue by province — in-depth guides to all nine South African provinces with featured venues, areas, real price ranges, best seasons and local booking tips.',
+      'Find your wedding venue by province: in-depth guides to all nine South African provinces with featured venues, areas, real price ranges, best seasons and local booking tips.',
     url: '/wedding-venues',
   })
 
@@ -36,7 +36,7 @@ export default function WeddingVenuesHub() {
         South African Wedding Venues by Province
       </h1>
       <p className="text-base mb-10 max-w-2xl" style={{ color: 'var(--color-text-muted)' }}>
-        Every province has its own wedding character — Winelands estates in the Cape, garden
+        Every province has its own wedding character: Winelands estates in the Cape, garden
         chapels around Johannesburg, warm-ocean beaches in KZN. Pick your province for an
         in-depth guide to areas, prices, seasons and booking.
       </p>

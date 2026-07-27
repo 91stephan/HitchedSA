@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// WhatsApp-first share bar — SA couples plan on WhatsApp. Pass an absolute url
+// WhatsApp-first share bar - SA couples plan on WhatsApp. Pass an absolute url
 // so it also works in build-time prerendered HTML (no window access at render).
 export default function ShareButtons({ title, url, label = 'Share this guide' }) {
   const [copied, setCopied] = useState(false)
@@ -12,7 +12,7 @@ export default function ShareButtons({ title, url, label = 'Share this guide' })
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      // clipboard unavailable — ignore
+      // clipboard unavailable - ignore
     }
   }
 

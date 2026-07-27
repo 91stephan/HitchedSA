@@ -23,7 +23,7 @@ export default function BudgetIllustration({ size = 160 }) {
         fill="none"
       />
 
-      {/* Clasp — oval metal catch */}
+      {/* Clasp - oval metal catch */}
       <ellipse cx="80" cy="90" rx="16" ry="10" fill="var(--color-accent)" fillOpacity="0.15" stroke="var(--color-accent)" strokeWidth="1.8" />
       <ellipse cx="80" cy="90" rx="9" ry="5.5" fill="var(--color-accent)" fillOpacity="0.3" stroke="var(--color-accent)" strokeWidth="1.2" />
 

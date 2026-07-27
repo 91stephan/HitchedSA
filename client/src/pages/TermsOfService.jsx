@@ -64,7 +64,7 @@ export default function TermsOfService() {
         <section className="card">
           <h2 className="font-display text-lg font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>7. Third-Party Integrations</h2>
           <p style={{ color: 'var(--color-text-muted)' }}>
-            HitchedSA integrates with third-party services including Google Maps, OpenWeatherMap, and Supabase to provide certain features. We are not responsible for the availability, accuracy, or reliability of data provided by these third parties. Use of venue and supplier search results is at your own discretion — we do not endorse or recommend any specific venue or supplier.
+            HitchedSA integrates with third-party services including Google Maps, OpenWeatherMap, and Supabase to provide certain features. We are not responsible for the availability, accuracy, or reliability of data provided by these third parties. Use of venue and supplier search results is at your own discretion. We do not endorse or recommend any specific venue or supplier.
           </p>
         </section>
 

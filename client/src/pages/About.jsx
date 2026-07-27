@@ -16,10 +16,10 @@ export default function About() {
         <section className="card">
           <h2 className="font-display text-xl font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>What is HitchedSA?</h2>
           <p className="text-sm leading-relaxed mb-3">
-            HitchedSA is a free, all-in-one wedding planning platform built specifically for South African couples. We bring together every tool you need to plan your big day — from your first venue search to finalising your seating plan the night before.
+            HitchedSA is a free, all-in-one wedding planning platform built specifically for South African couples. We bring together every tool you need to plan your big day, from your first venue search to finalising your seating plan the night before.
           </p>
           <p className="text-sm leading-relaxed">
-            Unlike generic international wedding planners, HitchedSA is built around South African venues, suppliers, and traditions. Our venue and supplier search is powered by Google Maps and covers the full country — from Cape Town's Winelands to Johannesburg's Midrand, Durban's beachfront to Mpumalanga's bush estates.
+            Unlike generic international wedding planners, HitchedSA is built around South African venues, suppliers, and traditions. Our venue and supplier search is powered by Google Maps and covers the full country, from Cape Town's Winelands to Johannesburg's Midrand, Durban's beachfront to Mpumalanga's bush estates.
           </p>
         </section>
 
@@ -29,7 +29,7 @@ export default function About() {
             Planning a wedding in South Africa means juggling dozens of spreadsheets, WhatsApp groups, supplier emails, and printed checklists. We built HitchedSA to replace all of that with a single, beautifully designed platform that does everything in one place.
           </p>
           <p className="text-sm leading-relaxed">
-            Every feature was designed with South African couples in mind — our budget tracker uses Rands, our venue search covers South African provinces and cities, our supplier directory covers the categories most commonly needed for a South African wedding, and our weather widget shows forecasts for your specific venue location.
+            Every feature was designed with South African couples in mind: our budget tracker uses Rands, our venue search covers South African provinces and cities, our supplier directory covers the categories most commonly needed for a South African wedding, and our weather widget shows forecasts for your specific venue location.
           </p>
         </section>
 
@@ -40,7 +40,7 @@ export default function About() {
             <li>✅ Budget tracker with category breakdown and over-budget alerts</li>
             <li>✅ Guest list manager with RSVP tracking and dietary requirements</li>
             <li>✅ Venue search powered by Google Maps across all South African provinces</li>
-            <li>✅ Supplier directory — photographers, DJs, florists, caterers and more</li>
+            <li>✅ Supplier directory: photographers, DJs, florists, caterers and more</li>
             <li>✅ Ideas and mood board for saving inspiration</li>
             <li>✅ Seating planner with drag-and-drop table layout</li>
             <li>✅ Countdown clock to your wedding day</li>
@@ -53,7 +53,7 @@ export default function About() {
         <section className="card">
           <h2 className="font-display text-xl font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>Is It Really Free?</h2>
           <p className="text-sm leading-relaxed mb-3">
-            Yes — HitchedSA is completely free for couples. There are no subscriptions, no premium tiers, and no paywalled features. Every tool on the platform is available to every couple at no charge.
+            Yes. HitchedSA is completely free for couples. There are no subscriptions, no premium tiers, and no paywalled features. Every tool on the platform is available to every couple at no charge.
           </p>
           <p className="text-sm leading-relaxed">
             We keep the platform free through unobtrusive advertising displayed in designated areas of the site. These ads are served by Google AdSense and do not affect your planning experience.

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-const DEFAULT_TITLE = 'HitchedSA — South African Wedding Planner'
-const DEFAULT_DESC  = 'Plan your perfect South African wedding for free. Venue search, budget tracker, guest list, supplier directory, checklist, seating planner and more — built for SA couples.'
+const DEFAULT_TITLE = 'HitchedSA | South African Wedding Planner'
+const DEFAULT_DESC  = 'Plan your perfect South African wedding for free. Venue search, budget tracker, guest list, checklist, seating planner and more, built for SA couples.'
 
 function setMeta(name, content) {
   let el = document.querySelector(`meta[name="${name}"]`)

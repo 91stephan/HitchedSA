@@ -329,7 +329,7 @@ function UrlModal({ open, onClose, onSave }) {
           <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--color-border)' }}>
             {imgError ? (
               <div className="h-32 flex flex-col items-center justify-center gap-2 px-4 text-sm text-center" style={{ background: 'var(--color-surface)', color: 'var(--color-danger)' }}>
-                <span>Could not load image — the URL may be protected.</span>
+                <span>Could not load image. The URL may be protected.</span>
                 <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Tip: right-click → "Copy image address" for a direct link.</span>
               </div>
             ) : (
@@ -529,7 +529,7 @@ export default function IdeasBoard() {
     }
   }, [])
 
-  // Initial load — "wedding inspiration"
+  // Initial load - "wedding inspiration"
   useEffect(() => {
     doSearch('wedding inspiration')
   }, [doSearch])
@@ -753,7 +753,7 @@ export default function IdeasBoard() {
                 </div>
               )}
 
-              {/* Pexels attribution — required by Pexels API terms */}
+              {/* Pexels attribution - required by Pexels API terms */}
               {photos.length > 0 && (
                 <p className="text-xs text-center mt-4 mb-2" style={{ color: 'var(--color-text-muted)' }}>
                   Photos provided by{' '}

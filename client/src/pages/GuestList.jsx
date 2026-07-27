@@ -297,7 +297,7 @@ export default function GuestList() {
                     <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{guest.dietary || 'None'}</span>
                   </td>
                   <td className="py-2.5 px-4 hidden lg:table-cell">
-                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{guest.table || '—'}</span>
+                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{guest.table || '–'}</span>
                   </td>
                   <td className="py-2.5 px-4 text-right">
                     <button onClick={() => startEdit(guest)} className="btn-ghost text-xs px-2 py-1 mr-1">Edit</button>
