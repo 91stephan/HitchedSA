@@ -61,7 +61,9 @@ export default async (req) => {
 
   const SUPABASE_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL
   const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
-  const GOOGLE_KEY = process.env.GOOGLE_PLACES_SERVER_KEY
+  // Prefer a dedicated server key, but fall back to the existing Google key
+  // already set in Netlify so search does not depend on a second new variable.
+  const GOOGLE_KEY = process.env.GOOGLE_PLACES_SERVER_KEY || process.env.VITE_GOOGLE_MAPS_KEY
 
   if (!SUPABASE_URL || !SERVICE_KEY || !GOOGLE_KEY) {
     // Names only, never values. Tells us exactly which env var the function
