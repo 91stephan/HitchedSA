@@ -81,6 +81,21 @@ export default function ProvinceVenues() {
       <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>
         Updated {p.updated} · {p.readTime}
       </p>
+
+      {p.image && (
+        <figure className="mb-6 -mx-4 sm:mx-0">
+          <img
+            src={p.image}
+            alt={p.imageAlt}
+            width="1600"
+            height="700"
+            loading="eager"
+            className="w-full object-cover sm:rounded-2xl"
+            style={{ aspectRatio: '16 / 7', maxHeight: 440 }}
+          />
+        </figure>
+      )}
+
       <div className="mb-8">
         <ShareButtons
           title={`Wedding Venues in ${p.inName}: ${p.tagline}`}

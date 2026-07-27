@@ -9,6 +9,8 @@
 export const PROVINCES = {
   'western-cape': {
     slug: 'western-cape',
+    image: '/images/provinces/western-cape.jpg',
+    imageAlt: 'Table Mountain rising above Cape Town in the Western Cape',
     name: 'Western Cape',
     inName: 'the Western Cape',
     shortName: 'Western Cape',
@@ -186,6 +188,8 @@ export const PROVINCES = {
 
   gauteng: {
     slug: 'gauteng',
+    image: '/images/provinces/gauteng.jpg',
+    imageAlt: 'Jacaranda trees in full purple bloom over a Gauteng street',
     name: 'Gauteng',
     inName: 'Gauteng',
     shortName: 'Gauteng',
@@ -353,6 +357,8 @@ export const PROVINCES = {
 
   'kwazulu-natal': {
     slug: 'kwazulu-natal',
+    image: '/images/provinces/kwazulu-natal.jpg',
+    imageAlt: 'The warm Indian Ocean coastline of KwaZulu-Natal',
     name: 'KwaZulu-Natal',
     inName: 'KwaZulu-Natal',
     shortName: 'KZN',
@@ -520,6 +526,8 @@ export const PROVINCES = {
 
   'eastern-cape': {
     slug: 'eastern-cape',
+    image: '/images/provinces/eastern-cape.jpg',
+    imageAlt: 'The rugged Wild Coast shoreline of the Eastern Cape',
     name: 'Eastern Cape',
     inName: 'the Eastern Cape',
     shortName: 'Eastern Cape',
@@ -678,6 +686,8 @@ export const PROVINCES = {
 
   'free-state': {
     slug: 'free-state',
+    image: '/images/provinces/free-state.jpg',
+    imageAlt: 'Golden Gate sandstone cliffs glowing in the Free State',
     name: 'Free State',
     inName: 'the Free State',
     shortName: 'Free State',
@@ -835,6 +845,8 @@ export const PROVINCES = {
 
   limpopo: {
     slug: 'limpopo',
+    image: '/images/provinces/limpopo.jpg',
+    imageAlt: 'A baobab tree in the Limpopo bushveld',
     name: 'Limpopo',
     inName: 'Limpopo',
     shortName: 'Limpopo',
@@ -988,6 +1000,8 @@ export const PROVINCES = {
 
   mpumalanga: {
     slug: 'mpumalanga',
+    image: '/images/provinces/mpumalanga.jpg',
+    imageAlt: 'The Blyde River Canyon on the Mpumalanga escarpment',
     name: 'Mpumalanga',
     inName: 'Mpumalanga',
     shortName: 'Mpumalanga',
@@ -1136,6 +1150,8 @@ export const PROVINCES = {
 
   'north-west': {
     slug: 'north-west',
+    image: '/images/provinces/north-west.jpg',
+    imageAlt: 'Bushveld and hills of the North West province',
     name: 'North West',
     inName: 'the North West',
     shortName: 'North West',
@@ -1276,6 +1292,8 @@ export const PROVINCES = {
 
   'northern-cape': {
     slug: 'northern-cape',
+    image: '/images/provinces/northern-cape.jpg',
+    imageAlt: 'Namaqualand wildflowers in bloom in the Northern Cape',
     name: 'Northern Cape',
     inName: 'the Northern Cape',
     shortName: 'Northern Cape',
