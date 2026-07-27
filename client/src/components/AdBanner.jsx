@@ -38,18 +38,8 @@ export default function AdBanner({ size = 'leaderboard', className = '' }) {
     )
   }
 
-  // Placeholder shown until both env vars are set in Netlify
-  return (
-    <div className={`flex justify-center my-4 ${className}`}>
-      <div
-        className="w-full rounded-xl flex items-center justify-center border border-dashed"
-        style={{ minHeight, maxWidth, borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}
-      >
-        <div className="text-center py-3">
-          <div className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>Advertisement</div>
-          <div className="text-xs opacity-40" style={{ color: 'var(--color-text-muted)' }}>{size}</div>
-        </div>
-      </div>
-    </div>
-  )
+  // Render nothing when no explicit ad slot is configured. Auto ads (enabled in
+  // the AdSense dashboard) place ads on their own via the loader script in
+  // index.html, so we do NOT want empty placeholder boxes on the live site.
+  return null
 }
