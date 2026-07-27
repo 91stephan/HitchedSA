@@ -70,7 +70,13 @@ export default async (req) => {
     if (!SUPABASE_URL) missing.push('SUPABASE_URL (or VITE_SUPABASE_URL)')
     if (!SERVICE_KEY) missing.push('SUPABASE_SERVICE_ROLE_KEY')
     if (!GOOGLE_KEY) missing.push('GOOGLE_PLACES_SERVER_KEY')
-    return json({ message: 'Search is not configured yet. Please try again later.', missing }, 500)
+    // Diagnostic: list the NAMES (never values) of any env vars the function can
+    // actually see that relate to Supabase/Google, so we can spot a typo or a
+    // variable whose scope excludes Functions. Remove once search is working.
+    const seen = Object.keys(process.env)
+      .filter((k) => /SUPABASE|GOOGLE|PLACES|SERVICE_ROLE/i.test(k))
+      .sort()
+    return json({ message: 'Search is not configured yet. Please try again later.', missing, seen }, 500)
   }
 
   // 1. Require a valid Supabase login token.
