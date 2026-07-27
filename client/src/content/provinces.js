@@ -14,7 +14,6 @@ export const PROVINCES = {
     name: 'Western Cape',
     inName: 'the Western Cape',
     shortName: 'Western Cape',
-    emoji: '🍷',
     tagline: 'Winelands estates, Atlantic beaches and the Garden Route',
     metaTitle: 'Wedding Venues in the Western Cape: Complete 2026 Guide',
     metaDescription:
@@ -193,7 +192,6 @@ export const PROVINCES = {
     name: 'Gauteng',
     inName: 'Gauteng',
     shortName: 'Gauteng',
-    emoji: '🌳',
     tagline: 'Muldersdrift farms, Pretoria estates and big-city glamour',
     metaTitle: 'Wedding Venues in Gauteng: Complete 2026 Guide',
     metaDescription:
@@ -362,7 +360,6 @@ export const PROVINCES = {
     name: 'KwaZulu-Natal',
     inName: 'KwaZulu-Natal',
     shortName: 'KZN',
-    emoji: '🌊',
     tagline: 'Warm-ocean beaches, misty Midlands farms and the Drakensberg',
     metaTitle: 'Wedding Venues in KwaZulu-Natal: Complete 2026 Guide',
     metaDescription:
@@ -531,7 +528,6 @@ export const PROVINCES = {
     name: 'Eastern Cape',
     inName: 'the Eastern Cape',
     shortName: 'Eastern Cape',
-    emoji: '🐘',
     tagline: 'Wild Coast beaches, Addo bushveld and friendly-city charm',
     metaTitle: 'Wedding Venues in the Eastern Cape: Complete 2026 Guide',
     metaDescription:
@@ -691,7 +687,6 @@ export const PROVINCES = {
     name: 'Free State',
     inName: 'the Free State',
     shortName: 'Free State',
-    emoji: '⛰️',
     tagline: 'Clarens sandstone, Vaal river banks and golden Maluti light',
     metaTitle: 'Wedding Venues in the Free State: Complete 2026 Guide',
     metaDescription:
@@ -850,7 +845,6 @@ export const PROVINCES = {
     name: 'Limpopo',
     inName: 'Limpopo',
     shortName: 'Limpopo',
-    emoji: '🦒',
     tagline: 'Waterberg bushveld, misty Magoebaskloof and big-sky sunsets',
     metaTitle: 'Wedding Venues in Limpopo: Complete 2026 Guide',
     metaDescription:
@@ -1005,7 +999,6 @@ export const PROVINCES = {
     name: 'Mpumalanga',
     inName: 'Mpumalanga',
     shortName: 'Mpumalanga',
-    emoji: '🌄',
     tagline: 'Lowveld safari country, Dullstroom mists and escarpment waterfalls',
     metaTitle: 'Wedding Venues in Mpumalanga: Complete 2026 Guide',
     metaDescription:
@@ -1155,7 +1148,6 @@ export const PROVINCES = {
     name: 'North West',
     inName: 'the North West',
     shortName: 'North West',
-    emoji: '🌅',
     tagline: 'Hartbeespoort dam views, Magaliesberg kloofs and Pilanesberg game',
     metaTitle: 'Wedding Venues in North West Province: Complete 2026 Guide',
     metaDescription:
@@ -1297,7 +1289,6 @@ export const PROVINCES = {
     name: 'Northern Cape',
     inName: 'the Northern Cape',
     shortName: 'Northern Cape',
-    emoji: '🌵',
     tagline: 'Kalahari dunes, Orange River banks and Namaqualand flower season',
     metaTitle: 'Wedding Venues in the Northern Cape: Complete 2026 Guide',
     metaDescription:

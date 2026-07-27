@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import AdBanner from '../components/AdBanner'
 
 const LS_KEY = 'hitchedsa_notebook'
@@ -82,7 +83,7 @@ export default function Notebook() {
             className="text-xs font-medium px-2 py-0.5 rounded-full"
             style={{ background: 'rgba(255,255,255,0.22)' }}
           >
-            {saved ? '✓ Saved' : '…saving'}
+            {saved ? <span className="inline-flex items-center gap-1"><Icon name="check" size={12} /> Saved</span> : '…saving'}
           </span>
         </div>
 

@@ -20,10 +20,15 @@ const template = readFileSync(join(distDir, 'index.html'), 'utf8')
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
 
+// Default social-share card for pages without their own image (homepage, guides).
+// Table Mountain reads as "South Africa"; swap for a branded 1200x630 card later.
+const DEFAULT_OG_IMAGE = 'https://hitchedsa.co.za/images/provinces/western-cape.jpg'
+
 let count = 0
-for (const { path, title, description } of ROUTES) {
+for (const { path, title, description, image } of ROUTES) {
   const appHtml = render(path)
   const canonical = `https://hitchedsa.co.za${path === '/' ? '/' : path}`
+  const ogImage = image ? `https://hitchedsa.co.za${image}` : DEFAULT_OG_IMAGE
 
   const headTags = [
     `<meta name="description" content="${esc(description)}" />`,
@@ -33,6 +38,11 @@ for (const { path, title, description } of ROUTES) {
     `<meta property="og:type" content="website" />`,
     `<meta property="og:url" content="${canonical}" />`,
     `<meta property="og:site_name" content="HitchedSA" />`,
+    `<meta property="og:image" content="${esc(ogImage)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${esc(title)}" />`,
+    `<meta name="twitter:description" content="${esc(description)}" />`,
+    `<meta name="twitter:image" content="${esc(ogImage)}" />`,
   ].join('\n    ')
 
   const html = template

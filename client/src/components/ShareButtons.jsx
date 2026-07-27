@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Icon from './Icon'
 
 // WhatsApp-first share bar - SA couples plan on WhatsApp. Pass an absolute url
 // so it also works in build-time prerendered HTML (no window access at render).
@@ -37,7 +38,7 @@ export default function ShareButtons({ title, url, label = 'Share this guide' })
         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-transform hover:scale-105"
         style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)', background: 'var(--color-card-bg)' }}
       >
-        {copied ? '✓ Copied' : '🔗 Copy link'}
+        {copied ? <><Icon name="check" size={14} /> Copied</> : <><Icon name="link" size={14} /> Copy link</>}
       </button>
     </div>
   )

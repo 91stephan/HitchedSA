@@ -1,4 +1,5 @@
 import { useCountdown } from '../hooks/useCountdown'
+import Icon from './Icon'
 
 function TimeBox({ value, label, light }) {
   return (
@@ -30,7 +31,7 @@ export default function CountdownClock({ targetDate, light = true }) {
   if (timeLeft.isPast) {
     return (
       <div className="text-center py-4">
-        <div className="text-4xl mb-3">🎊</div>
+        <div className="flex justify-center mb-3"><Icon name="celebrate" size={40} style={{ color: 'var(--color-primary)' }} /></div>
         <p className="font-display text-2xl font-bold" style={{ color: light ? '#fff' : 'var(--color-primary)' }}>
           Today is your wedding day!
         </p>

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Icon from './Icon'
 
 export default function Modal({ open, onClose, title, children, maxWidth = 'max-w-lg' }) {
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Modal({ open, onClose, title, children, maxWidth = 'max-
             className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-opacity-10"
             style={{ color: 'var(--color-text-muted)', background: 'var(--color-surface)' }}
           >
-            ✕
+            <Icon name="close" size={18} />
           </button>
         </div>
         {/* Body */}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Icon from './Icon'
 
 const CONFETTI_COLORS = ['#D4829A', '#C9A84C', '#6B9E78', '#B76E79', '#1B2B5E', '#E8A44A']
 
@@ -52,7 +53,7 @@ export default function Celebration({ show, onDone }) {
         className="rounded-2xl px-8 py-6 text-center animate-scale-in shadow-2xl pointer-events-auto"
         style={{ background: 'var(--color-card-bg)', border: '2px solid var(--color-accent)' }}
       >
-        <div className="text-5xl mb-3">💍</div>
+        <div className="flex justify-center mb-3"><Icon name="rings" size={48} style={{ color: 'var(--color-primary)' }} /></div>
         <div className="font-display text-2xl font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
           Congratulations!
         </div>

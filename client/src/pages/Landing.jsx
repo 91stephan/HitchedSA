@@ -2,18 +2,19 @@ import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCE_LIST } from '../content/provinces'
+import Icon from '../components/Icon'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
 
 const FEATURES = [
-  { icon: '📋', title: 'Interactive Checklist', desc: 'A comprehensive South African wedding checklist with 50+ tasks grouped by how far out you are: 12 months, 6 months, 3 months, and wedding week.' },
-  { icon: '💰', title: 'Budget Tracker', desc: 'Set your total wedding budget and track spending across 10 categories including venue, catering, photography, décor, and more. Never go over budget again.' },
-  { icon: '👥', title: 'Guest List Manager', desc: 'Add guests, track RSVPs, manage dietary requirements, and assign table numbers. Export your full guest list to CSV anytime.' },
-  { icon: '🏛️', title: 'Venue Search', desc: 'Search real South African wedding venues powered by Google Maps: Cape Town, Stellenbosch, Franschhoek, Johannesburg, Durban and beyond.' },
-  { icon: '📸', title: 'Supplier Directory', desc: 'Find photographers, DJs, florists, caterers, makeup artists, cake designers, car hire and décor suppliers across South Africa.' },
-  { icon: '💡', title: 'Ideas & Mood Board', desc: 'Save wedding inspiration images from the web, organise them into categories, and share your vision with your partner and suppliers.' },
-  { icon: '🪑', title: 'Seating Planner', desc: 'Create tables, assign guests, and visualise your reception layout. Plan the perfect seating arrangement with an easy drag-and-drop interface.' },
-  { icon: '☁️', title: 'Wedding Day Weather', desc: 'See the weather forecast for your venue location as your wedding day approaches, powered by live OpenWeatherMap data.' },
+  { icon: 'clipboard', title: 'Interactive Checklist', desc: 'A comprehensive South African wedding checklist with 50+ tasks grouped by how far out you are: 12 months, 6 months, 3 months, and wedding week.' },
+  { icon: 'wallet', title: 'Budget Tracker', desc: 'Set your total wedding budget and track spending across 10 categories including venue, catering, photography, décor, and more. Never go over budget again.' },
+  { icon: 'users', title: 'Guest List Manager', desc: 'Add guests, track RSVPs, manage dietary requirements, and assign table numbers. Export your full guest list to CSV anytime.' },
+  { icon: 'building', title: 'Venue Search', desc: 'Search real South African wedding venues powered by Google Maps: Cape Town, Stellenbosch, Franschhoek, Johannesburg, Durban and beyond.' },
+  { icon: 'camera', title: 'Supplier Directory', desc: 'Find photographers, DJs, florists, caterers, makeup artists, cake designers, car hire and décor suppliers across South Africa.' },
+  { icon: 'bulb', title: 'Ideas & Mood Board', desc: 'Save wedding inspiration images from the web, organise them into categories, and share your vision with your partner and suppliers.' },
+  { icon: 'chair', title: 'Seating Planner', desc: 'Create tables, assign guests, and visualise your reception layout. Plan the perfect seating arrangement with an easy drag-and-drop interface.' },
+  { icon: 'cloud', title: 'Wedding Day Weather', desc: 'See the weather forecast for your venue location as your wedding day approaches, powered by live OpenWeatherMap data.' },
 ]
 
 const STEPS = [
@@ -106,7 +107,7 @@ export default function Landing() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {FEATURES.map((f) => (
               <div key={f.title} className="card p-5">
-                <div className="text-3xl mb-3">{f.icon}</div>
+                <div className="mb-3"><Icon name={f.icon} size={36} style={{ color: 'var(--color-primary)' }} /></div>
                 <h3 className="font-display font-semibold text-sm mb-2" style={{ color: 'var(--color-heading)' }}>
                   {f.title}
                 </h3>
@@ -127,7 +128,7 @@ export default function Landing() {
         <section className="mb-20">
           <div className="card p-8" style={{ background: 'var(--color-surface)' }}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="text-4xl shrink-0">📖</div>
+              <Icon name="book" size={40} className="shrink-0" style={{ color: 'var(--color-primary)' }} />
               <div className="flex-1">
                 <h2 className="font-display text-xl font-bold mb-1" style={{ color: 'var(--color-heading)' }}>
                   The Complete SA Wedding Planning Guide
@@ -155,15 +156,27 @@ export default function Landing() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             {PROVINCE_LIST.map((p) => (
-              <Link key={p.slug} to={`/wedding-venues/${p.slug}`} className="card p-6 block hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-3">{p.emoji}</div>
-                <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
-                  {p.name}
-                </h3>
-                <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>{p.tagline}</p>
-                <span className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>
-                  Read the guide →
-                </span>
+              <Link key={p.slug} to={`/wedding-venues/${p.slug}`} className="card p-0 block overflow-hidden hover:shadow-md transition-shadow">
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt={p.imageAlt}
+                    width="800"
+                    height="360"
+                    loading="lazy"
+                    className="w-full object-cover"
+                    style={{ aspectRatio: '20 / 9' }}
+                  />
+                )}
+                <div className="p-6">
+                  <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
+                    {p.name}
+                  </h3>
+                  <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>{p.tagline}</p>
+                  <span className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>
+                    Read the guide →
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
@@ -182,12 +195,12 @@ export default function Landing() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto text-left">
               {[
-                { icon: '🇿🇦', title: 'South African Venues & Suppliers', desc: 'Search real wedding venues and suppliers in Cape Town, Johannesburg, Durban, Pretoria, the Winelands and beyond, powered by Google Maps.' },
-                { icon: '☁️', title: 'Synced to the Cloud', desc: 'Your wedding data is securely stored and synced across all your devices via Supabase. Access your planner on your phone, tablet or laptop.' },
-                { icon: '💎', title: 'Free Forever', desc: 'HitchedSA is completely free for couples. No subscriptions, no paywalls, no premium tiers. Every feature is available to every couple.' },
+                { icon: 'flag', title: 'South African Venues & Suppliers', desc: 'Search real wedding venues and suppliers in Cape Town, Johannesburg, Durban, Pretoria, the Winelands and beyond, powered by Google Maps.' },
+                { icon: 'cloud', title: 'Synced to the Cloud', desc: 'Your wedding data is securely stored and synced across all your devices via Supabase. Access your planner on your phone, tablet or laptop.' },
+                { icon: 'gem', title: 'Free Forever', desc: 'HitchedSA is completely free for couples. No subscriptions, no paywalls, no premium tiers. Every feature is available to every couple.' },
               ].map((item) => (
                 <div key={item.title}>
-                  <div className="text-2xl mb-2">{item.icon}</div>
+                  <div className="mb-2"><Icon name={item.icon} size={26} style={{ color: 'var(--color-primary)' }} /></div>
                   <h3 className="font-semibold text-sm mb-1" style={{ color: 'var(--color-heading)' }}>{item.title}</h3>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.desc}</p>
                 </div>

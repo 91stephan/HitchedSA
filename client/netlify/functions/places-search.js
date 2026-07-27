@@ -66,19 +66,7 @@ export default async (req) => {
   const GOOGLE_KEY = process.env.GOOGLE_PLACES_SERVER_KEY || process.env.VITE_GOOGLE_MAPS_KEY
 
   if (!SUPABASE_URL || !SERVICE_KEY || !GOOGLE_KEY) {
-    // Names only, never values. Tells us exactly which env var the function
-    // cannot see at runtime (usually a name typo or a wrong variable scope).
-    const missing = []
-    if (!SUPABASE_URL) missing.push('SUPABASE_URL (or VITE_SUPABASE_URL)')
-    if (!SERVICE_KEY) missing.push('SUPABASE_SERVICE_ROLE_KEY')
-    if (!GOOGLE_KEY) missing.push('GOOGLE_PLACES_SERVER_KEY')
-    // Diagnostic: list the NAMES (never values) of any env vars the function can
-    // actually see that relate to Supabase/Google, so we can spot a typo or a
-    // variable whose scope excludes Functions. Remove once search is working.
-    const seen = Object.keys(process.env)
-      .filter((k) => /SUPABASE|GOOGLE|PLACES|SERVICE_ROLE/i.test(k))
-      .sort()
-    return json({ message: 'Search is not configured yet. Please try again later.', missing, seen }, 500)
+    return json({ message: 'Search is not configured yet. Please try again later.' }, 500)
   }
 
   // 1. Require a valid Supabase login token.

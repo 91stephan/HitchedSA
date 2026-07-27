@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import BudgetIllustration from '../components/illustrations/BudgetIllustration'
 import AdBanner from '../components/AdBanner'
 
 const CATEGORY_ICONS = {
-  'Venue': '🏛️', 'Catering': '🍽️', 'Photography & Video': '📸',
-  'DJ & Entertainment': '🎵', 'Flowers & Floral': '💐', 'Wedding Cake': '🎂',
-  'Dress & Attire': '👗', 'Décor & Styling': '✨', 'Transport': '🚗', 'Other': '📦',
+  'Venue': 'building', 'Catering': 'utensils', 'Photography & Video': 'camera',
+  'DJ & Entertainment': 'music', 'Flowers & Floral': 'flower', 'Wedding Cake': 'cake',
+  'Dress & Attire': 'dress', 'Décor & Styling': 'sparkles', 'Transport': 'car', 'Other': 'box',
 }
 
 export default function Budget() {
@@ -123,7 +124,7 @@ export default function Budget() {
           return (
             <div key={cat.id} className="card">
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-xl">{CATEGORY_ICONS[cat.category] || '📦'}</span>
+                <Icon name={CATEGORY_ICONS[cat.category] || 'box'} size={20} />
                 <h3 className="font-display font-semibold flex-1" style={{ color: 'var(--color-accent)' }}>{cat.category}</h3>
                 <label className="flex items-center gap-2 text-xs cursor-pointer" style={{ color: 'var(--color-text-muted)' }}>
                   <input

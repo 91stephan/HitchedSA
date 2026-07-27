@@ -1,3 +1,5 @@
+import Icon from './Icon'
+
 export default function ThemePreviewCard({ theme, selected, onClick }) {
   return (
     <button
@@ -36,7 +38,7 @@ export default function ThemePreviewCard({ theme, selected, onClick }) {
           className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
           style={{ background: theme.preview.accent }}
         >
-          ✓
+          <Icon name="check" size={14} />
         </div>
       )}
     </button>

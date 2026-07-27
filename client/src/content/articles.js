@@ -4,7 +4,6 @@
 export const ARTICLES = {
   'wedding-cost-south-africa': {
     "slug": "wedding-cost-south-africa",
-    "emoji": "💰",
     "category": "Budget",
     "title": "How Much Does a Wedding Cost in South Africa? (2026 Budget Breakdown)",
     "metaTitle": "Wedding Cost in South Africa 2026: Full Budget Breakdown",
@@ -309,7 +308,6 @@ export const ARTICLES = {
 
   'best-wedding-season-south-africa': {
     "slug": "best-wedding-season-south-africa",
-    "emoji": "🌤️",
     "category": "Planning",
     "title": "The Best Time of Year to Get Married in South Africa",
     "metaTitle": "Best Wedding Season in South Africa: Month-by-Month Guide",
@@ -593,7 +591,6 @@ export const ARTICLES = {
 
   'legal-requirements-marriage-south-africa': {
     "slug": "legal-requirements-marriage-south-africa",
-    "emoji": "📜",
     "category": "Legal",
     "title": "Getting Legally Married in South Africa: Home Affairs, Documents and What the Law Says",
     "metaTitle": "Marriage Requirements in South Africa: The Legal Guide",
@@ -805,7 +802,6 @@ export const ARTICLES = {
 
   'lobola-traditional-weddings-guide': {
     "slug": "lobola-traditional-weddings-guide",
-    "emoji": "🏮",
     "category": "Traditions",
     "title": "Lobola and Traditional South African Weddings: A Modern Couple's Guide",
     "metaTitle": "Lobola & Traditional SA Weddings: A Modern Guide",
@@ -1015,7 +1011,6 @@ export const ARTICLES = {
 
   'wedding-photographer-south-africa': {
     "slug": "wedding-photographer-south-africa",
-    "emoji": "📸",
     "category": "Suppliers",
     "title": "How to Choose a Wedding Photographer in South Africa",
     "metaTitle": "Wedding Photographer Prices & Guide: South Africa 2026",
@@ -1208,7 +1203,6 @@ export const ARTICLES = {
 
   'small-wedding-ideas-south-africa': {
     "slug": "small-wedding-ideas-south-africa",
-    "emoji": "✨",
     "category": "Ideas",
     "title": "Small Wedding Ideas in South Africa: The Intimate Wedding Guide",
     "metaTitle": "Small & Intimate Wedding Ideas South Africa: Full Guide",
@@ -1515,7 +1509,6 @@ export const ARTICLES = {
 
   'wedding-flowers-south-africa': {
     "slug": "wedding-flowers-south-africa",
-    "emoji": "💐",
     "category": "Décor",
     "title": "Wedding Flowers in South Africa: What's in Season and What It Costs",
     "metaTitle": "Wedding Flowers in Season: South Africa Guide & Costs",
@@ -1773,7 +1766,6 @@ export const ARTICLES = {
 
   'load-shedding-wedding-guide': {
     "slug": "load-shedding-wedding-guide",
-    "emoji": "🔌",
     "category": "Planning",
     "title": "Load Shedding and Your Wedding: The Complete Contingency Guide",
     "metaTitle": "Load Shedding Wedding Guide: Backup Power & Planning",
@@ -1984,7 +1976,6 @@ export const ARTICLES = {
 
   'wedding-dresses-south-africa': {
     "slug": "wedding-dresses-south-africa",
-    "emoji": "👰",
     "category": "Style",
     "title": "Wedding Dresses in South Africa: Prices, Where to Buy, Hire and Styles",
     "metaTitle": "Wedding Dresses in South Africa: Prices, Hire & Styles",

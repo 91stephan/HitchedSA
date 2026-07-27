@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import ShareButtons from '../components/ShareButtons'
+import Icon from '../components/Icon'
 import { useMeta } from '../hooks/useMeta'
 import { ARTICLES, ARTICLE_LIST } from '../content/articles'
 
@@ -85,9 +86,12 @@ function Block({ block }) {
   }
   if (block.type === 'tip') {
     return (
-      <div className="card p-4 mb-4 text-sm" style={{ background: 'var(--color-surface)', borderLeft: '3px solid var(--color-primary)' }}>
-        <span className="font-semibold" style={{ color: 'var(--color-primary)' }}>💡 Tip: </span>
-        {block.text}
+      <div className="card p-4 mb-4 text-sm flex gap-2" style={{ background: 'var(--color-surface)', borderLeft: '3px solid var(--color-primary)' }}>
+        <Icon name="bulb" size={18} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} />
+        <span>
+          <span className="font-semibold" style={{ color: 'var(--color-primary)' }}>Tip: </span>
+          {block.text}
+        </span>
       </div>
     )
   }
@@ -102,6 +106,7 @@ export default function ArticlePage() {
     title: a ? a.metaTitle : 'Wedding Guides & Articles',
     description: a ? a.metaDescription : undefined,
     url: a ? `/articles/${a.slug}` : '/articles',
+    image: a ? `/images/articles/${a.slug}.jpg` : undefined,
   })
 
   if (!a) return <Navigate to="/articles" replace />
@@ -127,7 +132,7 @@ export default function ArticlePage() {
       </nav>
 
       <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--color-primary)' }}>
-        {a.emoji} {a.category}
+        {a.category}
       </p>
       <h1 className="font-display text-4xl font-bold mb-3" style={{ color: 'var(--color-heading)' }}>
         {a.title}
@@ -135,6 +140,17 @@ export default function ArticlePage() {
       <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>
         Updated {a.updated} · {a.readTime}
       </p>
+      <figure className="mb-6 -mx-4 sm:mx-0">
+        <img
+          src={`/images/articles/${a.slug}.jpg`}
+          alt={a.title}
+          width="1600"
+          height="700"
+          loading="eager"
+          className="w-full object-cover sm:rounded-2xl"
+          style={{ aspectRatio: '16 / 7', maxHeight: 440 }}
+        />
+      </figure>
       <div className="mb-8">
         <ShareButtons
           title={`${a.title} | HitchedSA`}
@@ -192,12 +208,22 @@ export default function ArticlePage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {related.map((o) => (
-              <Link key={o.slug} to={`/articles/${o.slug}`} className="card p-4 block hover:shadow-md transition-shadow">
-                <span className="text-xl">{o.emoji}</span>
-                <h3 className="font-display font-semibold text-sm mt-2 mb-1" style={{ color: 'var(--color-heading)' }}>
-                  {o.title}
-                </h3>
-                <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{o.readTime}</span>
+              <Link key={o.slug} to={`/articles/${o.slug}`} className="card p-0 block overflow-hidden hover:shadow-md transition-shadow">
+                <img
+                  src={`/images/articles/${o.slug}.jpg`}
+                  alt={o.title}
+                  width="400"
+                  height="150"
+                  loading="lazy"
+                  className="w-full object-cover"
+                  style={{ aspectRatio: '8 / 3' }}
+                />
+                <div className="p-4">
+                  <h3 className="font-display font-semibold text-sm mb-1" style={{ color: 'var(--color-heading)' }}>
+                    {o.title}
+                  </h3>
+                  <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{o.readTime}</span>
+                </div>
               </Link>
             ))}
           </div>
@@ -205,7 +231,9 @@ export default function ArticlePage() {
 
         {/* CTA */}
         <div className="card p-8 text-center" style={{ background: 'var(--color-surface)' }}>
-          <div className="text-3xl mb-3">💍</div>
+          <div className="flex justify-center mb-3">
+            <Icon name="rings" size={32} style={{ color: 'var(--color-primary)' }} />
+          </div>
           <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
             Plan Your Wedding with HitchedSA
           </h2>

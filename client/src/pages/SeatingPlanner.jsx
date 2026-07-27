@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { useApp } from '../context/AppContext'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import Icon from '../components/Icon'
 import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
 import AdBanner from '../components/AdBanner'
@@ -131,13 +132,13 @@ function TableCard({ table, guests, selected, onSelect, onMouseDown, onEdit, onD
               className="text-xs w-5 h-5 rounded flex items-center justify-center"
               style={{ color: 'var(--color-text-muted)', background: 'var(--color-surface)' }}
               title="Edit table"
-            >✎</button>
+            ><Icon name="edit" size={14} /></button>
             <button
               onClick={(e) => { e.stopPropagation(); onDelete(table.id) }}
               className="text-xs w-5 h-5 rounded flex items-center justify-center"
               style={{ color: 'var(--color-danger)', background: 'var(--color-surface)' }}
               title="Delete table"
-            >✕</button>
+            ><Icon name="close" size={14} /></button>
           </div>
         </div>
 
@@ -264,7 +265,7 @@ function PrintLayout({ tables, guests, partners }) {
                 <ol style={{ margin: 0, padding: '0 0 0 1.1rem', fontSize: '0.8rem', color: '#444', lineHeight: 1.7 }}>
                   {assigned.map((g, i) => (
                     <li key={g.id}>
-                      {g.isCouple ? '💍 ' : ''}{g.name}
+                      {g.isCouple ? <Icon name="rings" size={12} className="inline mr-1" /> : null}{g.name}
                       {g.dietary && g.dietary !== 'None' ? ` (${g.dietary})` : ''}
                       {g.isCouple ? ' (Couple)' : ''}
                     </li>
@@ -468,7 +469,7 @@ export default function SeatingPlanner() {
             >
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: selectedTable.color }} />
               Selected: {selectedTable.name}
-              <button onClick={() => setSelectedTableId(null)} className="ml-1 opacity-60 hover:opacity-100">✕</button>
+              <button onClick={() => setSelectedTableId(null)} className="ml-1 opacity-60 hover:opacity-100"><Icon name="close" size={14} /></button>
             </div>
           )}
           {!selectedTable && tables.length > 0 && (
@@ -476,8 +477,8 @@ export default function SeatingPlanner() {
               Click a table to select it, then click guests to assign
             </span>
           )}
-          <button className="btn-outline ml-auto" onClick={() => window.print()}>
-            🖨️ Print Layout
+          <button className="btn-outline ml-auto inline-flex items-center gap-1.5" onClick={() => window.print()}>
+            <Icon name="print" size={16} /> Print Layout
           </button>
         </div>
 
@@ -514,7 +515,7 @@ export default function SeatingPlanner() {
 
               {tables.length === 0 && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 pointer-events-none">
-                  <div className="text-6xl opacity-20">🪑</div>
+                  <div className="flex justify-center opacity-20"><Icon name="chair" size={60} /></div>
                   <p className="text-base font-display font-semibold" style={{ color: 'var(--color-text-muted)', opacity: 0.5 }}>
                     Add tables to begin planning
                   </p>
@@ -566,7 +567,7 @@ export default function SeatingPlanner() {
             {allPeople.length === 0 ? (
               /* No one at all to assign */
               <div className="flex-1 flex flex-col items-center justify-center p-4 text-center">
-                <div className="text-3xl mb-2 opacity-40">👥</div>
+                <div className="flex justify-center mb-2 opacity-40"><Icon name="users" size={32} /></div>
                 <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
                   Add guests in the Guest List page, or set partner names in Settings.
                 </p>
@@ -574,7 +575,7 @@ export default function SeatingPlanner() {
             ) : unassignedPeople.length === 0 ? (
               /* Everyone seated */
               <div className="flex-1 flex flex-col items-center justify-center p-4 text-center">
-                <div className="text-3xl mb-2">🎉</div>
+                <div className="flex justify-center mb-2"><Icon name="celebrate" size={32} /></div>
                 <p className="text-xs font-semibold" style={{ color: 'var(--color-success)' }}>
                   Everyone's seated!
                 </p>
@@ -608,12 +609,12 @@ export default function SeatingPlanner() {
                           onMouseEnter={e => { if (canAssign) e.currentTarget.style.background = 'var(--color-surface)' }}
                           onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                         >
-                          {/* 💍 ring emoji avatar instead of letter initial */}
+                          {/* ring icon avatar instead of letter initial */}
                           <div
                             className="w-7 h-7 rounded-full flex items-center justify-center text-sm shrink-0"
                             style={{ background: 'var(--color-accent-light)' }}
                           >
-                            💍
+                            <Icon name="rings" size={16} style={{ color: 'var(--color-accent)' }} />
                           </div>
                           <div className="overflow-hidden">
                             <div className="font-semibold text-xs truncate" style={{ color: 'var(--color-text)' }}>
@@ -752,7 +753,7 @@ export default function SeatingPlanner() {
                                 className="text-xs px-2 py-0.5 rounded-full inline-flex items-center gap-1"
                                 style={{ background: table.color + '22', color: 'var(--color-text)', border: `1px solid ${table.color}44` }}
                               >
-                                {g.isCouple && <span>💍</span>}
+                                {g.isCouple && <Icon name="rings" size={12} />}
                                 {g.name}
                               </span>
                             ))}

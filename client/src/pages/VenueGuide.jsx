@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import ShareButtons from '../components/ShareButtons'
 import { useMeta } from '../hooks/useMeta'
+import Icon from '../components/Icon'
 
 const SCHEMA = {
   '@context': 'https://schema.org',
@@ -17,56 +18,56 @@ const SCHEMA = {
 const VENUE_TYPES = [
   {
     type: 'Wine Farm & Estate',
-    icon: '🍷',
+    image: '/images/venue-types/wine-farm.jpg',
     desc: 'The most sought-after venue style in South Africa. Wine farms in Stellenbosch, Franschhoek, and Paarl offer dramatic mountain backdrops, lush vineyards, historic Cape Dutch architecture, and excellent in-house catering. Usually includes accommodation for the bridal party. These venues book out fastest, sometimes 18 months ahead for popular weekends.',
     budget: 'R35,000–R90,000+ venue hire',
     best: 'Couples who want a scenic, all-in-one experience',
   },
   {
     type: 'Garden & Fynbos Estate',
-    icon: '🌿',
+    image: '/images/venue-types/garden.jpg',
     desc: 'Botanical gardens, fynbos estates, and private nature reserves offer beautiful natural settings with minimal decoration needed. Popular in the Western Cape and around Pretoria. These venues work particularly well for outdoor ceremonies followed by a tented reception.',
     budget: 'R20,000–R60,000 venue hire',
     best: 'Nature-loving couples who want organic, natural aesthetics',
   },
   {
     type: 'Farm & Country Estate',
-    icon: '🐄',
+    image: '/images/venue-types/farm.jpg',
     desc: 'Working farms and country properties offer a rustic, relaxed atmosphere at often more affordable prices than wine estates. The Cradle of Humankind (Johannesburg), the Midlands Meander (KZN), and farms around Pretoria\'s East and West offer excellent options. Flexible, often allowing your own caterers.',
     budget: 'R15,000–R45,000 venue hire',
     best: 'Couples wanting a rustic feel with more flexibility and budget',
   },
   {
     type: 'Beach & Coastal',
-    icon: '🌊',
+    image: '/images/venue-types/beach.jpg',
     desc: 'South Africa\'s coastline offers spectacular beach wedding settings from the Atlantic Seaboard in Cape Town to KwaZulu-Natal\'s warm Indian Ocean beaches. Key considerations: wind (the Cape can be very windy), beach permits, tidal timing, and finding a nearby venue for wet weather. Many upmarket beach hotels offer dedicated wedding packages.',
     budget: 'R25,000–R70,000 for beachfront venue hire',
     best: 'Couples drawn to the ocean with a relaxed, summer feel',
   },
   {
     type: 'Bush & Game Lodge',
-    icon: '🦒',
+    image: '/images/venue-types/bush.jpg',
     desc: 'A bush wedding is one of the most uniquely South African experiences possible. Game lodges in Mpumalanga, Limpopo, the Northern Cape, and KwaZulu-Natal offer intimate settings with wildlife and African sunsets. These venues work best for smaller weddings (under 80 guests) given the logistical demands of getting guests to remote locations.',
     budget: 'R30,000–R120,000+ (includes accommodation packages)',
     best: 'Intimate weddings where the "Africa experience" is the priority',
   },
   {
     type: 'Heritage Building & Manor',
-    icon: '🏛️',
+    image: '/images/venue-types/heritage.jpg',
     desc: 'South Africa has magnificent colonial-era manor houses, Cape Dutch homesteads, and Victorian heritage buildings that make atmospheric wedding venues. These are particularly concentrated in Cape Town, Stellenbosch, and Johannesburg\'s northern suburbs. Many are on the national heritage register and come with strict noise and time restrictions.',
     budget: 'R20,000–R65,000 venue hire',
     best: 'Couples who love history, architecture, and formal elegance',
   },
   {
     type: 'Hotel & Conference Venue',
-    icon: '🏨',
+    image: '/images/venue-types/hotel.jpg',
     desc: 'Five-star hotels and purpose-built wedding venues offer reliability, professional service, in-house catering, and on-site accommodation. They are excellent for larger weddings (150+ guests) where logistics need to be tightly managed. Generally more expensive per-head than farm venues but everything is handled for you.',
     budget: 'R40,000–R150,000+ depending on hotel and package',
     best: 'Large weddings where convenience and reliability are priorities',
   },
   {
     type: 'Rooftop & Urban',
-    icon: '🌆',
+    image: '/images/venue-types/urban.jpg',
     desc: 'Urban rooftop venues and converted industrial spaces in Cape Town, Johannesburg, and Durban cater to couples wanting a modern, city aesthetic. These venues are especially popular for evening weddings with city skyline views. Many are versatile blank-canvas spaces that allow complete personalisation.',
     budget: 'R15,000–R50,000 venue hire',
     best: 'City-loving couples wanting a modern, non-traditional setting',
@@ -180,17 +181,25 @@ export default function VenueGuide() {
           </h2>
           <div className="space-y-5">
             {VENUE_TYPES.map((v) => (
-              <div key={v.type} className="card p-5">
-                <div className="flex items-start gap-3 mb-2">
-                  <span className="text-2xl shrink-0">{v.icon}</span>
-                  <h3 className="font-display font-semibold text-base mt-0.5" style={{ color: 'var(--color-heading)' }}>
+              <div key={v.type} className="card p-0 overflow-hidden sm:flex">
+                <img
+                  src={v.image}
+                  alt={`${v.type} wedding venue in South Africa`}
+                  width="320"
+                  height="240"
+                  loading="lazy"
+                  className="w-full sm:w-56 sm:shrink-0 object-cover"
+                  style={{ aspectRatio: '4 / 3' }}
+                />
+                <div className="p-5">
+                  <h3 className="font-display font-semibold text-base mb-2" style={{ color: 'var(--color-heading)' }}>
                     {v.type}
                   </h3>
-                </div>
-                <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--color-text-muted)' }}>{v.desc}</p>
-                <div className="flex flex-wrap gap-4 text-xs">
-                  <span><strong style={{ color: 'var(--color-text)' }}>Typical cost:</strong> <span style={{ color: 'var(--color-text-muted)' }}>{v.budget}</span></span>
-                  <span><strong style={{ color: 'var(--color-text)' }}>Best for:</strong> <span style={{ color: 'var(--color-text-muted)' }}>{v.best}</span></span>
+                  <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--color-text-muted)' }}>{v.desc}</p>
+                  <div className="flex flex-wrap gap-4 text-xs">
+                    <span><strong style={{ color: 'var(--color-text)' }}>Typical cost:</strong> <span style={{ color: 'var(--color-text-muted)' }}>{v.budget}</span></span>
+                    <span><strong style={{ color: 'var(--color-text)' }}>Best for:</strong> <span style={{ color: 'var(--color-text-muted)' }}>{v.best}</span></span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -286,7 +295,10 @@ export default function VenueGuide() {
           </ol>
 
           <div className="card p-5" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-            <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--color-heading)' }}>⚠️ The Most Common Venue Booking Mistake</h3>
+            <h3 className="font-semibold text-sm mb-2 flex items-center gap-2" style={{ color: 'var(--color-heading)' }}>
+              <Icon name="warning" size={18} style={{ color: 'var(--color-primary)' }} />
+              The Most Common Venue Booking Mistake
+            </h3>
             <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
               South African couples frequently book the venue before confirming the caterer's price. A venue that costs R30,000 hire may require you to use their exclusive caterer at R950 per head. For 100 guests, that's R95,000 on catering alone. Always get the total estimated cost (venue + catering + bar) before signing the venue contract.
             </p>
@@ -298,7 +310,9 @@ export default function VenueGuide() {
         {/* CTA */}
         <section>
           <div className="card p-8 text-center" style={{ background: 'var(--color-surface)' }}>
-            <div className="text-3xl mb-3">🔍</div>
+            <div className="flex justify-center mb-3">
+              <Icon name="search" size={32} style={{ color: 'var(--color-primary)' }} />
+            </div>
             <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
               Search Real SA Wedding Venues
             </h2>

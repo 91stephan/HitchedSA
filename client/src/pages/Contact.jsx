@@ -1,4 +1,5 @@
 import { useMeta } from '../hooks/useMeta'
+import Icon from '../components/Icon'
 
 export default function Contact() {
   useMeta({
@@ -21,7 +22,7 @@ export default function Contact() {
           </p>
           <div className="space-y-3 text-sm" style={{ color: 'var(--color-text)' }}>
             <div className="flex items-center gap-3">
-              <span className="text-lg">📧</span>
+              <Icon name="mail" size={18} />
               <div>
                 <div className="font-medium">Email</div>
                 <a
@@ -34,7 +35,7 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-lg">🌐</span>
+              <Icon name="globe" size={18} />
               <div>
                 <div className="font-medium">Website</div>
                 <a
@@ -47,7 +48,7 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-lg">🇿🇦</span>
+              <Icon name="flag" size={18} />
               <div>
                 <div className="font-medium">Location</div>
                 <span className="text-sm" style={{ color: 'var(--color-text-muted)' }}>South Africa</span>

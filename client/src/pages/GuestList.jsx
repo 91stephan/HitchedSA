@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import GuestIllustration from '../components/illustrations/GuestIllustration'
 import AdBanner from '../components/AdBanner'
 import Modal from '../components/Modal'
@@ -10,7 +11,11 @@ const RSVP_STYLES = {
   confirmed: { bg: 'var(--color-success)', text: '#fff' },
   declined:  { bg: 'var(--color-danger)',  text: '#fff' },
 }
-const RSVP_LABELS = { pending: '⏳ Pending', confirmed: '✅ Confirmed', declined: '❌ Declined' }
+const RSVP_LABELS = {
+  pending:   { icon: 'hourglass', text: 'Pending' },
+  confirmed: { icon: 'check',     text: 'Confirmed' },
+  declined:  { icon: 'xCircle',   text: 'Declined' },
+}
 
 const DIETARY_OPTIONS = ['None', 'Vegetarian', 'Vegan', 'Halal', 'Kosher', 'Gluten-Free', 'Dairy-Free', 'Nut Allergy', 'Other']
 
@@ -160,11 +165,11 @@ export default function GuestList() {
           <p className="section-subtitle">Manage your wedding guests and RSVPs</p>
         </div>
         <div className="flex gap-2 shrink-0">
-          <button className="btn-outline text-sm" onClick={() => setShowImport(true)}>
-            📥 Import
+          <button className="btn-outline text-sm inline-flex items-center gap-1.5" onClick={() => setShowImport(true)}>
+            <Icon name="upload" size={16} /> Import
           </button>
-          <button className="btn-primary text-sm" onClick={() => { setShowForm((s) => !s); setEditId(null); setForm(EMPTY_FORM) }}>
-            {showForm && !editId ? '✕ Close' : '+ Add Guest'}
+          <button className="btn-primary text-sm inline-flex items-center gap-1.5" onClick={() => { setShowForm((s) => !s); setEditId(null); setForm(EMPTY_FORM) }}>
+            {showForm && !editId ? <><Icon name="close" size={16} /> Close</> : <><Icon name="plus" size={16} /> Add Guest</>}
           </button>
         </div>
       </div>
@@ -215,7 +220,7 @@ export default function GuestList() {
               <label className="label">RSVP Status</label>
               <select className="input-field" value={form.rsvp}
                 onChange={(e) => setForm((f) => ({ ...f, rsvp: e.target.value }))}>
-                {RSVP_OPTIONS.map((o) => <option key={o} value={o}>{RSVP_LABELS[o]}</option>)}
+                {RSVP_OPTIONS.map((o) => <option key={o} value={o}>{RSVP_LABELS[o].text}</option>)}
               </select>
             </div>
             <div>
@@ -251,8 +256,8 @@ export default function GuestList() {
         <div className="flex gap-2">
           {['all', ...RSVP_OPTIONS].map((r) => (
             <button key={r} onClick={() => setFilterRsvp(r)}
-              className={`tab-btn text-xs ${filterRsvp === r ? 'active' : ''}`}>
-              {r === 'all' ? 'All' : RSVP_LABELS[r]}
+              className={`tab-btn text-xs inline-flex items-center gap-1 ${filterRsvp === r ? 'active' : ''}`}>
+              {r === 'all' ? 'All' : <><Icon name={RSVP_LABELS[r].icon} size={13} /> {RSVP_LABELS[r].text}</>}
             </button>
           ))}
         </div>
@@ -265,10 +270,10 @@ export default function GuestList() {
             {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
           <button
-            className="btn-outline text-xs px-3 py-1.5"
+            className="btn-outline text-xs px-3 py-1.5 inline-flex items-center gap-1.5"
             onClick={() => exportCSV(guests)}
           >
-            📥 Export CSV
+            <Icon name="download" size={14} /> Export CSV
           </button>
         </div>
       </div>
@@ -284,12 +289,12 @@ export default function GuestList() {
           <button className="btn-ghost text-xs px-3 py-1" onClick={selectAll}>Select All</button>
           <a
             href={`mailto:?subject=You're Invited!&body=We'd love you to join us on our special day. Please RSVP at: https://hitchedsa.co.za`}
-            className="btn-outline text-xs px-3 py-1.5"
+            className="btn-outline text-xs px-3 py-1.5 inline-flex items-center gap-1.5"
           >
-            📧 Send Evite
+            <Icon name="mail" size={14} /> Send Evite
           </a>
-          <button className="btn-danger text-xs px-3 py-1.5 ml-auto" onClick={deleteSelected}>
-            🗑️ Delete Selected
+          <button className="btn-danger text-xs px-3 py-1.5 ml-auto inline-flex items-center gap-1.5" onClick={deleteSelected}>
+            <Icon name="trash" size={14} /> Delete Selected
           </button>
         </div>
       )}
@@ -349,8 +354,8 @@ export default function GuestList() {
                     </span>
                   </td>
                   <td className="py-2.5 px-4 hidden md:table-cell">
-                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                      {guest.ageGroup === 'child' ? '👶 Child' : '👤 Adult'}
+                    <span className="text-xs inline-flex items-center gap-1" style={{ color: 'var(--color-text-muted)' }}>
+                      <Icon name="user" size={13} /> {guest.ageGroup === 'child' ? 'Child' : 'Adult'}
                     </span>
                   </td>
                   <td className="py-2.5 px-4 hidden md:table-cell">
@@ -361,7 +366,7 @@ export default function GuestList() {
                   </td>
                   <td className="py-2.5 px-4 text-right">
                     <button onClick={() => startEdit(guest)} className="btn-ghost text-xs px-2 py-1 mr-1">Edit</button>
-                    <button onClick={() => deleteGuest(guest.id)} className="text-xs px-2 py-1 rounded" style={{ color: 'var(--color-danger)' }}>✕</button>
+                    <button onClick={() => deleteGuest(guest.id)} className="text-xs px-2 py-1 rounded inline-flex items-center" style={{ color: 'var(--color-danger)' }}><Icon name="close" size={14} /></button>
                   </td>
                 </tr>
               ))}

@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import VenueCard from '../components/VenueCard'
 import VenueIllustration from '../components/illustrations/VenueIllustration'
 import AdBanner from '../components/AdBanner'
@@ -139,11 +140,11 @@ export default function VenueSearch() {
       <p className="section-subtitle">Find the perfect South African wedding venue</p>
 
       <div className="flex gap-2 mb-6">
-        <button className={`tab-btn ${tab === 'search' ? 'active' : ''}`} onClick={() => setTab('search')}>
-          🔍 Search Venues
+        <button className={`tab-btn inline-flex items-center gap-1.5 ${tab === 'search' ? 'active' : ''}`} onClick={() => setTab('search')}>
+          <Icon name="search" size={16} /> Search Venues
         </button>
-        <button className={`tab-btn ${tab === 'shortlist' ? 'active' : ''}`} onClick={() => setTab('shortlist')}>
-          ♥ My Shortlist ({venueShortlist.length})
+        <button className={`tab-btn inline-flex items-center gap-1.5 ${tab === 'shortlist' ? 'active' : ''}`} onClick={() => setTab('shortlist')}>
+          <Icon name="heart" size={16} filled /> My Shortlist ({venueShortlist.length})
         </button>
       </div>
 
@@ -203,13 +204,13 @@ export default function VenueSearch() {
 
                 {error && <p className="text-xs" style={{ color: 'var(--color-danger)' }}>{error}</p>}
 
-                <button className="btn-primary w-full" onClick={() => doSearch()} disabled={loading}>
-                  {loading ? '⟳ Searching...' : '🔍 Search'}
+                <button className="btn-primary w-full inline-flex items-center justify-center gap-1.5" onClick={() => doSearch()} disabled={loading}>
+                  <Icon name="search" size={16} className={loading ? 'animate-spin' : ''} /> {loading ? 'Searching...' : 'Search'}
                 </button>
 
                 {plan === 'pro' ? (
-                  <p className="text-xs text-center" style={{ color: 'var(--color-accent)' }}>
-                    ✨ Pro: unlimited searches
+                  <p className="text-xs text-center inline-flex items-center justify-center gap-1.5 w-full" style={{ color: 'var(--color-accent)' }}>
+                    <Icon name="sparkles" size={14} /> Pro: unlimited searches
                   </p>
                 ) : remaining !== null && (
                   <p className="text-xs text-center" style={{ color: remaining === 0 ? 'var(--color-danger)' : 'var(--color-text-muted)' }}>
@@ -231,11 +232,11 @@ export default function VenueSearch() {
               </div>
 
               <p className="text-xs mt-4" style={{ color: 'var(--color-text-muted)' }}>
-                Tip: click ⚖️ on 2–3 venues then compare them side by side.
+                Tip: click <Icon name="compare" size={14} className="inline align-text-bottom" /> on 2–3 venues then compare them side by side.
               </p>
               {compareList.length >= 2 && (
-                <button className="btn-accent w-full mt-2 text-sm" onClick={() => setShowCompare(true)}>
-                  ⚖️ Compare ({compareList.length}) Venues
+                <button className="btn-accent w-full mt-2 text-sm inline-flex items-center justify-center gap-1.5" onClick={() => setShowCompare(true)}>
+                  <Icon name="compare" size={16} /> Compare ({compareList.length}) Venues
                 </button>
               )}
             </div>
@@ -243,12 +244,23 @@ export default function VenueSearch() {
 
           <div className="flex-1">
             {loading && (
-              <div className="text-center py-20">
-                <div className="text-4xl mb-4 animate-spin inline-block">⟳</div>
-                <p className="text-sm mt-2" style={{ color: 'var(--color-text-muted)' }}>
+              <>
+                <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
                   Searching venues near {location || 'South Africa'}...
                 </p>
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="card p-0 overflow-hidden animate-pulse">
+                      <div style={{ aspectRatio: '16 / 10', background: 'var(--color-surface)' }} />
+                      <div className="p-4">
+                        <div className="h-4 rounded mb-3" style={{ width: '75%', background: 'var(--color-surface)' }} />
+                        <div className="h-3 rounded mb-2" style={{ width: '90%', background: 'var(--color-surface)' }} />
+                        <div className="h-3 rounded" style={{ width: '55%', background: 'var(--color-surface)' }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
 
             {!loading && searched && (
@@ -256,7 +268,9 @@ export default function VenueSearch() {
                 <div className="flex justify-between items-center mb-4">
                   <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
                     {filtered.length} venue{filtered.length !== 1 ? 's' : ''} found near {location}
-                    {minRating ? ` · ★ ${minRating}+ filter active` : ''}
+                    {minRating ? (
+                      <span className="inline-flex items-center gap-1"> · <Icon name="star" size={14} filled style={{ color: 'var(--color-accent)' }} /> {minRating}+ filter active</span>
+                    ) : ''}
                   </p>
                   {compareList.length > 0 && (
                     <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
@@ -322,7 +336,7 @@ export default function VenueSearch() {
         <div>
           {venueShortlist.length === 0 ? (
             <div className="text-center py-16">
-              <div className="text-5xl mb-4">♡</div>
+              <div className="flex justify-center mb-4"><Icon name="heart" size={48} style={{ color: 'var(--color-primary)' }} /></div>
               <p className="font-display text-xl font-semibold mb-2" style={{ color: 'var(--color-heading)' }}>
                 Your shortlist is empty
               </p>
@@ -334,8 +348,8 @@ export default function VenueSearch() {
           ) : (
             <>
               {compareList.length >= 2 && (
-                <button className="btn-accent mb-6 text-sm" onClick={() => setShowCompare(true)}>
-                  ⚖️ Compare ({compareList.length}) Venues
+                <button className="btn-accent mb-6 text-sm inline-flex items-center gap-1.5" onClick={() => setShowCompare(true)}>
+                  <Icon name="compare" size={16} /> Compare ({compareList.length}) Venues
                 </button>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -356,10 +370,10 @@ export default function VenueSearch() {
                             <button
                               key={star}
                               onClick={() => setShortlistRatings((r) => ({ ...r, [venue.id]: star }))}
-                              className="text-xl transition-transform hover:scale-110"
+                              className="transition-transform hover:scale-110"
                               style={{ color: star <= (shortlistRatings[venue.id] || 0) ? 'var(--color-accent)' : 'var(--color-border)' }}
                             >
-                              ★
+                              <Icon name="star" size={20} filled />
                             </button>
                           ))}
                         </div>
@@ -375,10 +389,10 @@ export default function VenueSearch() {
                         />
                       </div>
                       <button
-                        className="btn-primary w-full text-sm"
+                        className="btn-primary w-full text-sm inline-flex items-center justify-center gap-1.5"
                         onClick={() => { setBookingVenue(venue); setBookingDate(weddingDate || '') }}
                       >
-                        📅 Book This Venue
+                        <Icon name="calendar" size={16} /> Book This Venue
                       </button>
                     </div>
                   </div>
@@ -405,7 +419,7 @@ export default function VenueSearch() {
               {[
                 { label: 'Location',    key: 'location' },
                 { label: 'Price Range', key: 'priceRange' },
-                { label: 'Rating',      key: 'rating',  fmt: (v) => v > 0 ? `★ ${v.toFixed(1)}` : 'N/A' },
+                { label: 'Rating',      key: 'rating',  fmt: (v) => v > 0 ? <span className="inline-flex items-center gap-1"><Icon name="star" size={12} filled style={{ color: 'var(--color-accent)' }} /> {v.toFixed(1)}</span> : 'N/A' },
                 { label: 'Phone',       key: 'contact', fmt: (v) => v || '–' },
                 { label: 'Website',     key: 'website', fmt: (v) => v ? <a href={v} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)' }}>Visit site</a> : '–' },
               ].map((row) => (
@@ -440,8 +454,8 @@ export default function VenueSearch() {
         </div>
         <div className="flex gap-3">
           <button className="btn-outline flex-1" onClick={() => setBookingVenue(null)}>Cancel</button>
-          <button className="btn-primary flex-1" onClick={confirmBooking} disabled={!bookingDate}>
-            💍 Confirm Date
+          <button className="btn-primary flex-1 inline-flex items-center justify-center gap-1.5" onClick={confirmBooking} disabled={!bookingDate}>
+            <Icon name="rings" size={16} /> Confirm Date
           </button>
         </div>
       </Modal>

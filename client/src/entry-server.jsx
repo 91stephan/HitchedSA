@@ -76,11 +76,13 @@ export const ROUTES = [
     path: `/wedding-venues/${p.slug}`,
     title: `${p.metaTitle} | HitchedSA`,
     description: p.metaDescription,
+    image: p.image,
   })),
   ...ARTICLE_LIST.map((a) => ({
     path: `/articles/${a.slug}`,
     title: `${a.metaTitle} | HitchedSA`,
     description: a.metaDescription,
+    image: `/images/articles/${a.slug}.jpg`,
   })),
 ]
 

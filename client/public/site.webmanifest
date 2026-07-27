@@ -1,0 +1,17 @@
+{
+  "name": "HitchedSA: South African Wedding Planner",
+  "short_name": "HitchedSA",
+  "description": "Plan your South African wedding for free: venue search, budget, guest list, checklist, seating and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF7",
+  "theme_color": "#D4829A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}

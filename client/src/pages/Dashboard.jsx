@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import CountdownClock from '../components/CountdownClock'
 import FloralDivider from '../components/FloralDivider'
 import AdBanner from '../components/AdBanner'
@@ -65,7 +66,7 @@ function WeatherWidget({ venueLocation, weddingDate }) {
   if (!venueLocation) {
     return (
       <div className="card p-8 text-center" style={{ background: 'var(--color-surface)', border: '1px dashed var(--color-border)' }}>
-        <div className="text-4xl mb-3 opacity-40">☁</div>
+        <div className="flex justify-center mb-3 opacity-40"><Icon name="cloud" size={40} /></div>
         <p className="font-display text-base font-semibold mb-1" style={{ color: 'var(--color-text)' }}>
           Wedding Day Weather
         </p>
@@ -79,7 +80,7 @@ function WeatherWidget({ venueLocation, weddingDate }) {
   if (loading) {
     return (
       <div className="card p-8 text-center" style={{ background: 'var(--color-surface)' }}>
-        <p className="text-2xl mb-2">☁</p>
+        <div className="flex justify-center mb-2"><Icon name="cloud" size={26} /></div>
         <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
           Loading weather for {venueLocation.split(',')[0]}...
         </p>
@@ -90,7 +91,7 @@ function WeatherWidget({ venueLocation, weddingDate }) {
   if (error || !weather) {
     return (
       <div className="card p-6 text-center" style={{ background: 'var(--color-surface)', border: '1px dashed var(--color-border)' }}>
-        <div className="text-4xl mb-3 opacity-40">☁</div>
+        <div className="flex justify-center mb-3 opacity-40"><Icon name="cloud" size={40} /></div>
         <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
           Could not load weather for "{venueLocation.split(',')[0]}". Check your location or try again later.
         </p>
@@ -112,8 +113,8 @@ function WeatherWidget({ venueLocation, weddingDate }) {
           <h3 className="font-display font-semibold text-base" style={{ color: 'var(--color-accent)' }}>
             {weather.isForecast ? 'Wedding Day Forecast' : 'Current Weather'}
           </h3>
-          <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-            📍 {weather.cityName}
+          <p className="text-xs mt-0.5 inline-flex items-center gap-1" style={{ color: 'var(--color-text-muted)' }}>
+            <Icon name="map" size={13} /> {weather.cityName}
             {weather.isForecast && weather.daysUntil !== null && (
               <span> · {weather.daysUntil === 0 ? 'Today!' : weather.daysUntil === 1 ? 'Tomorrow!' : `In ${weather.daysUntil} days`}</span>
             )}
@@ -135,8 +136,8 @@ function WeatherWidget({ venueLocation, weddingDate }) {
         </div>
         <div className="ml-auto text-right space-y-1 pb-1">
           <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Feels like {feelsLike}°C</div>
-          <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>💧 Humidity {humidity}%</div>
-          <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>💨 Wind {windSpeed} km/h</div>
+          <div className="text-xs inline-flex items-center gap-1" style={{ color: 'var(--color-text-muted)' }}><Icon name="droplet" size={13} /> Humidity {humidity}%</div>
+          <div className="text-xs inline-flex items-center gap-1" style={{ color: 'var(--color-text-muted)' }}><Icon name="wind" size={13} /> Wind {windSpeed} km/h</div>
         </div>
       </div>
 
@@ -238,8 +239,8 @@ export default function Dashboard() {
             </>
           ) : (
             <div className="mt-4">
-              <p className="text-white/85 text-lg font-display italic mb-6">
-                Still planning the perfect day ✨
+              <p className="text-white/85 text-lg font-display italic mb-6 inline-flex items-center justify-center gap-1.5">
+                Still planning the perfect day <Icon name="sparkles" size={18} />
               </p>
               <button
                 onClick={() => navigate('/venues')}
@@ -266,7 +267,7 @@ export default function Dashboard() {
           <QuickStatCard illustration={<GuestIllustration size={36} />} label="Guests" value={guestCount} sub={`${confirmedCount} confirmed`} to="/guests" />
           <QuickStatCard illustration={<BudgetIllustration size={36} />} label="Budget Used" value={budgetUsedFormatted} sub={isOverBudget ? `R${overBy.toLocaleString('en-ZA')} over budget` : `of ${budgetTotalFormatted}`} to="/budget" valueColor={isOverBudget ? 'var(--color-danger)' : undefined} />
           <QuickStatCard illustration={<ChecklistIllustration size={36} />} label="Checklist" value={`${checklistProgress}%`} sub={`${checklistDone} of ${checklistTotal} done`} to="/checklist" />
-          <QuickStatCard illustration={<VenueIllustration size={36} />} label="Venue" value={weddingDate ? '✓' : '–'} sub={weddingDate ? 'Booked' : 'Not set'} to="/venues" />
+          <QuickStatCard illustration={<VenueIllustration size={36} />} label="Venue" value={weddingDate ? <Icon name="check" size={18} /> : '–'} sub={weddingDate ? 'Booked' : 'Not set'} to="/venues" />
         </div>
 
         <AdBanner slot="dashboard-top" size="leaderboard" className="mb-6" />

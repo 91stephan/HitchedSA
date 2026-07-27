@@ -1,4 +1,5 @@
 import Modal from './Modal'
+import Icon from './Icon'
 import { SEARCH_LIMIT } from '../lib/placesApi'
 
 // Paywall prompt shown when a free user runs out of weekly searches.
@@ -18,16 +19,16 @@ export default function UpgradeModal({ open, onClose }) {
   return (
     <Modal open={open} onClose={onClose} title="Upgrade to HitchedSA Pro" maxWidth="max-w-md">
       <div className="text-center">
-        <div className="text-4xl mb-3">✨</div>
+        <div className="flex justify-center mb-3"><Icon name="sparkles" size={40} style={{ color: 'var(--color-primary)' }} /></div>
         <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
           You have used all {SEARCH_LIMIT} of your free searches this week. Pro gives you
           unlimited venue and supplier searches so you can keep planning without waiting.
         </p>
 
         <ul className="text-sm text-left space-y-2 mb-5 mx-auto" style={{ maxWidth: '20rem', color: 'var(--color-text)' }}>
-          <li>✓ Unlimited venue searches</li>
-          <li>✓ Unlimited supplier searches</li>
-          <li>✓ Every planning tool stays free either way</li>
+          <li className="flex items-center gap-1.5"><Icon name="check" size={14} style={{ color: 'var(--color-primary)' }} /> Unlimited venue searches</li>
+          <li className="flex items-center gap-1.5"><Icon name="check" size={14} style={{ color: 'var(--color-primary)' }} /> Unlimited supplier searches</li>
+          <li className="flex items-center gap-1.5"><Icon name="check" size={14} style={{ color: 'var(--color-primary)' }} /> Every planning tool stays free either way</li>
         </ul>
 
         <div

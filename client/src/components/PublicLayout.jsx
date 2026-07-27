@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import LogoRingIllustration from './illustrations/LogoRingIllustration'
+import BackToTop from './BackToTop'
 
 function PublicNavbar() {
   const { user } = useAuth()
@@ -79,6 +80,7 @@ export default function PublicLayout({ children }) {
       <PublicNavbar />
       <main className="flex-1">{children}</main>
       <PublicFooter />
+      <BackToTop />
     </div>
   )
 }

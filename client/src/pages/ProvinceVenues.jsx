@@ -4,6 +4,7 @@ import AdBanner from '../components/AdBanner'
 import ShareButtons from '../components/ShareButtons'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCES, PROVINCE_LIST } from '../content/provinces'
+import Icon from '../components/Icon'
 
 function buildSchema(p) {
   return [
@@ -46,6 +47,7 @@ export default function ProvinceVenues() {
     title: p ? p.metaTitle : 'Wedding Venues',
     description: p ? p.metaDescription : undefined,
     url: p ? `/wedding-venues/${p.slug}` : '/wedding-venues',
+    image: p ? p.image : undefined,
   })
 
   if (!p) return <Navigate to="/wedding-venues" replace />
@@ -160,7 +162,7 @@ export default function ProvinceVenues() {
                         </a>
                       )}
                       <a
-                        href={`https://wa.me/?text=${encodeURIComponent(`Look at ${v.name} in ${v.area} for our wedding 💍\nhttps://hitchedsa.co.za/wedding-venues/${p.slug}`)}`}
+                        href={`https://wa.me/?text=${encodeURIComponent(`Look at ${v.name} in ${v.area} for our wedding\nhttps://hitchedsa.co.za/wedding-venues/${p.slug}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:underline"
@@ -213,15 +215,15 @@ export default function ProvinceVenues() {
           </h2>
           <div className="space-y-3">
             <div className="card p-5">
-              <h3 className="font-semibold text-sm mb-1" style={{ color: 'var(--color-accent)' }}>✅ Best months</h3>
+              <h3 className="font-semibold text-sm mb-1 flex items-center gap-2" style={{ color: 'var(--color-accent)' }}><Icon name="check" size={16} style={{ color: 'var(--color-accent)' }} /> Best months</h3>
               <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>{p.season.best}</p>
             </div>
             <div className="card p-5">
-              <h3 className="font-semibold text-sm mb-1" style={{ color: 'var(--color-accent)' }}>⚠️ Plan around</h3>
+              <h3 className="font-semibold text-sm mb-1 flex items-center gap-2" style={{ color: 'var(--color-accent)' }}><Icon name="warning" size={16} style={{ color: 'var(--color-accent)' }} /> Plan around</h3>
               <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>{p.season.avoid}</p>
             </div>
             <div className="card p-5">
-              <h3 className="font-semibold text-sm mb-1" style={{ color: 'var(--color-accent)' }}>🌤️ Weather wisdom</h3>
+              <h3 className="font-semibold text-sm mb-1 flex items-center gap-2" style={{ color: 'var(--color-accent)' }}><Icon name="sun" size={16} style={{ color: 'var(--color-accent)' }} /> Weather wisdom</h3>
               <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>{p.season.wind}</p>
             </div>
           </div>
@@ -260,21 +262,38 @@ export default function ProvinceVenues() {
 
         {/* Other provinces */}
         <section>
-          <h2 className="font-display text-xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
-            Venue Guides for Other Provinces
-          </h2>
+          <div className="flex items-baseline justify-between mb-4 gap-4">
+            <h2 className="font-display text-xl font-bold" style={{ color: 'var(--color-heading)' }}>
+              Venue Guides for Other Provinces
+            </h2>
+            <Link to="/wedding-venues" className="text-xs font-semibold whitespace-nowrap" style={{ color: 'var(--color-primary)' }}>
+              All provinces →
+            </Link>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {others.map((o) => (
-              <Link key={o.slug} to={`/wedding-venues/${o.slug}`} className="card p-5 block hover:shadow-md transition-shadow">
-                <div className="text-2xl mb-2">{o.emoji}</div>
-                <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
-                  {o.name}
-                </h3>
-                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{o.tagline}</p>
+              <Link key={o.slug} to={`/wedding-venues/${o.slug}`} className="card p-0 block overflow-hidden hover:shadow-md transition-shadow">
+                {o.image && (
+                  <img
+                    src={o.image}
+                    alt={o.imageAlt}
+                    width="800"
+                    height="300"
+                    loading="lazy"
+                    className="w-full object-cover"
+                    style={{ aspectRatio: '8 / 3' }}
+                  />
+                )}
+                <div className="p-5">
+                  <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
+                    {o.name}
+                  </h3>
+                  <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{o.tagline}</p>
+                </div>
               </Link>
             ))}
             <Link to="/wedding-venues-guide" className="card p-5 block hover:shadow-md transition-shadow">
-              <div className="text-2xl mb-2">🗺️</div>
+              <div className="flex justify-center mb-2"><Icon name="map" size={26} style={{ color: 'var(--color-primary)' }} /></div>
               <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
                 National Venue Guide
               </h3>
@@ -288,7 +307,7 @@ export default function ProvinceVenues() {
         {/* CTA */}
         <section>
           <div className="card p-8 text-center" style={{ background: 'var(--color-surface)' }}>
-            <div className="text-3xl mb-3">💍</div>
+            <div className="flex justify-center mb-3"><Icon name="rings" size={32} style={{ color: 'var(--color-primary)' }} /></div>
             <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
               Planning a {p.shortName} Wedding?
             </h2>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import { useTheme } from '../context/ThemeContext'
 import { useAuth } from '../context/AuthContext'
 import ThemePreviewCard from '../components/ThemePreviewCard'
@@ -9,10 +10,46 @@ import FloralDivider from '../components/FloralDivider'
 import WeddingRingsIllustration from '../components/illustrations/WeddingRingsIllustration'
 
 export default function Settings() {
-  const { partners, setPartners, weddingDate, setWeddingDate, clearAllData } = useApp()
+  const {
+    partners, setPartners, weddingDate, setWeddingDate, clearAllData,
+    guests, budget, budgetTotal, checklist, ideas, venueShortlist, supplierShortlist,
+  } = useApp()
   const { themeId, applyTheme, themes } = useTheme()
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
+
+  // Download all planning data as a single JSON backup file. Lets couples keep a
+  // copy or move between devices, and is a safety net before "Clear All Data".
+  const exportData = () => {
+    let notebook = {}
+    try { notebook = JSON.parse(localStorage.getItem('hitchedsa_notebook')) || {} } catch {}
+    const backup = {
+      app: 'HitchedSA',
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      account: user?.email || null,
+      partners,
+      weddingDate,
+      budgetTotal,
+      guests,
+      budget,
+      checklist,
+      ideas,
+      venueShortlist,
+      supplierShortlist,
+      notebook,
+    }
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const stamp = new Date().toISOString().slice(0, 10)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `hitchedsa-backup-${stamp}.json`
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    URL.revokeObjectURL(url)
+  }
 
   const handleSignOut = async () => {
     await signOut()
@@ -100,8 +137,8 @@ export default function Settings() {
             />
           </div>
         </div>
-        <button className="btn-primary text-sm" onClick={saveNames}>
-          {savedNames ? '✓ Saved!' : 'Save Names'}
+        <button className="btn-primary text-sm inline-flex items-center gap-1.5" onClick={saveNames}>
+          {savedNames ? <><Icon name="check" size={16} /> Saved!</> : 'Save Names'}
         </button>
       </div>
 
@@ -126,8 +163,8 @@ export default function Settings() {
               onChange={(e) => setDateInput(e.target.value)}
             />
           </div>
-          <button className="btn-primary text-sm" onClick={saveDate}>
-            {savedDate ? '✓ Saved!' : 'Save Date'}
+          <button className="btn-primary text-sm inline-flex items-center gap-1.5" onClick={saveDate}>
+            {savedDate ? <><Icon name="check" size={16} /> Saved!</> : 'Save Date'}
           </button>
           {weddingDate && (
             <button className="btn-ghost text-sm" onClick={clearDate}>
@@ -135,6 +172,22 @@ export default function Settings() {
             </button>
           )}
         </div>
+      </div>
+
+      <FloralDivider />
+
+      {/* Backup */}
+      <div className="card p-5 mb-6">
+        <h2 className="font-display text-lg font-semibold mb-2" style={{ color: 'var(--color-accent)' }}>
+          Backup Your Plan
+        </h2>
+        <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
+          Download a copy of everything: guests, budget, checklist, ideas, shortlists, notebook,
+          partner names and date. Keep it safe or use it to move between devices.
+        </p>
+        <button className="btn-outline text-sm inline-flex items-center gap-1.5" onClick={exportData}>
+          <Icon name="download" size={16} /> Download My Plan (JSON)
+        </button>
       </div>
 
       <FloralDivider />
@@ -150,15 +203,15 @@ export default function Settings() {
         <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
           Clearing all data permanently removes your guests, budget, ideas, checklists, and settings from this device. This cannot be undone.
         </p>
-        <button className="btn-danger" onClick={() => setShowClearConfirm(true)}>
-          🗑️ Clear All Data
+        <button className="btn-danger inline-flex items-center gap-1.5" onClick={() => setShowClearConfirm(true)}>
+          <Icon name="trash" size={16} /> Clear All Data
         </button>
       </div>
 
       {/* Confirm Clear Modal */}
       <Modal open={showClearConfirm} onClose={() => setShowClearConfirm(false)} title="Clear All Data?">
         <div className="text-center">
-          <div className="text-3xl mb-4" style={{ color: 'var(--color-danger)', opacity: 0.7 }}>⚠</div>
+          <div className="flex justify-center mb-4"><Icon name="warning" size={32} style={{ color: 'var(--color-danger)', opacity: 0.7 }} /></div>
           <p className="text-sm mb-2" style={{ color: 'var(--color-text)' }}>
             This will permanently delete all your wedding planning data including:
           </p>

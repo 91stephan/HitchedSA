@@ -4,6 +4,9 @@ import { AuthProvider, useAuth } from './context/AuthContext'
 import { AppProvider, useApp } from './context/AppContext'
 import Navbar from './components/Navbar'
 import PublicLayout from './components/PublicLayout'
+import ScrollToTop from './components/ScrollToTop'
+import ErrorBoundary from './components/ErrorBoundary'
+import NotFound from './pages/NotFound'
 import Auth from './pages/Auth'
 import Welcome from './pages/Welcome'
 import Landing from './pages/Landing'
@@ -101,22 +104,26 @@ function AppRoutes() {
       <Route path="/notebook"  element={<ProtectedRoute><Notebook /></ProtectedRoute>} />
       <Route path="/settings"  element={<ProtectedRoute><Settings /></ProtectedRoute>} />
 
-      {/* ── Catch-all ────────────────────────────────────────────────────── */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      {/* ── Catch-all: real 404 page (not a redirect, so Google sees a proper
+             not-found and users get a way back in) ─────────────────────────── */}
+      <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
     </Routes>
   )
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <AppProvider>
-            <AppRoutes />
-          </AppProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ScrollToTop />
+        <ThemeProvider>
+          <AuthProvider>
+            <AppProvider>
+              <AppRoutes />
+            </AppProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }

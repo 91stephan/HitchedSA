@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import SupplierCard from '../components/SupplierCard'
 import SupplierIllustration from '../components/illustrations/SupplierIllustration'
+import Icon from '../components/Icon'
 import AdBanner from '../components/AdBanner'
 import FloralDivider from '../components/FloralDivider'
 import Modal from '../components/Modal'
@@ -9,14 +10,14 @@ import { useApp } from '../context/AppContext'
 import { runSearch, fetchSearchStatus, SEARCH_LIMIT } from '../lib/placesApi'
 
 const CATEGORIES = [
-  { id: 'photographers', label: 'Photographers',  icon: '📸', query: 'wedding photographer' },
-  { id: 'djs',           label: 'DJs',            icon: '🎵', query: 'wedding DJ entertainment' },
-  { id: 'florists',      label: 'Florists',       icon: '💐', query: 'wedding florist flowers' },
-  { id: 'caterers',      label: 'Caterers',       icon: '🍽️', query: 'wedding caterer catering' },
-  { id: 'makeup',        label: 'Makeup Artists', icon: '💄', query: 'wedding makeup artist bridal beauty' },
-  { id: 'cakes',         label: 'Wedding Cakes',  icon: '🎂', query: 'wedding cake bakery' },
-  { id: 'cars',          label: 'Car Hire',       icon: '🚗', query: 'wedding car hire limousine' },
-  { id: 'decor',         label: 'Décor Hire',     icon: '✨', query: 'wedding decor hire styling' },
+  { id: 'photographers', label: 'Photographers',  image: '/images/suppliers/photographers.jpg', query: 'wedding photographer' },
+  { id: 'djs',           label: 'DJs',            image: '/images/suppliers/djs.jpg',           query: 'wedding DJ entertainment' },
+  { id: 'florists',      label: 'Florists',       image: '/images/suppliers/florists.jpg',      query: 'wedding florist flowers' },
+  { id: 'caterers',      label: 'Caterers',       image: '/images/suppliers/caterers.jpg',      query: 'wedding caterer catering' },
+  { id: 'makeup',        label: 'Makeup Artists', image: '/images/suppliers/makeup.jpg',        query: 'wedding makeup artist bridal beauty' },
+  { id: 'cakes',         label: 'Wedding Cakes',  image: '/images/suppliers/cakes.jpg',         query: 'wedding cake bakery' },
+  { id: 'cars',          label: 'Car Hire',       image: '/images/suppliers/cars.jpg',          query: 'wedding car hire limousine' },
+  { id: 'decor',         label: 'Décor Hire',     image: '/images/suppliers/decor.jpg',         query: 'wedding decor hire styling' },
 ]
 
 const QUICK_CITIES = ['Cape Town', 'Johannesburg', 'Durban', 'Pretoria', 'Stellenbosch']
@@ -64,7 +65,7 @@ function ListingModal({ open, onClose }) {
     <Modal open={open} onClose={handleClose} title="List Your Business on HitchedSA" maxWidth="max-w-lg">
       {submitted ? (
         <div className="text-center py-6">
-          <div className="text-4xl mb-3">✅</div>
+          <div className="flex justify-center mb-3"><Icon name="checkCircle" size={40} style={{ color: 'var(--color-primary)' }} /></div>
           <h3 className="font-display text-lg font-semibold mb-2" style={{ color: 'var(--color-heading)' }}>
             Your email app should have opened!
           </h3>
@@ -200,11 +201,11 @@ export default function Suppliers() {
 
       {/* Main tabs */}
       <div className="flex gap-2 mb-6">
-        <button className={`tab-btn ${tab === 'search' ? 'active' : ''}`} onClick={() => setTab('search')}>
-          🔍 Search Suppliers
+        <button className={`tab-btn inline-flex items-center gap-1.5 ${tab === 'search' ? 'active' : ''}`} onClick={() => setTab('search')}>
+          <Icon name="search" size={16} /> Search Suppliers
         </button>
-        <button className={`tab-btn ${tab === 'shortlist' ? 'active' : ''}`} onClick={() => setTab('shortlist')}>
-          ♥ My Shortlist ({supplierShortlist.length})
+        <button className={`tab-btn inline-flex items-center gap-1.5 ${tab === 'shortlist' ? 'active' : ''}`} onClick={() => setTab('shortlist')}>
+          <Icon name="heart" size={16} filled /> My Shortlist ({supplierShortlist.length})
         </button>
       </div>
 
@@ -212,7 +213,7 @@ export default function Suppliers() {
         <div>
           {supplierShortlist.length === 0 ? (
             <div className="text-center py-16">
-              <div className="text-5xl mb-4">♡</div>
+              <div className="flex justify-center mb-4"><Icon name="heart" size={48} style={{ color: 'var(--color-primary)' }} /></div>
               <p className="font-display text-xl font-semibold mb-2" style={{ color: 'var(--color-heading)' }}>
                 No saved suppliers yet
               </p>
@@ -233,7 +234,7 @@ export default function Suppliers() {
                     <SupplierCard
                       key={supplier.id}
                       supplier={supplier}
-                      categoryIcon={cat?.icon || '⭐'}
+                      categoryImage={cat?.image || CATEGORIES[0].image}
                     />
                   )
                 })}
@@ -258,12 +259,13 @@ export default function Suppliers() {
                   onKeyDown={(e) => e.key === 'Enter' && doSearch()}
                 />
               </div>
-              <button className="btn-primary shrink-0" onClick={() => doSearch()} disabled={loading}>
-                {loading ? '⟳ Searching...' : '🔍 Search'}
+              <button className="btn-primary shrink-0 inline-flex items-center gap-1.5" onClick={() => doSearch()} disabled={loading}>
+                <Icon name="search" size={16} className={loading ? 'animate-spin' : ''} />
+                {loading ? 'Searching...' : 'Search'}
               </button>
             </div>
             {plan === 'pro' ? (
-              <p className="text-xs mt-2" style={{ color: 'var(--color-accent)' }}>✨ Pro: unlimited searches</p>
+              <p className="text-xs mt-2 inline-flex items-center gap-1" style={{ color: 'var(--color-accent)' }}><Icon name="sparkles" size={14} /> Pro: unlimited searches</p>
             ) : remaining !== null && (
               <p className="text-xs mt-2" style={{ color: remaining === 0 ? 'var(--color-danger)' : 'var(--color-text-muted)' }}>
                 {remaining} of {SEARCH_LIMIT} free searches left this week
@@ -297,9 +299,9 @@ export default function Suppliers() {
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
-                className={`tab-btn whitespace-nowrap flex items-center gap-1.5 ${activeCategory === cat.id ? 'active' : ''}`}
+                className={`tab-btn whitespace-nowrap flex items-center gap-2 ${activeCategory === cat.id ? 'active' : ''}`}
               >
-                <span>{cat.icon}</span>
+                <img src={cat.image} alt="" width="24" height="24" loading="lazy" className="w-6 h-6 rounded-full object-cover" />
                 <span>{cat.label}</span>
               </button>
             ))}
@@ -309,7 +311,7 @@ export default function Suppliers() {
             <div className="flex-1">
               {loading && (
                 <div className="text-center py-16">
-                  <p className="text-4xl mb-4 animate-spin inline-block">⟳</p>
+                  <div className="flex justify-center mb-4"><Icon name="search" size={40} className="animate-spin" style={{ color: 'var(--color-primary)' }} /></div>
                   <p className="text-sm mt-2" style={{ color: 'var(--color-text-muted)' }}>
                     Finding {category?.label?.toLowerCase()} near {location}...
                   </p>
@@ -327,7 +329,7 @@ export default function Suppliers() {
                         <SupplierCard
                           key={supplier.id}
                           supplier={supplier}
-                          categoryIcon={category?.icon}
+                          categoryImage={category?.image}
                         />
                       ))}
                     </div>
@@ -392,7 +394,7 @@ export default function Suppliers() {
                 className="card p-5"
                 style={{ background: 'linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light))', border: '1px solid var(--color-border)' }}
               >
-                <div className="text-2xl mb-2">🏢</div>
+                <div className="mb-2"><Icon name="building" size={26} style={{ color: 'var(--color-primary)' }} /></div>
                 <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
                   List Your Business
                 </h3>
@@ -400,15 +402,15 @@ export default function Suppliers() {
                   Reach thousands of engaged couples across South Africa.
                 </p>
                 <ul className="text-xs space-y-1 mb-4" style={{ color: 'var(--color-text-muted)' }}>
-                  <li>✓ Free to list</li>
-                  <li>✓ Direct enquiries to your phone/email</li>
-                  <li>✓ Verified supplier badge</li>
+                  <li className="flex items-center gap-1.5"><Icon name="check" size={14} style={{ color: 'var(--color-primary)' }} /> Free to list</li>
+                  <li className="flex items-center gap-1.5"><Icon name="check" size={14} style={{ color: 'var(--color-primary)' }} /> Direct enquiries to your phone/email</li>
+                  <li className="flex items-center gap-1.5"><Icon name="check" size={14} style={{ color: 'var(--color-primary)' }} /> Verified supplier badge</li>
                 </ul>
                 <button
                   className="btn-primary w-full text-sm"
                   onClick={() => setShowListingModal(true)}
                 >
-                  Get Listed →
+                  Get Listed
                 </button>
               </div>
             </aside>

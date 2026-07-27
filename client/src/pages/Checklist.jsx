@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
 import ChecklistIllustration from '../components/illustrations/ChecklistIllustration'
@@ -13,17 +14,17 @@ function getMonthsOut(weddingDate) {
 }
 
 const PHASE_GROUPS = {
-  early: { label: 'Early Planning', icon: '🌱', color: 'var(--color-success)' },
-  serious: { label: 'Getting Serious', icon: '📋', color: 'var(--color-accent)' },
-  final: { label: 'Final Stretch', icon: '🏃', color: 'var(--color-primary)' },
-  week: { label: 'Wedding Week', icon: '💍', color: 'var(--color-danger)' },
+  early: { label: 'Early Planning', icon: 'seedling', color: 'var(--color-success)' },
+  serious: { label: 'Getting Serious', icon: 'clipboard', color: 'var(--color-accent)' },
+  final: { label: 'Final Stretch', icon: 'flagFinish', color: 'var(--color-primary)' },
+  week: { label: 'Wedding Week', icon: 'rings', color: 'var(--color-danger)' },
 }
 
 const TIME_GROUPS = [
-  { key: '12', label: '12 Months Out', icon: '📅', phases: ['early'], months: [9, Infinity] },
-  { key: '6', label: '6 Months Out', icon: '📆', phases: ['serious'], months: [3, 9] },
-  { key: '3', label: '3 Months Out', icon: '🗓️', phases: ['final'], months: [1, 3] },
-  { key: '1', label: '1 Month Out', icon: '⏰', phases: ['week'], months: [0, 1] },
+  { key: '12', label: '12 Months Out', icon: 'calendar', phases: ['early'], months: [9, Infinity] },
+  { key: '6', label: '6 Months Out', icon: 'calendar', phases: ['serious'], months: [3, 9] },
+  { key: '3', label: '3 Months Out', icon: 'calendar', phases: ['final'], months: [1, 3] },
+  { key: '1', label: '1 Month Out', icon: 'hourglass', phases: ['week'], months: [0, 1] },
 ]
 
 function ChecklistItem({ task, onToggle, onUpdateNotes, onUpdateDueDate, onDelete }) {
@@ -57,8 +58,8 @@ function ChecklistItem({ task, onToggle, onUpdateNotes, onUpdateDueDate, onDelet
           {task.label}
         </span>
         {task.dueDate && (
-          <span className="text-xs shrink-0" style={{ color: 'var(--color-text-muted)' }}>
-            📅 {new Date(task.dueDate).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short' })}
+          <span className="text-xs shrink-0 inline-flex items-center gap-1" style={{ color: 'var(--color-text-muted)' }}>
+            <Icon name="calendar" size={12} /> {new Date(task.dueDate).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short' })}
           </span>
         )}
         <button
@@ -66,10 +67,10 @@ function ChecklistItem({ task, onToggle, onUpdateNotes, onUpdateDueDate, onDelet
           className="text-xs px-1.5 py-0.5 rounded"
           style={{ color: 'var(--color-text-muted)', background: 'var(--color-surface)' }}
         >
-          {expanded ? '▲' : '▼'}
+          <Icon name={expanded ? 'chevronUp' : 'chevronDown'} size={14} />
         </button>
         {task.custom && (
-          <button onClick={() => onDelete(task.id)} className="text-xs" style={{ color: 'var(--color-danger)' }}>✕</button>
+          <button onClick={() => onDelete(task.id)} className="text-xs" style={{ color: 'var(--color-danger)' }}><Icon name="close" size={14} /></button>
         )}
       </div>
 
@@ -193,7 +194,7 @@ export default function Checklist() {
                   className="font-display text-lg font-semibold flex items-center gap-2"
                   style={{ color: group.color || 'var(--color-text)' }}
                 >
-                  <span>{group.icon}</span>
+                  <Icon name={group.icon} size={16} />
                   <span>{group.label}</span>
                 </h2>
                 <span className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
@@ -240,7 +241,7 @@ export default function Checklist() {
             <label className="label">Planning Phase</label>
             <select className="input-field" value={newTaskPhase} onChange={(e) => setNewTaskPhase(e.target.value)}>
               {Object.entries(PHASE_GROUPS).map(([key, meta]) => (
-                <option key={key} value={key}>{meta.icon} {meta.label}</option>
+                <option key={key} value={key}>{meta.label}</option>
               ))}
             </select>
           </div>

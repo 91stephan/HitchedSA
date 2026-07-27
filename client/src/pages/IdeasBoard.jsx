@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useApp } from '../context/AppContext'
+import Icon from '../components/Icon'
 import IdeasIllustration from '../components/illustrations/IdeasIllustration'
 import Modal from '../components/Modal'
 import AdBanner from '../components/AdBanner'
@@ -89,7 +90,7 @@ function PexelsCard({ photo, onSave }) {
             style={{ background: 'var(--color-primary)', color: '#fff' }}
             title="Save to my board"
           >
-            ♡
+            <Icon name="heart" size={18} />
           </button>
         </div>
         <p className="text-xs text-white/80 drop-shadow-sm">
@@ -141,7 +142,7 @@ function BoardCard({ idea, onDelete, onEdit }) {
               className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center hover:scale-110 transition-transform text-sm"
               style={{ color: 'var(--color-text)' }}
               title="Edit"
-            >✏</button>
+            ><Icon name="edit" size={14} /></button>
             <a
               href={pinterestUrl}
               target="_blank"
@@ -157,16 +158,16 @@ function BoardCard({ idea, onDelete, onEdit }) {
               className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center hover:scale-110 transition-transform text-sm"
               style={{ color: 'var(--color-danger)' }}
               title="Delete"
-            >✕</button>
+            ><Icon name="close" size={14} /></button>
           </div>
         </div>
       ) : (
         <div className="h-32 flex items-center justify-center relative" style={{ background: 'var(--color-surface)' }}>
           <IdeasIllustration size={72} />
           <div className="absolute inset-0 flex items-center justify-center gap-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'rgba(0,0,0,0.25)' }}>
-            <button onClick={() => onEdit(idea)} className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-xs hover:scale-110 transition-transform" style={{ color: 'var(--color-text)' }}>✏</button>
+            <button onClick={() => onEdit(idea)} className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-xs hover:scale-110 transition-transform" style={{ color: 'var(--color-text)' }}><Icon name="edit" size={14} /></button>
             <a href={pinterestUrl} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center hover:scale-110 transition-transform" style={{ color: '#E60023' }}><PinterestIcon size={13} /></a>
-            <button onClick={() => onDelete(idea.id)} className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-xs hover:scale-110 transition-transform" style={{ color: 'var(--color-danger)' }}>✕</button>
+            <button onClick={() => onDelete(idea.id)} className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-xs hover:scale-110 transition-transform" style={{ color: 'var(--color-danger)' }}><Icon name="close" size={14} /></button>
           </div>
         </div>
       )}
@@ -399,7 +400,7 @@ function UploadModal({ open, onClose, onSave }) {
             <button
               onClick={() => setImageUrl('')}
               className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white text-xs flex items-center justify-center"
-            >✕</button>
+            ><Icon name="close" size={14} /></button>
           </div>
         ) : (
           <button
@@ -562,7 +563,7 @@ export default function IdeasBoard() {
       createdAt: new Date().toISOString(),
     }, ...prev])
     setSaveTarget(null)
-    showToast('Saved to your board 💍')
+    showToast('Saved to your board')
   }
 
   const handleUrlSave = ({ imageUrl, title, category, notes }) => {
@@ -573,7 +574,7 @@ export default function IdeasBoard() {
       createdAt: new Date().toISOString(),
     }, ...prev])
     setMainTab('board')
-    showToast('Saved to your board 💍')
+    showToast('Saved to your board')
   }
 
   const handleUploadSave = ({ imageUrl, title, category, notes }) => {
@@ -584,7 +585,7 @@ export default function IdeasBoard() {
       createdAt: new Date().toISOString(),
     }, ...prev])
     setMainTab('board')
-    showToast('Saved to your board 💍')
+    showToast('Saved to your board')
   }
 
   const handleDelete = (id) => setIdeas((prev) => prev.filter((i) => i.id !== id))
@@ -680,17 +681,17 @@ export default function IdeasBoard() {
             </span>
             <button
               type="button"
-              className="btn-primary text-sm px-4 py-2 shrink-0"
+              className="btn-primary text-sm px-4 py-2 shrink-0 inline-flex items-center gap-1.5"
               onClick={() => setShowUrlModal(true)}
             >
-              🔗 Paste Image URL
+              <Icon name="link" size={16} /> Paste Image URL
             </button>
             <button
               type="button"
-              className="btn-outline text-sm px-4 py-2 shrink-0"
+              className="btn-outline text-sm px-4 py-2 shrink-0 inline-flex items-center gap-1.5"
               onClick={() => setShowUploadModal(true)}
             >
-              📁 Upload Photo
+              <Icon name="upload" size={16} /> Upload Photo
             </button>
             <span className="text-xs hidden sm:block" style={{ color: 'var(--color-text-muted)' }}>
               Works with any direct image link (right-click → Copy image address)

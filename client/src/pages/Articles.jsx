@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
+import Icon from '../components/Icon'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCE_LIST } from '../content/provinces'
 import { ARTICLE_LIST } from '../content/articles'
@@ -7,7 +8,8 @@ import { ARTICLE_LIST } from '../content/articles'
 const GUIDES = [
   {
     to: '/wedding-guide',
-    emoji: '📋',
+    image: '/images/articles/best-wedding-season-south-africa.jpg',
+    imageAlt: 'Outdoor South African wedding ceremony setup',
     category: 'Planning',
     title: 'The Complete SA Wedding Planning Guide',
     desc: 'Every step from engagement to "I do": timelines, budgets, suppliers and SA-specific advice.',
@@ -15,7 +17,8 @@ const GUIDES = [
   },
   {
     to: '/wedding-venues-guide',
-    emoji: '🗺️',
+    image: '/images/venue-types/wine-farm.jpg',
+    imageAlt: 'Wine farm wedding venue in the Cape Winelands',
     category: 'Venues',
     title: 'South African Wedding Venues: The Complete Regional Guide',
     desc: 'Wine farms, bush lodges, beaches and heritage estates: every venue type and region compared.',
@@ -32,20 +35,30 @@ const SCHEMA = {
   publisher: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
 }
 
-function ArticleCard({ to, emoji, category, title, desc, read }) {
+function ArticleCard({ to, category, title, desc, read, image, imageAlt }) {
   return (
-    <Link to={to} className="card p-6 block hover:shadow-md transition-shadow">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-2xl">{emoji}</span>
-        <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--color-primary)' }}>
-          {category}
-        </span>
+    <Link to={to} className="card p-0 block overflow-hidden hover:shadow-md transition-shadow">
+      <img
+        src={image}
+        alt={imageAlt}
+        width="800"
+        height="360"
+        loading="lazy"
+        className="w-full object-cover"
+        style={{ aspectRatio: '20 / 9' }}
+      />
+      <div className="p-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--color-primary)' }}>
+            {category}
+          </span>
+        </div>
+        <h2 className="font-display font-semibold text-lg mb-2" style={{ color: 'var(--color-heading)' }}>
+          {title}
+        </h2>
+        <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)' }}>{desc}</p>
+        <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{read}</span>
       </div>
-      <h2 className="font-display font-semibold text-lg mb-2" style={{ color: 'var(--color-heading)' }}>
-        {title}
-      </h2>
-      <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)' }}>{desc}</p>
-      <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{read}</span>
     </Link>
   )
 }
@@ -94,7 +107,8 @@ export default function Articles() {
           <ArticleCard
             key={a.slug}
             to={`/articles/${a.slug}`}
-            emoji={a.emoji}
+            image={`/images/articles/${a.slug}.jpg`}
+            imageAlt={a.title}
             category={a.category}
             title={a.title}
             desc={a.excerpt}
@@ -113,7 +127,8 @@ export default function Articles() {
           <ArticleCard
             key={p.slug}
             to={`/wedding-venues/${p.slug}`}
-            emoji={p.emoji}
+            image={p.image}
+            imageAlt={p.imageAlt}
             category="Venues"
             title={`Wedding Venues in ${p.inName}`}
             desc={p.tagline}
@@ -128,7 +143,9 @@ export default function Articles() {
 
       {/* CTA */}
       <div className="card p-8 text-center" style={{ background: 'var(--color-surface)' }}>
-        <div className="text-3xl mb-3">💍</div>
+        <div className="flex justify-center mb-3">
+          <Icon name="rings" size={32} style={{ color: 'var(--color-primary)' }} />
+        </div>
         <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
           Ready to Start Planning?
         </h2>

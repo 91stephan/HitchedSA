@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import ShareButtons from '../components/ShareButtons'
 import { useMeta } from '../hooks/useMeta'
+import Icon from '../components/Icon'
 
 const SCHEMA = {
   '@context': 'https://schema.org',
@@ -369,7 +370,7 @@ export default function WeddingGuide() {
           </ul>
 
           <div className="card p-6 text-center" style={{ background: 'var(--color-surface)' }}>
-            <div className="text-3xl mb-3">💍</div>
+            <div className="flex justify-center mb-3"><Icon name="rings" size={32} style={{ color: 'var(--color-primary)' }} /></div>
             <h3 className="font-display text-lg font-semibold mb-2" style={{ color: 'var(--color-heading)' }}>
               Plan Your Wedding with HitchedSA
             </h3>

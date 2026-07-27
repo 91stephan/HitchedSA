@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import AdBanner from '../components/AdBanner'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCE_LIST } from '../content/provinces'
+import Icon from '../components/Icon'
 
 const SCHEMA = {
   '@context': 'https://schema.org',
@@ -74,7 +75,7 @@ export default function WeddingVenuesHub() {
       {/* National guide + planner CTA */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-12">
         <Link to="/wedding-venues-guide" className="card p-6 block hover:shadow-md transition-shadow">
-          <div className="text-3xl mb-3">🗺️</div>
+          <div className="flex justify-center mb-3"><Icon name="map" size={32} style={{ color: 'var(--color-primary)' }} /></div>
           <h2 className="font-display font-semibold text-lg mb-1" style={{ color: 'var(--color-heading)' }}>
             National Venue Guide
           </h2>
@@ -83,7 +84,7 @@ export default function WeddingVenuesHub() {
           </p>
         </Link>
         <div className="card p-6 text-center" style={{ background: 'var(--color-surface)' }}>
-          <div className="text-3xl mb-3">🔍</div>
+          <div className="flex justify-center mb-3"><Icon name="search" size={32} style={{ color: 'var(--color-primary)' }} /></div>
           <h2 className="font-display font-semibold text-lg mb-1" style={{ color: 'var(--color-heading)' }}>
             Search Real Venues
           </h2>

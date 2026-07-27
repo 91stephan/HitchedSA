@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useMeta } from '../hooks/useMeta'
+import Icon from '../components/Icon'
 
 export default function About() {
   useMeta({
@@ -36,17 +37,17 @@ export default function About() {
         <section className="card">
           <h2 className="font-display text-xl font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>What's Included</h2>
           <ul className="text-sm space-y-2" style={{ color: 'var(--color-text-muted)' }}>
-            <li>✅ Interactive wedding checklist with 50+ tasks grouped by timeline</li>
-            <li>✅ Budget tracker with category breakdown and over-budget alerts</li>
-            <li>✅ Guest list manager with RSVP tracking and dietary requirements</li>
-            <li>✅ Venue search powered by Google Maps across all South African provinces</li>
-            <li>✅ Supplier directory: photographers, DJs, florists, caterers and more</li>
-            <li>✅ Ideas and mood board for saving inspiration</li>
-            <li>✅ Seating planner with drag-and-drop table layout</li>
-            <li>✅ Countdown clock to your wedding day</li>
-            <li>✅ Live weather forecast for your venue location</li>
-            <li>✅ Cloud sync across all devices</li>
-            <li>✅ Multiple colour themes to match your wedding style</li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Interactive wedding checklist with 50+ tasks grouped by timeline</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Budget tracker with category breakdown and over-budget alerts</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Guest list manager with RSVP tracking and dietary requirements</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Venue search powered by Google Maps across all South African provinces</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Supplier directory: photographers, DJs, florists, caterers and more</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Ideas and mood board for saving inspiration</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Seating planner with drag-and-drop table layout</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Countdown clock to your wedding day</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Live weather forecast for your venue location</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Cloud sync across all devices</span></li>
+            <li className="flex items-start gap-2"><Icon name="check" size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} /> <span>Multiple colour themes to match your wedding style</span></li>
           </ul>
         </section>
 
