@@ -44,15 +44,27 @@ export default function WeddingVenuesHub() {
       {/* Province guides */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
         {PROVINCE_LIST.map((p) => (
-          <Link key={p.slug} to={`/wedding-venues/${p.slug}`} className="card p-6 block hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-3">{p.emoji}</div>
-            <h2 className="font-display font-semibold text-lg mb-1" style={{ color: 'var(--color-heading)' }}>
-              {p.name}
-            </h2>
-            <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>{p.tagline}</p>
-            <span className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>
-              Read the guide →
-            </span>
+          <Link key={p.slug} to={`/wedding-venues/${p.slug}`} className="card p-0 block overflow-hidden hover:shadow-md transition-shadow">
+            {p.image && (
+              <img
+                src={p.image}
+                alt={p.imageAlt}
+                width="800"
+                height="360"
+                loading="lazy"
+                className="w-full object-cover"
+                style={{ aspectRatio: '20 / 9' }}
+              />
+            )}
+            <div className="p-6">
+              <h2 className="font-display font-semibold text-lg mb-1" style={{ color: 'var(--color-heading)' }}>
+                {p.name}
+              </h2>
+              <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>{p.tagline}</p>
+              <span className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>
+                Read the guide →
+              </span>
+            </div>
           </Link>
         ))}
       </div>
