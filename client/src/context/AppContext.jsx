@@ -336,6 +336,7 @@ export function AppProvider({ children }) {
   const pendingCount     = guests.filter((g) => g.rsvp === 'pending').length
   const declinedCount    = guests.filter((g) => g.rsvp === 'declined').length
   const totalSpent       = budget.reduce((sum, cat) => sum + (Number(cat.spent) || 0), 0)
+  const totalAllocated   = budget.reduce((sum, cat) => sum + (Number(cat.allocated) || 0), 0)
   const budgetProgress   = budgetTotal > 0 ? Math.min((totalSpent / budgetTotal) * 100, 100) : 0
   const checklistDone    = checklist.filter((t) => t.done).length
   const checklistProgress= checklist.length > 0 ? Math.round((checklistDone / checklist.length) * 100) : 0
@@ -356,7 +357,7 @@ export function AppProvider({ children }) {
       venueLocation,     setVenueLocation,
       clearAllData,
       guestCount, confirmedCount, pendingCount, declinedCount,
-      totalSpent, budgetProgress,
+      totalSpent, totalAllocated, budgetProgress,
       checklistDone, checklistProgress, checklistTotal: checklist.length,
     }}>
       {children}

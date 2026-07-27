@@ -3,10 +3,26 @@ import { useApp } from '../context/AppContext'
 import AdBanner from '../components/AdBanner'
 
 const LS_KEY = 'hitchedsa_notebook'
+const LS_FONT = 'hitchedsa_notebook_font'
 const PAGES = ['Notes', 'To-Do', 'Inspiration', 'Questions']
+
+// Ruled-line height. The text line-height matches this so writing sits
+// in the gap above each rule, not on top of it.
+const LINE_H = 34
+
+const FONTS = [
+  { id: 'serif', label: 'Classic Serif', stack: '"Georgia", "Times New Roman", serif' },
+  { id: 'hand',  label: 'Handwriting',   stack: '"Segoe Script", "Bradley Hand", "Comic Sans MS", cursive' },
+  { id: 'sans',  label: 'Modern Sans',   stack: 'system-ui, "Segoe UI", Roboto, sans-serif' },
+  { id: 'mono',  label: 'Typewriter',    stack: '"Courier New", Courier, monospace' },
+]
 
 function loadPages() {
   try { return JSON.parse(localStorage.getItem(LS_KEY)) || {} } catch { return {} }
+}
+
+function loadFont() {
+  try { return localStorage.getItem(LS_FONT) || 'serif' } catch { return 'serif' }
 }
 
 export default function Notebook() {
@@ -14,7 +30,15 @@ export default function Notebook() {
   const [activePage, setActivePage] = useState(0)
   const [pages, setPages] = useState(loadPages)
   const [saved, setSaved] = useState(true)
+  const [fontId, setFontId] = useState(loadFont)
   const saveTimer = useRef(null)
+
+  const fontStack = (FONTS.find((f) => f.id === fontId) || FONTS[0]).stack
+
+  const changeFont = (id) => {
+    setFontId(id)
+    try { localStorage.setItem(LS_FONT, id) } catch {}
+  }
 
   const coupleLabel =
     partners.partner1 && partners.partner2
@@ -84,22 +108,23 @@ export default function Notebook() {
           ))}
         </div>
 
-        {/* Lined paper writing area */}
+        {/* Font picker row */}
         <div
-          style={{
-            background: 'var(--color-card-bg)',
-            backgroundImage: `
-              linear-gradient(90deg, transparent 56px, rgba(230,179,179,0.35) 56px, rgba(230,179,179,0.35) 58px, transparent 58px),
-              repeating-linear-gradient(
-                transparent,
-                transparent 30px,
-                var(--color-border) 30px,
-                var(--color-border) 31px
-              )
-            `,
-            backgroundPositionY: '20px',
-          }}
+          className="flex items-center justify-end gap-2 px-4 py-2 border-b"
+          style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
         >
+          <label className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>Font</label>
+          <select
+            className="input-field text-xs py-1 w-auto"
+            value={fontId}
+            onChange={(e) => changeFont(e.target.value)}
+          >
+            {FONTS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
+          </select>
+        </div>
+
+        {/* Writing area */}
+        <div style={{ background: 'var(--color-card-bg)' }}>
           {/* Page section header */}
           <div
             className="flex items-center gap-3 px-6 pt-5 pb-2 border-b"
@@ -113,20 +138,31 @@ export default function Notebook() {
             </span>
           </div>
 
-          {/* Text area - lined */}
+          {/* Text area - lined. Rules live on the textarea so they always
+              line up with the text; writing rests in the gap above each rule. */}
           <textarea
             className="w-full focus:outline-none resize-none"
             style={{
               background: 'transparent',
+              backgroundImage: `
+                linear-gradient(90deg, transparent 55px, rgba(230,179,179,0.4) 55px, rgba(230,179,179,0.4) 57px, transparent 57px),
+                repeating-linear-gradient(
+                  transparent 0,
+                  transparent ${LINE_H - 1}px,
+                  var(--color-border) ${LINE_H - 1}px,
+                  var(--color-border) ${LINE_H}px
+                )
+              `,
+              backgroundPositionY: '12px',
               color: 'var(--color-text)',
-              lineHeight: '31px',
-              paddingTop: '7px',
+              lineHeight: `${LINE_H}px`,
+              paddingTop: '12px',
               paddingLeft: '70px',
               paddingRight: '32px',
               paddingBottom: '24px',
-              minHeight: '520px',
-              fontFamily: '"Georgia", "Times New Roman", serif',
-              fontSize: '14.5px',
+              minHeight: '510px',
+              fontFamily: fontStack,
+              fontSize: '15px',
               caretColor: 'var(--color-primary)',
             }}
             placeholder={`Start writing your ${PAGES[activePage].toLowerCase()} here…`}

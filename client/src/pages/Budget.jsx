@@ -10,7 +10,7 @@ const CATEGORY_ICONS = {
 }
 
 export default function Budget() {
-  const { budget, setBudget, budgetTotal, setBudgetTotal, totalSpent, budgetProgress } = useApp()
+  const { budget, setBudget, budgetTotal, setBudgetTotal, totalSpent, totalAllocated, budgetProgress } = useApp()
   const [totalInput, setTotalInput] = useState(String(budgetTotal))
   const [editingTotal, setEditingTotal] = useState(false)
 
@@ -61,6 +61,26 @@ export default function Budget() {
               </span>
               <button className="btn-outline text-sm" onClick={() => setEditingTotal(true)}>Edit</button>
             </div>
+          )}
+        </div>
+
+        {/* Allocated vs total quick reference */}
+        <div className="flex items-center justify-between flex-wrap gap-2 mb-4 text-sm">
+          <span style={{ color: 'var(--color-text-muted)' }}>
+            Allocated across categories:{' '}
+            <strong style={{ color: totalAllocated > budgetTotal ? 'var(--color-danger)' : 'var(--color-accent)' }}>
+              R{totalAllocated.toLocaleString('en-ZA')}
+            </strong>{' '}
+            of R{budgetTotal.toLocaleString('en-ZA')} total
+            {totalAllocated > budgetTotal && ' (over allocated)'}
+          </span>
+          {totalAllocated !== budgetTotal && totalAllocated > 0 && (
+            <button
+              className="btn-outline text-xs px-3 py-1"
+              onClick={() => { setBudgetTotal(totalAllocated); setTotalInput(String(totalAllocated)) }}
+            >
+              Set total budget to R{totalAllocated.toLocaleString('en-ZA')}
+            </button>
           )}
         </div>
 

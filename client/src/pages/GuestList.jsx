@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { useApp } from '../context/AppContext'
 import GuestIllustration from '../components/illustrations/GuestIllustration'
 import AdBanner from '../components/AdBanner'
+import Modal from '../components/Modal'
 
 const RSVP_OPTIONS = ['pending', 'confirmed', 'declined']
 const RSVP_STYLES = {
@@ -21,6 +22,35 @@ const SORT_OPTIONS = [
 ]
 
 const EMPTY_FORM = { name: '', email: '', phone: '', rsvp: 'pending', dietary: 'None', table: '', ageGroup: 'adult' }
+
+// Parse pasted or uploaded rows into guest objects. Column order matches the
+// CSV export: Name, Email, Phone, RSVP, Dietary, Table, Age Group. Only Name is
+// required; a single-column line is treated as just a name.
+function parseGuests(text) {
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean)
+  if (!lines.length) return []
+  const first = lines[0].toLowerCase()
+  const hasHeader = first.includes('name') && (first.includes('email') || first.includes('phone') || first.includes('rsvp') || first.includes('table'))
+  const out = []
+  for (let i = hasHeader ? 1 : 0; i < lines.length; i++) {
+    const cols = lines[i].split(',').map((c) => c.replace(/^"|"$/g, '').trim())
+    const name = cols[0]
+    if (!name) continue
+    const rsvpRaw = (cols[3] || '').toLowerCase()
+    const rsvp = ['confirmed', 'declined', 'pending'].find((r) => rsvpRaw.includes(r)) || 'pending'
+    const ageGroup = (cols[6] || '').toLowerCase().includes('child') ? 'child' : 'adult'
+    out.push({
+      name,
+      email:   cols[1] || '',
+      phone:   cols[2] || '',
+      rsvp,
+      dietary: cols[4] || 'None',
+      table:   cols[5] || '',
+      ageGroup,
+    })
+  }
+  return out
+}
 
 function exportCSV(guests) {
   const headers = ['Name', 'Email', 'Phone', 'RSVP', 'Dietary', 'Table', 'Age Group']
@@ -44,7 +74,32 @@ export default function GuestList() {
   const [filterRsvp, setFilterRsvp] = useState('all')
   const [selectedIds, setSelectedIds] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const [showImport, setShowImport] = useState(false)
+  const [importText, setImportText] = useState('')
+  const [importFileName, setImportFileName] = useState('')
   const formRef = useRef(null)
+
+  const parsedImport = parseGuests(importText)
+
+  const handleImportFile = (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setImportFileName(file.name)
+    const reader = new FileReader()
+    reader.onload = () => setImportText(String(reader.result || ''))
+    reader.readAsText(file)
+  }
+
+  const doImport = () => {
+    if (!parsedImport.length) return
+    const ts = Date.now()
+    setGuests((prev) => [...prev, ...parsedImport.map((g, i) => ({ ...g, id: `guest_${ts}_${i}` }))])
+    setImportText('')
+    setImportFileName('')
+    setShowImport(false)
+  }
+
+  const closeImport = () => { setImportText(''); setImportFileName(''); setShowImport(false) }
 
   const adultsCount   = guests.filter((g) => g.ageGroup !== 'child').length
   const childrenCount = guests.filter((g) => g.ageGroup === 'child').length
@@ -104,9 +159,14 @@ export default function GuestList() {
           <h1 className="section-title">Guest List</h1>
           <p className="section-subtitle">Manage your wedding guests and RSVPs</p>
         </div>
-        <button className="btn-primary text-sm shrink-0" onClick={() => { setShowForm((s) => !s); setEditId(null); setForm(EMPTY_FORM) }}>
-          {showForm && !editId ? '✕ Close' : '+ Add Guest'}
-        </button>
+        <div className="flex gap-2 shrink-0">
+          <button className="btn-outline text-sm" onClick={() => setShowImport(true)}>
+            📥 Import
+          </button>
+          <button className="btn-primary text-sm" onClick={() => { setShowForm((s) => !s); setEditId(null); setForm(EMPTY_FORM) }}>
+            {showForm && !editId ? '✕ Close' : '+ Add Guest'}
+          </button>
+        </div>
       </div>
 
       {/* Summary Bar */}
@@ -309,6 +369,63 @@ export default function GuestList() {
           </table>
         </div>
       )}
+
+      {/* Import Guests Modal */}
+      <Modal open={showImport} onClose={closeImport} title="Import Guests" maxWidth="max-w-lg">
+        <div className="space-y-4">
+          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+            Add many guests at once. Upload a CSV file or paste rows below, one guest per line.
+          </p>
+
+          <div
+            className="text-xs p-3 rounded-lg"
+            style={{ background: 'var(--color-surface)', color: 'var(--color-text-muted)' }}
+          >
+            <p className="font-semibold mb-1" style={{ color: 'var(--color-text)' }}>Format (only the name is required):</p>
+            <code style={{ color: 'var(--color-text)' }}>Name, Email, Phone, RSVP, Dietary, Table, Age Group</code>
+            <p className="mt-2">Example:</p>
+            <code style={{ color: 'var(--color-text)' }}>Nandi Dlamini, nandi@mail.com, 082 123 4567, confirmed, Vegetarian, 5, adult</code>
+            <p className="mt-2">A file exported from HitchedSA works as-is. RSVP accepts pending, confirmed or declined. Age Group accepts adult or child.</p>
+          </div>
+
+          <div>
+            <label className="label">Upload CSV file</label>
+            <input
+              type="file"
+              accept=".csv,text/csv,text/plain"
+              onChange={handleImportFile}
+              className="text-sm w-full"
+              style={{ color: 'var(--color-text-muted)' }}
+            />
+            {importFileName && (
+              <p className="text-xs mt-1" style={{ color: 'var(--color-success)' }}>Loaded: {importFileName}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label">Or paste rows</label>
+            <textarea
+              className="input-field text-sm"
+              rows={6}
+              placeholder={'Nandi Dlamini, nandi@mail.com, 082 123 4567, confirmed\nSipho Khumalo\nAisha Patel, aisha@mail.com, , pending, Halal, 3, adult'}
+              value={importText}
+              onChange={(e) => { setImportText(e.target.value); setImportFileName('') }}
+            />
+          </div>
+
+          <div className="flex items-center gap-3 pt-1">
+            <span className="text-sm mr-auto" style={{ color: parsedImport.length ? 'var(--color-success)' : 'var(--color-text-muted)' }}>
+              {parsedImport.length > 0
+                ? `${parsedImport.length} guest${parsedImport.length !== 1 ? 's' : ''} ready to import`
+                : 'No valid rows yet'}
+            </span>
+            <button className="btn-outline" onClick={closeImport}>Cancel</button>
+            <button className="btn-primary" onClick={doImport} disabled={!parsedImport.length}>
+              Import {parsedImport.length || ''}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }

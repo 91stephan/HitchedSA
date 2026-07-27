@@ -152,11 +152,11 @@ function WeatherWidget({ venueLocation, weddingDate }) {
   )
 }
 
-function QuickStatCard({ illustration, label, value, sub, to }) {
+function QuickStatCard({ illustration, label, value, sub, to, valueColor }) {
   const content = (
     <div className="stat-card group cursor-pointer">
       <div className="mb-1">{illustration}</div>
-      <div className="font-display text-3xl font-bold" style={{ color: 'var(--color-heading)' }}>{value}</div>
+      <div className="font-display text-3xl font-bold" style={{ color: valueColor || 'var(--color-heading)' }}>{value}</div>
       <div className="text-sm font-semibold mt-0.5" style={{ color: 'var(--color-heading)', opacity: 0.75 }}>{label}</div>
       {sub && <div className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>{sub}</div>}
     </div>
@@ -209,6 +209,8 @@ export default function Dashboard() {
 
   const budgetUsedFormatted = `R${totalSpent.toLocaleString('en-ZA')}`
   const budgetTotalFormatted = `R${budgetTotal.toLocaleString('en-ZA')}`
+  const isOverBudget = totalSpent > budgetTotal
+  const overBy = totalSpent - budgetTotal
 
   return (
     <div>
@@ -262,7 +264,7 @@ export default function Dashboard() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           <QuickStatCard illustration={<GuestIllustration size={36} />} label="Guests" value={guestCount} sub={`${confirmedCount} confirmed`} to="/guests" />
-          <QuickStatCard illustration={<BudgetIllustration size={36} />} label="Budget Used" value={budgetUsedFormatted} sub={`of ${budgetTotalFormatted}`} to="/budget" />
+          <QuickStatCard illustration={<BudgetIllustration size={36} />} label="Budget Used" value={budgetUsedFormatted} sub={isOverBudget ? `R${overBy.toLocaleString('en-ZA')} over budget` : `of ${budgetTotalFormatted}`} to="/budget" valueColor={isOverBudget ? 'var(--color-danger)' : undefined} />
           <QuickStatCard illustration={<ChecklistIllustration size={36} />} label="Checklist" value={`${checklistProgress}%`} sub={`${checklistDone} of ${checklistTotal} done`} to="/checklist" />
           <QuickStatCard illustration={<VenueIllustration size={36} />} label="Venue" value={weddingDate ? '✓' : '–'} sub={weddingDate ? 'Booked' : 'Not set'} to="/venues" />
         </div>
@@ -278,10 +280,15 @@ export default function Dashboard() {
             <Link to="/budget" className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>View Details →</Link>
           </div>
           <div className="progress-bar-track mb-3">
-            <div className="progress-bar-fill" style={{ width: `${budgetProgress}%` }} />
+            <div
+              className="progress-bar-fill"
+              style={{ width: `${budgetProgress}%`, ...(isOverBudget ? { background: 'var(--color-danger)' } : {}) }}
+            />
           </div>
           <div className="flex justify-between text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            <span>{budgetUsedFormatted} spent</span>
+            <span style={isOverBudget ? { color: 'var(--color-danger)', fontWeight: 600 } : undefined}>
+              {budgetUsedFormatted} spent{isOverBudget ? ' (over budget)' : ''}
+            </span>
             <span>{budgetTotalFormatted} total budget</span>
           </div>
         </div>
