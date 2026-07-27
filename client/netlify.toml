@@ -1,0 +1,6 @@
+# Netlify config for HitchedSA. The site's Base directory is "client", so this
+# file lives in client/ and is read from there. Build settings stay in the
+# Netlify dashboard; this only declares the serverless functions directory.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

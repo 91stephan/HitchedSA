@@ -4,9 +4,9 @@ import VenueCard from '../components/VenueCard'
 import VenueIllustration from '../components/illustrations/VenueIllustration'
 import AdBanner from '../components/AdBanner'
 import Modal from '../components/Modal'
+import UpgradeModal from '../components/UpgradeModal'
 import Celebration from '../components/Celebration'
-
-const PLACES_KEY = import.meta.env.VITE_GOOGLE_MAPS_KEY
+import { runSearch, fetchSearchStatus, SEARCH_LIMIT } from '../lib/placesApi'
 
 const QUICK_LOCATIONS = [
   'Cape Town', 'Stellenbosch', 'Franschhoek', 'Johannesburg',
@@ -27,14 +27,13 @@ function lsLoad(key, fallback) {
 }
 
 function mapPlace(place) {
-  const photo = place.photos?.[0]?.name
   const priceLevelMap = ['', 'R–RR', 'RR–RRR', 'RRR–RRRR', 'RRRR+']
   return {
     id: place.id,
     name: place.displayName?.text || 'Unknown Venue',
     location: place.formattedAddress || '',
     description: place.editorialSummary?.text || 'Contact for more information about this venue.',
-    image: photo ? `https://places.googleapis.com/v1/${photo}/media?maxWidthPx=800&key=${PLACES_KEY}` : null,
+    image: place.photoUri || null,
     rating: typeof place.rating === 'number' ? place.rating : 0,
     priceRange: priceLevelMap[place.priceLevel] || 'Contact for pricing',
     capacity: 0,
@@ -44,22 +43,6 @@ function mapPlace(place) {
     contact: place.nationalPhoneNumber || '',
     website: place.websiteUri || '',
   }
-}
-
-async function searchPlaces(keywords, location) {
-  const q = `wedding venue${keywords ? ' ' + keywords : ''} ${location} South Africa`
-  const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Goog-Api-Key': PLACES_KEY,
-      'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.rating,places.photos,places.editorialSummary,places.nationalPhoneNumber,places.priceLevel,places.websiteUri',
-    },
-    body: JSON.stringify({ textQuery: q, maxResultCount: 20 }),
-  })
-  if (!res.ok) throw new Error(`Search failed (${res.status})`)
-  const data = await res.json()
-  return (data.places || []).map(mapPlace)
 }
 
 export default function VenueSearch() {
@@ -79,6 +62,9 @@ export default function VenueSearch() {
   const [showCelebration, setShowCelebration] = useState(false)
   const [shortlistNotes,   setShortlistNotes]   = useState(() => lsLoad(LS_NOTES, {}))
   const [shortlistRatings, setShortlistRatings] = useState(() => lsLoad(LS_RATINGS, {}))
+  const [plan, setPlan] = useState('free')
+  const [remaining, setRemaining] = useState(null)
+  const [showUpgrade, setShowUpgrade] = useState(false)
 
   useEffect(() => {
     try { localStorage.setItem(LS_NOTES, JSON.stringify(shortlistNotes)) } catch {}
@@ -88,18 +74,30 @@ export default function VenueSearch() {
     try { localStorage.setItem(LS_RATINGS, JSON.stringify(shortlistRatings)) } catch {}
   }, [shortlistRatings])
 
+  useEffect(() => {
+    let active = true
+    fetchSearchStatus()
+      .then((s) => { if (active) { setPlan(s.plan); setRemaining(s.remaining) } })
+      .catch(() => {})
+    return () => { active = false }
+  }, [])
+
   const doSearch = async (overrideLocation) => {
     const loc = (overrideLocation ?? location).trim()
     if (!loc) { setError('Please enter a location to search'); return }
     setLoading(true)
     setError('')
     try {
-      const venues = await searchPlaces(keywords, loc)
-      setResults(venues)
+      const textQuery = `wedding venue${keywords ? ' ' + keywords : ''} ${loc} South Africa`
+      const data = await runSearch('venue', textQuery)
+      setResults((data.results || []).map(mapPlace))
       setSearched(true)
+      setPlan(data.plan)
+      setRemaining(data.remaining)
       if (overrideLocation !== undefined) setLocation(overrideLocation)
     } catch (e) {
-      setError(e.message)
+      if (e.code === 'limit') { setShowUpgrade(true); setRemaining(0) }
+      else setError(e.message)
     } finally {
       setLoading(false)
     }
@@ -134,6 +132,8 @@ export default function VenueSearch() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 animate-fade-in">
       <Celebration show={showCelebration} onDone={() => setShowCelebration(false)} />
+
+      <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
       <h1 className="section-title">Venue Search</h1>
       <p className="section-subtitle">Find the perfect South African wedding venue</p>
@@ -206,6 +206,20 @@ export default function VenueSearch() {
                 <button className="btn-primary w-full" onClick={() => doSearch()} disabled={loading}>
                   {loading ? '⟳ Searching...' : '🔍 Search'}
                 </button>
+
+                {plan === 'pro' ? (
+                  <p className="text-xs text-center" style={{ color: 'var(--color-accent)' }}>
+                    ✨ Pro: unlimited searches
+                  </p>
+                ) : remaining !== null && (
+                  <p className="text-xs text-center" style={{ color: remaining === 0 ? 'var(--color-danger)' : 'var(--color-text-muted)' }}>
+                    {remaining} of {SEARCH_LIMIT} free searches left this week
+                    {remaining === 0 && (
+                      <> · <button className="underline" style={{ color: 'var(--color-primary)' }} onClick={() => setShowUpgrade(true)}>Upgrade</button></>
+                    )}
+                  </p>
+                )}
+
                 {searched && !loading && (
                   <button
                     className="btn-outline w-full text-sm"
