@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SupplierCard from '../components/SupplierCard'
 import SupplierIllustration from '../components/illustrations/SupplierIllustration'
 import AdBanner from '../components/AdBanner'
 import FloralDivider from '../components/FloralDivider'
 import Modal from '../components/Modal'
+import UpgradeModal from '../components/UpgradeModal'
 import { useApp } from '../context/AppContext'
-
-const PLACES_KEY = import.meta.env.VITE_GOOGLE_MAPS_KEY
+import { runSearch, fetchSearchStatus, SEARCH_LIMIT } from '../lib/placesApi'
 
 const CATEGORIES = [
   { id: 'photographers', label: 'Photographers',  icon: '📸', query: 'wedding photographer' },
@@ -44,21 +44,6 @@ function mapPlaceToSupplier(place) {
   }
 }
 
-async function searchSuppliers(query, location) {
-  const textQuery = `${query} ${location} South Africa`
-  const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Goog-Api-Key': PLACES_KEY,
-      'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.rating,places.editorialSummary,places.nationalPhoneNumber,places.priceLevel',
-    },
-    body: JSON.stringify({ textQuery, maxResultCount: 20 }),
-  })
-  if (!res.ok) throw new Error(`Search failed (${res.status})`)
-  const data = await res.json()
-  return (data.places || []).map(mapPlaceToSupplier)
-}
 
 function ListingModal({ open, onClose }) {
   const [form, setForm] = useState(EMPTY_LISTING)
@@ -159,8 +144,19 @@ export default function Suppliers() {
   const [error, setError] = useState('')
   const [searched, setSearched] = useState(false)
   const [showListingModal, setShowListingModal] = useState(false)
+  const [plan, setPlan] = useState('free')
+  const [remaining, setRemaining] = useState(null)
+  const [showUpgrade, setShowUpgrade] = useState(false)
 
   const category = CATEGORIES.find((c) => c.id === activeCategory)
+
+  useEffect(() => {
+    let active = true
+    fetchSearchStatus()
+      .then((s) => { if (active) { setPlan(s.plan); setRemaining(s.remaining) } })
+      .catch(() => {})
+    return () => { active = false }
+  }, [])
 
   const doSearch = async (overrideLocation, overrideCat) => {
     const loc = (overrideLocation ?? location).trim()
@@ -169,31 +165,35 @@ export default function Suppliers() {
     setLoading(true)
     setError('')
     try {
-      const suppliers = await searchSuppliers(cat.query, loc)
-      setResults(suppliers)
+      const textQuery = `${cat.query} ${loc} South Africa`
+      const data = await runSearch('supplier', textQuery)
+      setResults((data.results || []).map(mapPlaceToSupplier))
       setSearched(true)
+      setPlan(data.plan)
+      setRemaining(data.remaining)
       if (overrideLocation !== undefined) setLocation(overrideLocation)
     } catch (e) {
-      setError(e.message)
+      if (e.code === 'limit') { setShowUpgrade(true); setRemaining(0) }
+      else setError(e.message)
     } finally {
       setLoading(false)
     }
   }
 
+  // Switching category only changes the active tab. It no longer fires a search
+  // automatically, so a free user does not burn their weekly quota by browsing
+  // categories. They pick a category, then click Search.
   const handleCategoryChange = (catId) => {
     setActiveCategory(catId)
     setResults([])
     setSearched(false)
     setError('')
-    if (location.trim()) {
-      const cat = CATEGORIES.find((c) => c.id === catId)
-      doSearch(location.trim(), cat)
-    }
   }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 animate-fade-in">
       <ListingModal open={showListingModal} onClose={() => setShowListingModal(false)} />
+      <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
       <h1 className="section-title">Suppliers</h1>
       <p className="section-subtitle">Discover South Africa's finest wedding suppliers</p>
@@ -262,6 +262,16 @@ export default function Suppliers() {
                 {loading ? '⟳ Searching...' : '🔍 Search'}
               </button>
             </div>
+            {plan === 'pro' ? (
+              <p className="text-xs mt-2" style={{ color: 'var(--color-accent)' }}>✨ Pro: unlimited searches</p>
+            ) : remaining !== null && (
+              <p className="text-xs mt-2" style={{ color: remaining === 0 ? 'var(--color-danger)' : 'var(--color-text-muted)' }}>
+                {remaining} of {SEARCH_LIMIT} free searches left this week
+                {remaining === 0 && (
+                  <> · <button className="underline" style={{ color: 'var(--color-primary)' }} onClick={() => setShowUpgrade(true)}>Upgrade</button></>
+                )}
+              </p>
+            )}
             <div className="flex flex-wrap gap-2 mt-3">
               {QUICK_CITIES.map((city) => (
                 <button
