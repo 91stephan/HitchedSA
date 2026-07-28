@@ -19,6 +19,7 @@ import Articles from './pages/Articles'
 import ArticlePage from './pages/ArticlePage'
 import WeddingVenuesHub from './pages/WeddingVenuesHub'
 import ProvinceVenues from './pages/ProvinceVenues'
+import Demo from './pages/Demo'
 import { PROVINCE_LIST } from './content/provinces'
 import { ARTICLE_LIST } from './content/articles'
 
@@ -72,6 +73,12 @@ export const ROUTES = [
     description:
       'Find your wedding venue by province: in-depth guides to all nine South African provinces with featured venues, areas, real price ranges, best seasons and local booking tips.',
   },
+  {
+    path: '/demo',
+    title: 'See the Wedding Planner in Action | HitchedSA',
+    description:
+      'Take a look inside the free HitchedSA wedding planner: dashboard, guest list, budget tracker, checklist, seating planner and mood board, all shown with a sample wedding.',
+  },
   ...PROVINCE_LIST.map((p) => ({
     path: `/wedding-venues/${p.slug}`,
     title: `${p.metaTitle} | HitchedSA`,
@@ -103,6 +110,7 @@ export function render(path) {
             <Route path="/articles/:slug" element={<PublicLayout><ArticlePage /></PublicLayout>} />
             <Route path="/wedding-venues" element={<PublicLayout><WeddingVenuesHub /></PublicLayout>} />
             <Route path="/wedding-venues/:slug" element={<PublicLayout><ProvinceVenues /></PublicLayout>} />
+            <Route path="/demo" element={<PublicLayout><Demo /></PublicLayout>} />
           </Routes>
         </StaticRouter>
       </AuthProvider>

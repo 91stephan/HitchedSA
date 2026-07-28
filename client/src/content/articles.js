@@ -1164,7 +1164,7 @@ export const ARTICLES = {
         "blocks": [
           {
             "type": "p",
-            "text": "Video is the add-on couples most often regret skipping. It is the only way to keep the vows, the speeches and your first dance as they actually sounded. In 2026, SA wedding videography runs from around R7,500 for a short highlights package with one shooter, to R15,000 – R25,000 for full-day coverage with two cameras and a longer feature edit. Booking photo and video through the same team, or a photographer's regular video partner, often saves money and guarantees the crews work well together instead of jostling for the same shot."
+            "text": "Video is the add-on couples most often regret skipping. It is the only way to keep the vows, the speeches and your first dance as they actually sounded. In 2026, SA wedding videography runs from around R7,500 for a short highlights package with one shooter, to R15,000 – R25,000 for full-day coverage with two cameras and a longer feature edit. Booking photo and video through the same team, or a photographer's regular video partner, often saves money and means the crews are used to working together instead of jostling for the same shot."
           },
           {
             "type": "p",

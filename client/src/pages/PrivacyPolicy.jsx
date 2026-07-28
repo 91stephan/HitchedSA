@@ -2,9 +2,12 @@ export default function PrivacyPolicy() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 animate-fade-in">
       <h1 className="section-title">Privacy Policy</h1>
-      <p className="section-subtitle mb-2">Last updated: April 2026</p>
-      <p className="text-sm mb-10" style={{ color: 'var(--color-text-muted)' }}>
+      <p className="section-subtitle mb-2">Last updated: July 2026</p>
+      <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)' }}>
         This Privacy Policy describes how HitchedSA ("we", "us", or "our") collects, uses, and protects your personal information in accordance with the Protection of Personal Information Act 4 of 2013 (POPIA) and applicable South African law.
+      </p>
+      <p className="text-sm mb-10" style={{ color: 'var(--color-text-muted)' }}>
+        HitchedSA is an independently operated South African wedding planning service. For the purposes of POPIA, HitchedSA is the responsible party for the personal information described below and can be contacted about any privacy matter at <a href="mailto:21rssolutions@gmail.com" style={{ color: 'var(--color-primary)' }}>21rssolutions@gmail.com</a>.
       </p>
 
       <div className="space-y-6 text-sm" style={{ color: 'var(--color-text)' }}>
@@ -13,7 +16,7 @@ export default function PrivacyPolicy() {
           <h2 className="font-display text-lg font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>1. Information We Collect</h2>
           <p className="mb-2">We collect the following categories of personal information:</p>
           <ul className="space-y-1 list-disc pl-5" style={{ color: 'var(--color-text-muted)' }}>
-            <li><strong>Account information:</strong> Email address and password (stored securely via Supabase Auth)</li>
+            <li><strong>Account information:</strong> Your email address and a password. The password is encrypted and stored only as a one-way hash by Supabase Auth. We never see or store your password in plain text.</li>
             <li><strong>Profile information:</strong> Partner names, wedding date, and venue location (entered voluntarily)</li>
             <li><strong>Planning data:</strong> Guest list, budget entries, checklist tasks, seating plans, and ideas board content</li>
             <li><strong>Usage data:</strong> Pages visited, features used, and general interaction patterns (collected via analytics)</li>
@@ -64,7 +67,7 @@ export default function PrivacyPolicy() {
             <li>Lodge a complaint with the Information Regulator of South Africa</li>
           </ul>
           <p className="mt-3" style={{ color: 'var(--color-text-muted)' }}>
-            To exercise these rights, contact us at <a href="mailto:hello@hitchedsa.co.za" style={{ color: 'var(--color-primary)' }}>hello@hitchedsa.co.za</a>.
+            To exercise these rights, contact us at <a href="mailto:21rssolutions@gmail.com" style={{ color: 'var(--color-primary)' }}>21rssolutions@gmail.com</a>.
           </p>
         </section>
 
@@ -97,7 +100,7 @@ export default function PrivacyPolicy() {
         <section className="card">
           <h2 className="font-display text-lg font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>9. Contact</h2>
           <p style={{ color: 'var(--color-text-muted)' }}>
-            For privacy-related enquiries, contact us at <a href="mailto:hello@hitchedsa.co.za" style={{ color: 'var(--color-primary)' }}>hello@hitchedsa.co.za</a>.
+            For privacy-related enquiries, contact us at <a href="mailto:21rssolutions@gmail.com" style={{ color: 'var(--color-primary)' }}>21rssolutions@gmail.com</a>.
           </p>
         </section>
       </div>

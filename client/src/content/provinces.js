@@ -76,7 +76,7 @@ export const PROVINCES = {
       { item: 'Typical all-in wedding (100 guests)', range: 'R250,000 – R600,000+' },
     ],
     season: {
-      best: 'October – April for guaranteed summer weather; February–March offers the most settled conditions with harvest-season vineyards.',
+      best: 'October – April for warm, mostly dry summer weather; February–March offers the most settled conditions with harvest-season vineyards.',
       avoid: 'Mid-December to mid-January: peak tourist pricing, venue minimums and accommodation shortages. June–August is winter and rainy, but venues discount heavily, and a fireside Winelands winter wedding is a genuine (and much cheaper) option.',
       wind: 'The Cape Doctor, the summer south-easter, is the region\'s defining planning factor. Ask every venue directly: "What happens to my ceremony in a 40km/h south-easter?" Good venues have a practised answer.',
     },
@@ -1050,7 +1050,7 @@ export const PROVINCES = {
       wind: 'The Lowveld sits in a seasonal malaria zone: winter dates minimise risk, and guests should still get travel-clinic advice. The Waterberg (Limpopo) or highveld venues are alternatives if this is a dealbreaker.',
     },
     tips: [
-      'Winter (May–August) is the Lowveld\'s secret superpower: dry guaranteed weather when the rest of the country gambles, and it books out accordingly.',
+      'Winter (May–August) is the Lowveld\'s secret superpower: reliably dry weather when the rest of the country gambles, and it books out accordingly.',
       'Build the safari in: venues near Kruger gates can arrange guest game drives the morning after, which turns a wedding into the trip of a lifetime for overseas guests.',
       'Dullstroom weddings need a cold plan: heated marquees or stone-walled venues, and blankets as favours never go to waste.',
       'Brief guests on malaria precautions for Lowveld dates, especially November–April.',

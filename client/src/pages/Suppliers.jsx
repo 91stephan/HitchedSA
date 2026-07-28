@@ -57,7 +57,7 @@ function ListingModal({ open, onClose }) {
     const body = encodeURIComponent(
       `Business Name: ${form.business}\nCategory: ${form.category}\nContact Person: ${form.contact}\nEmail: ${form.email}\nPhone: ${form.phone}\nCity/Area: ${form.city}\nWebsite: ${form.website}\n\nDescription:\n${form.description}`
     )
-    window.open(`mailto:hello@hitchedsa.co.za?subject=Supplier Listing Request – ${encodeURIComponent(form.business)}&body=${body}`)
+    window.open(`mailto:21rssolutions@gmail.com?subject=Supplier Listing Request – ${encodeURIComponent(form.business)}&body=${body}`)
     setSubmitted(true)
   }
 

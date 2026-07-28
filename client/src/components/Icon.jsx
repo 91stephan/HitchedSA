@@ -57,6 +57,7 @@ const PATHS = {
   flagFinish: <><path d="M5 21V4" /><path d="M5 4h14v9H5" /><path d="M5 4h3.5v3H5M8.5 7H12v3H8.5M12 4h3.5v3H12M15.5 7H19v3h-3.5" /></>,
   chevronUp: <><path d="m6 15 6-6 6 6" /></>,
   chevronDown: <><path d="m6 9 6 6 6-6" /></>,
+  menu: <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>,
 }
 
 export default function Icon({ name, size = 24, strokeWidth = 1.8, filled = false, className = '', style }) {

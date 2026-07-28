@@ -1,8 +1,16 @@
 User-agent: *
 Allow: /
-
-User-agent: Googlebot
-Allow: /ads.txt
-Allow: /
+Disallow: /login
+Disallow: /welcome-setup
+Disallow: /dashboard
+Disallow: /venues
+Disallow: /suppliers
+Disallow: /ideas
+Disallow: /guests
+Disallow: /seating
+Disallow: /budget
+Disallow: /checklist
+Disallow: /notebook
+Disallow: /settings
 
 Sitemap: https://hitchedsa.co.za/sitemap.xml

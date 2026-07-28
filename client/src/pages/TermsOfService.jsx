@@ -2,9 +2,9 @@ export default function TermsOfService() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 animate-fade-in">
       <h1 className="section-title">Terms of Service</h1>
-      <p className="section-subtitle mb-2">Last updated: April 2026</p>
+      <p className="section-subtitle mb-2">Last updated: July 2026</p>
       <p className="text-sm mb-10" style={{ color: 'var(--color-text-muted)' }}>
-        By using HitchedSA ("the platform", "we", "us"), you agree to these Terms of Service. Please read them carefully before creating an account.
+        HitchedSA is an independently operated South African wedding planning service ("the platform", "we", "us"). By using HitchedSA, you agree to these Terms of Service. Please read them carefully before creating an account.
       </p>
 
       <div className="space-y-6 text-sm" style={{ color: 'var(--color-text)' }}>
@@ -99,7 +99,7 @@ export default function TermsOfService() {
         <section className="card">
           <h2 className="font-display text-lg font-semibold mb-3" style={{ color: 'var(--color-accent)' }}>12. Contact</h2>
           <p style={{ color: 'var(--color-text-muted)' }}>
-            For questions about these Terms, contact us at <a href="mailto:hello@hitchedsa.co.za" style={{ color: 'var(--color-primary)' }}>hello@hitchedsa.co.za</a>.
+            For questions about these Terms, contact us at <a href="mailto:21rssolutions@gmail.com" style={{ color: 'var(--color-primary)' }}>21rssolutions@gmail.com</a>.
           </p>
         </section>
       </div>

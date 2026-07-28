@@ -3,6 +3,9 @@ import AdBanner from '../components/AdBanner'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCE_LIST } from '../content/provinces'
 import Icon from '../components/Icon'
+import BrowserFrame from '../components/demo/BrowserFrame'
+import { DemoDashboardPanel, DemoGuestPanel } from '../components/demo/DemoPanels'
+import Testimonials from '../components/Testimonials'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1920&q=80'
 
@@ -53,13 +56,13 @@ export default function Landing() {
             >
               Get Started Free
             </Link>
-            <a
-              href="#features"
+            <Link
+              to="/demo"
               className="px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105"
               style={{ background: 'rgba(255,255,255,0.2)', border: '2px solid rgba(255,255,255,0.7)', color: '#fff', backdropFilter: 'blur(8px)' }}
             >
-              See What's Included
-            </a>
+              View the Live Demo
+            </Link>
           </div>
         </div>
       </div>
@@ -91,6 +94,41 @@ export default function Landing() {
                 </p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* See it in action - live framed previews of the real planner */}
+        <section className="mb-20">
+          <div className="text-center mb-10">
+            <h2 className="font-display text-3xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>
+              See It in Action
+            </h2>
+            <p className="text-base" style={{ color: 'var(--color-text-muted)' }}>
+              A look inside the real planner, shown with a sample wedding
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            <div>
+              <BrowserFrame url="hitchedsa.co.za/dashboard">
+                <div style={{ pointerEvents: 'none' }}><DemoDashboardPanel /></div>
+              </BrowserFrame>
+              <p className="text-sm text-center mt-3 font-medium" style={{ color: 'var(--color-text-muted)' }}>
+                Your dashboard: countdown, guests, budget and checklist at a glance
+              </p>
+            </div>
+            <div>
+              <BrowserFrame url="hitchedsa.co.za/guests">
+                <div style={{ pointerEvents: 'none' }}><DemoGuestPanel /></div>
+              </BrowserFrame>
+              <p className="text-sm text-center mt-3 font-medium" style={{ color: 'var(--color-text-muted)' }}>
+                Guest list: track RSVPs, dietary needs, plus-ones and more
+              </p>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/demo" className="btn-primary text-sm px-8 py-3 inline-block" style={{ borderRadius: '9999px' }}>
+              Explore the Full Demo →
+            </Link>
           </div>
         </section>
 
@@ -197,7 +235,7 @@ export default function Landing() {
               {[
                 { icon: 'flag', title: 'South African Venues & Suppliers', desc: 'Search real wedding venues and suppliers in Cape Town, Johannesburg, Durban, Pretoria, the Winelands and beyond, powered by Google Maps.' },
                 { icon: 'cloud', title: 'Synced to the Cloud', desc: 'Your wedding data is securely stored and synced across all your devices via Supabase. Access your planner on your phone, tablet or laptop.' },
-                { icon: 'gem', title: 'Free Forever', desc: 'HitchedSA is completely free for couples. No subscriptions, no paywalls, no premium tiers. Every feature is available to every couple.' },
+                { icon: 'gem', title: 'Free Forever', desc: 'HitchedSA is completely free for couples. No subscriptions, no paywalls, no premium tiers. The service is funded by the ads you see on the site, so every planning feature stays free for everyone.' },
               ].map((item) => (
                 <div key={item.title}>
                   <div className="mb-2"><Icon name={item.icon} size={26} style={{ color: 'var(--color-primary)' }} /></div>
@@ -208,6 +246,9 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
+        {/* Wedding stories from couples who planned with HitchedSA */}
+        <Testimonials />
 
         {/* Ad - bottom placement above final CTA */}
         <div className="mb-12">
@@ -230,7 +271,7 @@ export default function Landing() {
             Create Your Free Account
           </Link>
           <p className="text-xs mt-4" style={{ color: 'var(--color-text-muted)' }}>
-            No credit card required · Free forever · Cancel anytime
+            No credit card required · Free forever · No hidden costs
           </p>
         </section>
       </div>

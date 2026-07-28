@@ -11,7 +11,7 @@ export default function UpgradeModal({ open, onClose }) {
     // merchant account is live (build the signed payment URL and send the
     // user to it). Until then, collect interest by email.
     window.open(
-      'mailto:hello@hitchedsa.co.za?subject=HitchedSA%20Pro%20-%20notify%20me&body=I%20would%20like%20to%20upgrade%20to%20Pro%20for%20unlimited%20venue%20and%20supplier%20searches.',
+      'mailto:21rssolutions@gmail.com?subject=HitchedSA%20Pro%20-%20notify%20me&body=I%20would%20like%20to%20upgrade%20to%20Pro%20for%20unlimited%20venue%20and%20supplier%20searches.',
       '_blank'
     )
   }

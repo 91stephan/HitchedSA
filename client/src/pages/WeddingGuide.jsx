@@ -12,19 +12,38 @@ const SCHEMA = {
   author: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
   publisher: { '@type': 'Organization', name: 'HitchedSA', url: 'https://hitchedsa.co.za' },
   url: 'https://hitchedsa.co.za/wedding-guide',
-  dateModified: '2025-05-01',
+  dateModified: '2026-07-28',
 }
 
+const HERO_IMAGE = '/images/provinces/western-cape.jpg'
+
 const SECTIONS = [
-  { id: 'timeline',   label: '12-Month Timeline' },
-  { id: 'budget',     label: 'Wedding Budget' },
-  { id: 'venue',      label: 'Choosing a Venue' },
-  { id: 'suppliers',  label: 'Your Supplier Team' },
-  { id: 'guests',     label: 'Guest List Tips' },
-  { id: 'traditions', label: 'SA Traditions' },
-  { id: 'food',       label: 'Food & Catering' },
-  { id: 'finalweek',  label: 'The Final Week' },
+  { id: 'timeline',   label: '12-Month Timeline',  icon: 'calendar' },
+  { id: 'budget',     label: 'Wedding Budget',     icon: 'wallet' },
+  { id: 'venue',      label: 'Choosing a Venue',   icon: 'building' },
+  { id: 'suppliers',  label: 'Your Supplier Team', icon: 'camera' },
+  { id: 'guests',     label: 'Guest List Tips',    icon: 'users' },
+  { id: 'traditions', label: 'SA Traditions',      icon: 'gem' },
+  { id: 'food',       label: 'Food & Catering',    icon: 'utensils' },
+  { id: 'finalweek',  label: 'The Final Week',     icon: 'hourglass' },
 ]
+
+// Icon-badged section heading, so each part of the guide has a clear visual anchor.
+function SectionHeading({ icon, children }) {
+  return (
+    <div className="flex items-center gap-3 mb-5">
+      <span
+        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+        style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}
+      >
+        <Icon name={icon} size={22} />
+      </span>
+      <h2 className="font-display text-2xl font-bold" style={{ color: 'var(--color-heading)' }}>
+        {children}
+      </h2>
+    </div>
+  )
+}
 
 export default function WeddingGuide() {
   useMeta({
@@ -34,52 +53,75 @@ export default function WeddingGuide() {
   })
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 animate-fade-in">
+    <div className="animate-fade-in">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }}
       />
+      <style>{'section[id]{scroll-margin-top:88px}'}</style>
 
-      <h1 className="font-display text-4xl font-bold mb-3" style={{ color: 'var(--color-heading)' }}>
-        The Complete South African Wedding Planning Guide
-      </h1>
-      <p className="text-base mb-2" style={{ color: 'var(--color-text-muted)' }}>
-        Everything you need to know to plan a beautiful, stress-free wedding in South Africa, from setting your budget to walking down the aisle.
-      </p>
-      <p className="text-xs mb-4" style={{ color: 'var(--color-text-muted)' }}>
-        Updated May 2025 · 15 min read
-      </p>
-      <div className="mb-8">
-        <ShareButtons
-          title="Complete South African Wedding Planning Guide | HitchedSA"
-          url="https://hitchedsa.co.za/wedding-guide"
-        />
+      {/* Hero */}
+      <div className="relative overflow-hidden" style={{ minHeight: 380 }}>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${HERO_IMAGE}')` }} />
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 py-24 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-4" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            The Complete Guide
+          </p>
+          <h1 className="font-display text-3xl md:text-5xl font-bold text-white mb-4 leading-tight" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.45)' }}>
+            The Complete South African Wedding Planning Guide
+          </h1>
+          <p className="text-white/85 text-base md:text-lg max-w-2xl mx-auto mb-5 font-display italic" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}>
+            Everything you need to plan a beautiful, stress-free wedding in South Africa, from setting your budget to walking down the aisle.
+          </p>
+          <p className="text-xs uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.7)' }}>
+            Updated July 2026 · 15 min read
+          </p>
+        </div>
       </div>
 
-      {/* Jump links */}
-      <nav className="card p-4 mb-10">
-        <p className="text-xs font-semibold mb-2" style={{ color: 'var(--color-text-muted)' }}>IN THIS GUIDE</p>
-        <div className="flex flex-wrap gap-2">
-          {SECTIONS.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className="text-xs px-3 py-1.5 rounded-full border transition-colors hover:underline"
-              style={{ borderColor: 'var(--color-border)', color: 'var(--color-primary)' }}
-            >
-              {s.label}
-            </a>
-          ))}
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="mb-10">
+          <ShareButtons
+            title="Complete South African Wedding Planning Guide | HitchedSA"
+            url="https://hitchedsa.co.za/wedding-guide"
+          />
         </div>
-      </nav>
+
+        {/* Table of contents */}
+        <nav className="card p-6 mb-12">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--color-primary)' }}>
+            In This Guide
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {SECTIONS.map((s, i) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors hover:bg-[var(--color-surface)]"
+              >
+                <span
+                  className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}
+                >
+                  <Icon name={s.icon} size={18} />
+                </span>
+                <span className="text-sm font-medium" style={{ color: 'var(--color-heading)' }}>
+                  <span className="mr-1.5" style={{ color: 'var(--color-text-muted)' }}>{String(i + 1).padStart(2, '0')}</span>
+                  {s.label}
+                </span>
+              </a>
+            ))}
+          </div>
+        </nav>
 
       <div className="prose-like space-y-12" style={{ color: 'var(--color-text)', lineHeight: 1.8 }}>
 
         {/* ── 12-Month Timeline ─────────────────────────────────────────── */}
         <section id="timeline">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="calendar">
             The 12-Month South African Wedding Planning Timeline
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             Planning a wedding in South Africa takes between 12 and 18 months for most couples, though it is possible to pull off a beautiful wedding in six months if you are decisive and flexible. The key is knowing which decisions to make first, because certain suppliers and venues book up 12 or more months in advance, especially in peak season (October through March in most provinces).
           </p>
@@ -138,9 +180,9 @@ export default function WeddingGuide() {
 
         {/* ── Budget ──────────────────────────────────────────────────────── */}
         <section id="budget">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="wallet">
             Planning Your South African Wedding Budget
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             The average South African wedding costs between R150,000 and R350,000, though costs vary enormously depending on location, guest count, and your choices. Cape Town and the Winelands tend to be the most expensive regions; Johannesburg's East Rand and smaller KZN towns the most affordable.
           </p>
@@ -189,9 +231,9 @@ export default function WeddingGuide() {
 
         {/* ── Venue ───────────────────────────────────────────────────────── */}
         <section id="venue">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="building">
             Choosing a Wedding Venue in South Africa
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             South Africa has some of the most spectacular wedding venues in the world, from Cape Winelands farms and Drakensberg mountain retreats to beachfront Durban estates and Johannesburg heritage buildings. Narrowing down your options starts with three questions: How many guests? What is your budget? What feeling do you want?
           </p>
@@ -230,9 +272,9 @@ export default function WeddingGuide() {
 
         {/* ── Suppliers ───────────────────────────────────────────────────── */}
         <section id="suppliers">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="camera">
             Building Your South African Supplier Team
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             After your venue and date are locked in, building your supplier team is the most important part of wedding planning. The best suppliers in South Africa book out fast, especially in major cities where a single weekend can have dozens of weddings. Here is what you need to know about each key supplier category.
           </p>
@@ -268,9 +310,9 @@ export default function WeddingGuide() {
 
         {/* ── Guest List ──────────────────────────────────────────────────── */}
         <section id="guests">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="users">
             Managing Your Guest List
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             The guest list is one of the most emotionally charged parts of wedding planning for South African couples. Extended family expectations, workplace obligations, and social pressure can quickly turn a planned 80-person wedding into a 180-person event. Being firm about your numbers from the beginning saves enormous cost and stress.
           </p>
@@ -289,9 +331,9 @@ export default function WeddingGuide() {
 
         {/* ── SA Traditions ───────────────────────────────────────────────── */}
         <section id="traditions">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="gem">
             South African Wedding Traditions
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             South Africa's rich cultural diversity means weddings here are as varied and beautiful as the country itself. Many couples choose to blend Western and traditional elements, creating a celebration that is uniquely South African.
           </p>
@@ -327,9 +369,9 @@ export default function WeddingGuide() {
 
         {/* ── Food & Catering ─────────────────────────────────────────────── */}
         <section id="food">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="utensils">
             Food &amp; Catering for a South African Wedding
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             South Africans take food seriously, and a wedding where guests leave hungry is a wedding people will remember for the wrong reasons. The food and drink budget is typically the single largest expense for a South African wedding. Budget generously and guests will talk about your wedding for years.
           </p>
@@ -350,9 +392,9 @@ export default function WeddingGuide() {
 
         {/* ── Final Week ──────────────────────────────────────────────────── */}
         <section id="finalweek">
-          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+          <SectionHeading icon="hourglass">
             The Final Week Before Your Wedding
-          </h2>
+          </SectionHeading>
           <p className="mb-4 text-sm">
             The week before your wedding is not the time to add new tasks. It is the time to confirm everything is in place, delegate as much as possible, and look after yourself.
           </p>
@@ -385,6 +427,7 @@ export default function WeddingGuide() {
 
         <AdBanner slot="guide-bottom" size="leaderboard" />
 
+      </div>
       </div>
     </div>
   )

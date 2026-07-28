@@ -20,6 +20,7 @@ import Articles from './pages/Articles'
 import ArticlePage from './pages/ArticlePage'
 import WeddingVenuesHub from './pages/WeddingVenuesHub'
 import ProvinceVenues from './pages/ProvinceVenues'
+import Demo from './pages/Demo'
 import Dashboard from './pages/Dashboard'
 import VenueSearch from './pages/VenueSearch'
 import Suppliers from './pages/Suppliers'
@@ -75,6 +76,7 @@ function AppRoutes() {
       <Route path="/articles/:slug"       element={<PublicLayout><ArticlePage /></PublicLayout>} />
       <Route path="/wedding-venues"       element={<PublicLayout><WeddingVenuesHub /></PublicLayout>} />
       <Route path="/wedding-venues/:slug" element={<PublicLayout><ProvinceVenues /></PublicLayout>} />
+      <Route path="/demo"                 element={<PublicLayout><Demo /></PublicLayout>} />
 
       {/* ── Auth ─────────────────────────────────────────────────────────── */}
       <Route

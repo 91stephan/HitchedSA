@@ -26,11 +26,11 @@ export default function Contact() {
               <div>
                 <div className="font-medium">Email</div>
                 <a
-                  href="mailto:hello@hitchedsa.co.za"
+                  href="mailto:21rssolutions@gmail.com"
                   className="text-sm"
                   style={{ color: 'var(--color-primary)' }}
                 >
-                  hello@hitchedsa.co.za
+                  21rssolutions@gmail.com
                 </a>
               </div>
             </div>
