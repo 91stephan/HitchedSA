@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
+import SaveStatus from '../components/SaveStatus'
 
 const AppContext = createContext(null)
 
@@ -18,12 +19,34 @@ function lsSave(key, val) {
 
 // ─── Supabase sync helpers ──────────────────────────────────────────────────
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+// Runs an async action, retrying on failure with backoff. A paused free-tier
+// Supabase project rejects the first request while it wakes, so the retries
+// give it time to come back before we give up.
+async function withRetry(fn, attempts = 3) {
+  let lastErr
+  for (let i = 0; i < attempts; i++) {
+    try { return await fn() }
+    catch (err) {
+      lastErr = err
+      if (i < attempts - 1) await sleep(1200 * (i + 1))
+    }
+  }
+  throw lastErr
+}
+
+// Replaces the whole set of rows for a user in one table (delete then insert,
+// matching the INSERT/DELETE permissions the database already grants).
+// Throws on any error so the caller can retry and surface a save-failed state
+// instead of losing the change silently. withRetry re-runs the whole operation,
+// so a delete-succeeds-then-insert-fails hiccup is recovered on the next attempt.
 async function syncTable(table, userId, rows) {
   const { error: delErr } = await supabase.from(table).delete().eq('user_id', userId)
-  if (delErr) { console.error('[HitchedSA] syncTable delete error:', delErr); return }
+  if (delErr) throw delErr
   if (rows.length > 0) {
     const { error: insErr } = await supabase.from(table).insert(rows)
-    if (insErr) console.error('[HitchedSA] syncTable insert error:', insErr)
+    if (insErr) throw insErr
   }
 }
 
@@ -128,6 +151,46 @@ export function AppProvider({ children }) {
 
   const [appLoading, setAppLoading] = useState(true)
 
+  // Save status shown to the user: 'idle' | 'saving' | 'saved' | 'error'.
+  // Without this a failed cloud write was invisible and looked saved.
+  const [syncStatus, setSyncStatus] = useState('idle')
+  const syncInFlight = useRef(0)
+  const syncErrored  = useRef(false)
+  const syncChains   = useRef({}) // per-table promise chain, serialises writes
+  // True once cloud data has loaded successfully. Until then we never push a
+  // sync, so a failed load (e.g. a paused database) can't overwrite the real
+  // cloud data with empty local state.
+  const dataLoadedRef = useRef(false)
+
+  // Queue a table sync. Writes to the same table are serialised so a burst of
+  // edits can't race the delete/insert; the aggregate status flips to 'saved'
+  // only once every queued write for every table has settled.
+  const queueSync = useCallback((table, userId, rows) => {
+    // Never push before a successful load, or we could overwrite real cloud
+    // data with empty/default local state after a failed load.
+    if (!dataLoadedRef.current) return Promise.resolve()
+    if (syncInFlight.current === 0) syncErrored.current = false
+    syncInFlight.current += 1
+    setSyncStatus('saving')
+
+    const prev = syncChains.current[table] || Promise.resolve()
+    const next = prev
+      .catch(() => {})
+      .then(() => withRetry(() => syncTable(table, userId, rows)))
+      .catch((err) => {
+        console.error('[HitchedSA] sync failed for', table, err)
+        syncErrored.current = true
+      })
+      .finally(() => {
+        syncInFlight.current = Math.max(0, syncInFlight.current - 1)
+        if (syncInFlight.current === 0) {
+          setSyncStatus(syncErrored.current ? 'error' : 'saved')
+        }
+      })
+    syncChains.current[table] = next
+    return next
+  }, [])
+
   const [partners,         setPartnersState]        = useState({ partner1: '', partner2: '' })
   const [weddingDate,      setWeddingDateState]      = useState(null)
   const [firstLaunchDone,  setFirstLaunchDone]       = useState(false)
@@ -165,13 +228,17 @@ export function AppProvider({ children }) {
   async function loadAllData(userId) {
     setAppLoading(true)
     try {
-      const [profileRes, guestsRes, budgetRes, checklistRes, ideasRes] = await Promise.all([
+      const [profileRes, guestsRes, budgetRes, checklistRes, ideasRes] = await withRetry(() => Promise.all([
         supabase.from('profiles').select('*').eq('id', userId).single(),
         supabase.from('guests').select('*').eq('user_id', userId),
         supabase.from('budget_categories').select('*').eq('user_id', userId),
         supabase.from('checklist_items').select('*').eq('user_id', userId).order('sort_order'),
         supabase.from('ideas').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
-      ])
+      ]).then((results) => {
+        const failed = results.find((r) => r.error && r.status !== 406) // 406 = .single() no-row, expected
+        if (failed) throw failed.error
+        return results
+      }))
 
       if (profileRes.data) {
         const p = profileRes.data
@@ -217,8 +284,16 @@ export function AppProvider({ children }) {
         setIdeasState(mapped)
         ideasRef.current = mapped
       }
+
+      dataLoadedRef.current = true
+      setSyncStatus('idle')
     } catch (err) {
       console.error('HitchedSA: failed to load data', err)
+      // Load failed (most likely the free-tier database is waking up). Do NOT
+      // mark data as loaded, so edits won't overwrite the cloud, and show the
+      // user an error with a Retry action instead of a silent blank planner.
+      dataLoadedRef.current = false
+      setSyncStatus('error')
     } finally {
       setAppLoading(false)
     }
@@ -269,15 +344,15 @@ export function AppProvider({ children }) {
     const next = typeof val === 'function' ? val(guestsRef.current) : val
     setGuestsState(next)
     guestsRef.current = next
-    if (user) syncTable('guests', user.id, next.map(g => guestToDb(g, user.id)))
-  }, [user])
+    if (user) queueSync('guests', user.id, next.map(g => guestToDb(g, user.id)))
+  }, [user, queueSync])
 
   const setBudget = useCallback((val) => {
     const next = typeof val === 'function' ? val(budgetRef.current) : val
     setBudgetState(next)
     budgetRef.current = next
-    if (user) syncTable('budget_categories', user.id, next.map(b => budgetToDb(b, user.id)))
-  }, [user])
+    if (user) queueSync('budget_categories', user.id, next.map(b => budgetToDb(b, user.id)))
+  }, [user, queueSync])
 
   const setBudgetTotal = useCallback((val) => {
     setBudgetTotalState(val)
@@ -288,15 +363,15 @@ export function AppProvider({ children }) {
     const next = typeof val === 'function' ? val(checklistRef.current) : val
     setChecklistState(next)
     checklistRef.current = next
-    if (user) syncTable('checklist_items', user.id, next.map((c, i) => checklistToDb(c, user.id, i)))
-  }, [user])
+    if (user) queueSync('checklist_items', user.id, next.map((c, i) => checklistToDb(c, user.id, i)))
+  }, [user, queueSync])
 
   const setIdeas = useCallback((val) => {
     const next = typeof val === 'function' ? val(ideasRef.current) : val
     setIdeasState(next)
     ideasRef.current = next
-    if (user) syncTable('ideas', user.id, next.map(i => ideaToDb(i, user.id)))
-  }, [user])
+    if (user) queueSync('ideas', user.id, next.map(i => ideaToDb(i, user.id)))
+  }, [user, queueSync])
 
   const setVenueShortlist = useCallback((val) => {
     const next = typeof val === 'function' ? val(venueShortlistRef.current) : val
@@ -311,6 +386,22 @@ export function AppProvider({ children }) {
     supplierShortlistRef.current = next
     lsSave(LS_SUPPLIER_SHORTLIST, next)
   }, [])
+
+  // ── Retry after a failed save/load ────────────────────────────────────────
+
+  const retrySync = useCallback(() => {
+    if (!user) return
+    if (dataLoadedRef.current) {
+      // A save failed after a good load: re-push the current local state.
+      queueSync('guests',            user.id, guestsRef.current.map(g => guestToDb(g, user.id)))
+      queueSync('budget_categories', user.id, budgetRef.current.map(b => budgetToDb(b, user.id)))
+      queueSync('checklist_items',   user.id, checklistRef.current.map((c, i) => checklistToDb(c, user.id, i)))
+      queueSync('ideas',             user.id, ideasRef.current.map(i => ideaToDb(i, user.id)))
+    } else {
+      // The initial load failed: try loading again.
+      loadAllData(user.id)
+    }
+  }, [user, queueSync])
 
   // ── Clear all data ────────────────────────────────────────────────────────
 
@@ -355,12 +446,14 @@ export function AppProvider({ children }) {
       venueShortlist,    setVenueShortlist,
       supplierShortlist, setSupplierShortlist,
       venueLocation,     setVenueLocation,
+      syncStatus,        retrySync,
       clearAllData,
       guestCount, confirmedCount, pendingCount, declinedCount,
       totalSpent, totalAllocated, budgetProgress,
       checklistDone, checklistProgress, checklistTotal: checklist.length,
     }}>
       {children}
+      <SaveStatus />
     </AppContext.Provider>
   )
 }
