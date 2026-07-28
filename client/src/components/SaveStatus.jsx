@@ -65,7 +65,7 @@ export default function SaveStatus() {
       <div>
         <p className="font-semibold mb-0.5" style={{ color: 'var(--color-danger)' }}>Changes not saved</p>
         <p className="mb-1.5" style={{ color: 'var(--color-text-muted)' }}>
-          We could not reach the server. Your changes are still here on this device.
+          The server did not accept the change. Your data is still here on this device.
         </p>
         <button
           onClick={retrySync}

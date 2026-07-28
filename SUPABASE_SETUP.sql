@@ -23,6 +23,7 @@ create table if not exists guests (
   dietary    text    not null default '',
   table_id   text    not null default '',
   plus_one   boolean not null default false,
+  age_group  text    not null default 'adult',
   created_at timestamptz not null default now()
 );
 
