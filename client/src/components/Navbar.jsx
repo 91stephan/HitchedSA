@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useAuth } from '../context/AuthContext'
+import Icon from './Icon'
 import LogoRingIllustration from './illustrations/LogoRingIllustration'
 
 const NAV_ITEMS = [
@@ -22,6 +24,7 @@ const HERO_PATHS = ['/dashboard']
 
 export default function Navbar() {
   const { partners } = useApp()
+  const { isAdmin } = useAuth()
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -138,6 +141,20 @@ export default function Navbar() {
               </NavLink>
 
             ))}
+
+            {/* Admin switch: only rendered for the owner account. */}
+            {isAdmin && (
+              <NavLink
+                to="/admin"
+                className="ml-1 px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap inline-flex items-center gap-1.5 transition-all"
+                style={({ isActive }) => ({
+                  background: isActive ? 'var(--color-accent)' : 'var(--color-primary)',
+                  color: '#ffffff',
+                })}
+              >
+                <Icon name="sparkles" size={15} /> Admin
+              </NavLink>
+            )}
           </div>
 
           {/* ── Mobile hamburger ──────────────────────────────────── */}
@@ -194,6 +211,18 @@ export default function Navbar() {
                 {item.label}
               </NavLink>
             ))}
+
+            {/* Admin switch (mobile): only rendered for the owner account. */}
+            {isAdmin && (
+              <NavLink
+                to="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="block px-4 py-2.5 rounded-xl mx-1 mb-1 text-sm font-semibold inline-flex items-center gap-1.5"
+                style={{ background: 'var(--color-primary)', color: '#ffffff' }}
+              >
+                <Icon name="sparkles" size={15} /> Admin
+              </NavLink>
+            )}
           </div>
         )}
       </div>

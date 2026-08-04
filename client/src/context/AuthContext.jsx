@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
+import { isAdminEmail } from '../lib/admin'
 
 const AuthContext = createContext(null)
 
@@ -28,8 +29,12 @@ export function AuthProvider({ children }) {
 
   const signOut = () => supabase.auth.signOut()
 
+  // Cosmetic only: this decides whether the "Admin" switch is shown. The real
+  // access check happens server-side in the admin-data function.
+  const isAdmin = isAdminEmail(user?.email)
+
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, loading, isAdmin, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

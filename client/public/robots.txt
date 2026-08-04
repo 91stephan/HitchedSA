@@ -12,5 +12,6 @@ Disallow: /budget
 Disallow: /checklist
 Disallow: /notebook
 Disallow: /settings
+Disallow: /admin
 
 Sitemap: https://hitchedsa.co.za/sitemap.xml

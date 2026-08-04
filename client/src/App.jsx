@@ -31,6 +31,7 @@ import Budget from './pages/Budget'
 import Checklist from './pages/Checklist'
 import Settings from './pages/Settings'
 import Notebook from './pages/Notebook'
+import Admin from './pages/Admin'
 
 function LoadingScreen() {
   return (
@@ -53,6 +54,21 @@ function ProtectedRoute({ children, padTop = true }) {
     <>
       <Navbar />
       <div className={padTop ? 'pt-16' : ''}>{children}</div>
+    </>
+  )
+}
+
+// Admin-only route. The client guard here just keeps non-admins out of the UI;
+// the admin data itself is independently gated server-side, so this is not the
+// security boundary. firstLaunchDone is not required to reach the admin view.
+function AdminRoute({ children }) {
+  const { user, isAdmin } = useAuth()
+  if (!user) return <Navigate to="/" replace />
+  if (!isAdmin) return <Navigate to="/dashboard" replace />
+  return (
+    <>
+      <Navbar />
+      <div className="pt-16">{children}</div>
     </>
   )
 }
@@ -105,6 +121,9 @@ function AppRoutes() {
       <Route path="/checklist" element={<ProtectedRoute><Checklist /></ProtectedRoute>} />
       <Route path="/notebook"  element={<ProtectedRoute><Notebook /></ProtectedRoute>} />
       <Route path="/settings"  element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+
+      {/* ── Admin (owner only; server-gated data) ────────────────────────── */}
+      <Route path="/admin"     element={<AdminRoute><Admin /></AdminRoute>} />
 
       {/* ── Catch-all: real 404 page (not a redirect, so Google sees a proper
              not-found and users get a way back in) ─────────────────────────── */}
