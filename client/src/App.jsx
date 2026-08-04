@@ -47,9 +47,13 @@ function LoadingScreen() {
 // Wraps authenticated app pages - handles auth guard + navbar
 function ProtectedRoute({ children, padTop = true }) {
   const { user } = useAuth()
-  const { firstLaunchDone } = useApp()
+  const { firstLaunchDone, profileReady } = useApp()
   if (!user) return <Navigate to="/" replace />
-  if (!firstLaunchDone) return <Navigate to="/welcome-setup" replace />
+  // Only send to the "add your names" setup when the profile actually loaded and
+  // genuinely has no names. If the load failed (e.g. free-tier DB waking up),
+  // profileReady is false: keep the user in the app (which shows a retry banner)
+  // rather than bounce a returning user to setup, where they could overwrite data.
+  if (profileReady && !firstLaunchDone) return <Navigate to="/welcome-setup" replace />
   return (
     <>
       <Navbar />
@@ -75,7 +79,7 @@ function AdminRoute({ children }) {
 
 function AppRoutes() {
   const { user, loading: authLoading } = useAuth()
-  const { firstLaunchDone, appLoading } = useApp()
+  const { firstLaunchDone, appLoading, profileReady } = useApp()
 
   if (authLoading || appLoading) return <LoadingScreen />
 
@@ -106,7 +110,8 @@ function AppRoutes() {
         element={
           !user ? <Navigate to="/" replace />
             : firstLaunchDone ? <Navigate to="/dashboard" replace />
-            : <Welcome />
+            : profileReady ? <Welcome />
+            : <Navigate to="/dashboard" replace />
         }
       />
 

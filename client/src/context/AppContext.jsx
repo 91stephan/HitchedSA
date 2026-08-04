@@ -155,6 +155,12 @@ export function AppProvider({ children }) {
   // is still its default (false) and would wrongly bounce a returning user to
   // the "add your names" welcome page during the load.
   const [loadedUserId, setLoadedUserId] = useState(null)
+  // True only after the profile query has SUCCEEDED. A returning user is sent to
+  // the welcome/"add your names" page only when this is true and there are still
+  // no partner names. If the load failed (e.g. the free-tier DB was waking up),
+  // this stays false so we never mistake a returning user for a brand-new one
+  // and never let them overwrite their saved profile.
+  const [profileReady, setProfileReady] = useState(false)
 
   // Save status shown to the user: 'idle' | 'saving' | 'saved' | 'error'.
   // Without this a failed cloud write was invisible and looked saved.
@@ -226,12 +232,13 @@ export function AppProvider({ children }) {
   // ── Load all data when user changes ──────────────────────────────────────
 
   useEffect(() => {
-    if (!user) { setAppLoading(false); setLoadedUserId(null); return }
+    if (!user) { setAppLoading(false); setLoadedUserId(null); setProfileReady(false); return }
     loadAllData(user.id)
   }, [user])
 
   async function loadAllData(userId) {
     setAppLoading(true)
+    setProfileReady(false)
     try {
       const [profileRes, guestsRes, budgetRes, checklistRes, ideasRes] = await withRetry(() => Promise.all([
         supabase.from('profiles').select('*').eq('id', userId).single(),
@@ -290,6 +297,9 @@ export function AppProvider({ children }) {
         ideasRef.current = mapped
       }
 
+      // The profile query itself succeeded (a genuinely new user simply returns
+      // no row), so it is now safe for routing to decide first-launch vs return.
+      setProfileReady(true)
       dataLoadedRef.current = true
       setSyncStatus('idle')
     } catch (err) {
@@ -452,6 +462,7 @@ export function AppProvider({ children }) {
       partners,          setPartners,
       weddingDate,       setWeddingDate,
       firstLaunchDone,   completeFirstLaunch,
+      profileReady,
       guests,            setGuests,
       budget,            setBudget,
       budgetTotal,       setBudgetTotal,
