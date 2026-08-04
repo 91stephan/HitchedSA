@@ -8,6 +8,7 @@ import Modal from '../components/Modal'
 import UpgradeModal from '../components/UpgradeModal'
 import Celebration from '../components/Celebration'
 import { runSearch, fetchSearchStatus, SEARCH_LIMIT } from '../lib/placesApi'
+import PageBackdrop from '../components/PageBackdrop'
 
 const QUICK_LOCATIONS = [
   'Cape Town', 'Stellenbosch', 'Franschhoek', 'Johannesburg',
@@ -131,6 +132,8 @@ export default function VenueSearch() {
   }
 
   return (
+    <>
+    <PageBackdrop src="/images/venue-types/beach.jpg" />
     <div className="max-w-7xl mx-auto px-4 py-8 animate-fade-in">
       <Celebration show={showCelebration} onDone={() => setShowCelebration(false)} />
 
@@ -189,7 +192,7 @@ export default function VenueSearch() {
                       <button
                         key={p}
                         onClick={() => doSearch(p)}
-                        className="text-xs px-2.5 py-1 rounded-full border transition-colors"
+                        className="text-xs px-2.5 py-1 rounded-lg border transition-colors"
                         style={{
                           borderColor: location === p ? 'var(--color-primary)' : 'var(--color-border)',
                           background: location === p ? 'var(--color-primary-light)' : 'transparent',
@@ -460,5 +463,6 @@ export default function VenueSearch() {
         </div>
       </Modal>
     </div>
+    </>
   )
 }

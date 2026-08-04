@@ -103,7 +103,11 @@ function AppRoutes() {
       {/* ── Welcome setup ────────────────────────────────────────────────── */}
       <Route
         path="/welcome-setup"
-        element={!user ? <Navigate to="/" replace /> : <Welcome />}
+        element={
+          !user ? <Navigate to="/" replace />
+            : firstLaunchDone ? <Navigate to="/dashboard" replace />
+            : <Welcome />
+        }
       />
 
       {/* ── Root: always the public home page (ads render before entering the app).

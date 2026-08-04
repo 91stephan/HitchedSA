@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../context/AppContext'
 import Icon from '../components/Icon'
 import AdBanner from '../components/AdBanner'
+import PageBackdrop from '../components/PageBackdrop'
 
 const LS_KEY = 'hitchedsa_notebook'
 const LS_FONT = 'hitchedsa_notebook_font'
@@ -60,6 +61,8 @@ export default function Notebook() {
   useEffect(() => () => clearTimeout(saveTimer.current), [])
 
   return (
+    <>
+    <PageBackdrop src="/images/suppliers/florists.jpg" />
     <div className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
       <h1 className="section-title">Notebook</h1>
       <p className="section-subtitle">Your private space for wedding notes, ideas and reminders</p>
@@ -80,7 +83,7 @@ export default function Notebook() {
         >
           <span className="font-vibes text-2xl">{coupleLabel} · Wedding Notebook</span>
           <span
-            className="text-xs font-medium px-2 py-0.5 rounded-full"
+            className="text-xs font-medium px-2 py-0.5 rounded-lg"
             style={{ background: 'rgba(255,255,255,0.22)' }}
           >
             {saved ? <span className="inline-flex items-center gap-1"><Icon name="check" size={12} /> Saved</span> : '…saving'}
@@ -186,5 +189,6 @@ export default function Notebook() {
         Your notebook saves automatically. Sign into the same browser to keep your notes.
       </p>
     </div>
+    </>
   )
 }

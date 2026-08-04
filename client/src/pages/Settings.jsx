@@ -13,6 +13,7 @@ export default function Settings() {
   const {
     partners, setPartners, weddingDate, setWeddingDate, clearAllData,
     guests, budget, budgetTotal, checklist, ideas, venueShortlist, supplierShortlist,
+    venueLocation,
   } = useApp()
   const { themeId, applyTheme, themes } = useTheme()
   const { user, signOut } = useAuth()
@@ -23,13 +24,17 @@ export default function Settings() {
   const exportData = () => {
     let notebook = {}
     try { notebook = JSON.parse(localStorage.getItem('hitchedsa_notebook')) || {} } catch {}
+    let seating = []
+    try { seating = JSON.parse(localStorage.getItem('hitchedsa_seating')) || [] } catch {}
     const backup = {
       app: 'HitchedSA',
-      version: 1,
+      version: 2,
       exportedAt: new Date().toISOString(),
       account: user?.email || null,
       partners,
       weddingDate,
+      venueLocation,
+      theme: themeId,
       budgetTotal,
       guests,
       budget,
@@ -37,6 +42,7 @@ export default function Settings() {
       ideas,
       venueShortlist,
       supplierShortlist,
+      seating,
       notebook,
     }
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
@@ -182,8 +188,9 @@ export default function Settings() {
           Backup Your Plan
         </h2>
         <p className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>
-          Download a copy of everything: guests, budget, checklist, ideas, shortlists, notebook,
-          partner names and date. Keep it safe or use it to move between devices.
+          Download a copy of everything: guests, budget, checklist, ideas, venue and supplier
+          shortlists, seating plan, notebook, your venue location, theme, partner names and date.
+          Keep it safe or use it to move between devices.
         </p>
         <button className="btn-outline text-sm inline-flex items-center gap-1.5" onClick={exportData}>
           <Icon name="download" size={16} /> Download My Plan (JSON)

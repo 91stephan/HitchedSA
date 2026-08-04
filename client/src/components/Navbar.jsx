@@ -77,6 +77,12 @@ export default function Navbar() {
   const linkColor  = isSolid ? '#2d2d2d' : '#ffffff'
   const linkOpacity = isSolid ? 1 : 0.9
 
+  // Active underline tab. On solid nav the active item is primary-coloured
+  // text + primary underline. On the transparent hero the text stays white
+  // (readable over the dark overlay) and the underline uses the gold accent.
+  const activeTextColor = isSolid ? 'var(--color-primary)' : '#ffffff'
+  const activeUnderline = isSolid ? 'var(--color-primary)' : 'var(--color-accent)'
+
   // Logo (Great Vibes): solid → theme accent (gold / rose gold); transparent → white
   const logoColor     = isSolid ? 'var(--color-accent)' : '#ffffff'
   const logoShadow    = isSolid ? 'none' : '0 1px 8px rgba(0,0,0,0.35)'
@@ -113,43 +119,32 @@ export default function Navbar() {
             </div>
           </NavLink>
 
-          {/* ── Desktop nav links ─────────────────────────────────── */}
-          <div className="hidden lg:flex items-center gap-0.5">
+          {/* ── Desktop nav links (underline tabs) ────────────────── */}
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={({ isActive }) =>
-                  `px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-150 whitespace-nowrap ${
-                    isActive ? 'nav-link active shadow-sm' : ''
-                  }`
-                }
+                className="nav-tab"
                 style={({ isActive }) =>
                   isActive
-                    ? {
-                        // Active pill: always theme primary bg + white text - clear on any bg
-                        background: 'var(--color-primary)',
-                        color: '#ffffff',
-                      }
-                    : {
-                        color: linkColor,
-                        opacity: linkOpacity,
-                      }
+                    ? { color: activeTextColor, borderBottomColor: activeUnderline, fontWeight: 600 }
+                    : { color: linkColor, opacity: linkOpacity }
                 }
               >
                 {item.label}
               </NavLink>
-
             ))}
 
-            {/* Admin switch: only rendered for the owner account. */}
+            {/* Admin switch: only rendered for the owner account. Always the
+                gold accent so it reads as a distinct control, same tab shape. */}
             {isAdmin && (
               <NavLink
                 to="/admin"
-                className="ml-1 px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap inline-flex items-center gap-1.5 transition-all"
+                className="nav-tab ml-1 inline-flex items-center gap-1.5 font-semibold"
                 style={({ isActive }) => ({
-                  background: isActive ? 'var(--color-accent)' : 'var(--color-primary)',
-                  color: '#ffffff',
+                  color: 'var(--color-accent)',
+                  borderBottomColor: isActive ? 'var(--color-accent)' : 'transparent',
                 })}
               >
                 <Icon name="sparkles" size={15} /> Admin
@@ -197,18 +192,23 @@ export default function Navbar() {
                 key={item.path}
                 to={item.path}
                 onClick={() => setMenuOpen(false)}
-                className={({ isActive }) =>
-                  `block px-4 py-2.5 rounded-xl mx-1 mb-1 text-sm font-medium transition-all ${
-                    isActive ? 'nav-link active' : ''
-                  }`
-                }
+                className="block px-4 py-2.5 text-sm transition-all"
                 style={({ isActive }) =>
                   isActive
-                    ? { background: 'var(--color-primary)', color: '#ffffff' }
-                    : { color: '#2d2d2d' }  // Always dark in mobile menu
+                    ? { color: 'var(--color-primary)', fontWeight: 600 }
+                    : { color: '#2d2d2d', fontWeight: 500 }
                 }
               >
-                {item.label}
+                {({ isActive }) => (
+                  <span
+                    style={{
+                      paddingBottom: 2,
+                      borderBottom: `2px solid ${isActive ? 'var(--color-primary)' : 'transparent'}`,
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                )}
               </NavLink>
             ))}
 
@@ -217,10 +217,20 @@ export default function Navbar() {
               <NavLink
                 to="/admin"
                 onClick={() => setMenuOpen(false)}
-                className="block px-4 py-2.5 rounded-xl mx-1 mb-1 text-sm font-semibold inline-flex items-center gap-1.5"
-                style={{ background: 'var(--color-primary)', color: '#ffffff' }}
+                className="block px-4 py-2.5 text-sm font-semibold"
+                style={{ color: 'var(--color-accent)' }}
               >
-                <Icon name="sparkles" size={15} /> Admin
+                {({ isActive }) => (
+                  <span
+                    className="inline-flex items-center gap-1.5"
+                    style={{
+                      paddingBottom: 2,
+                      borderBottom: `2px solid ${isActive ? 'var(--color-accent)' : 'transparent'}`,
+                    }}
+                  >
+                    <Icon name="sparkles" size={15} /> Admin
+                  </span>
+                )}
               </NavLink>
             )}
           </div>

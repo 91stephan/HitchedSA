@@ -8,6 +8,7 @@ import Modal from '../components/Modal'
 import UpgradeModal from '../components/UpgradeModal'
 import { useApp } from '../context/AppContext'
 import { runSearch, fetchSearchStatus, SEARCH_LIMIT } from '../lib/placesApi'
+import PageBackdrop from '../components/PageBackdrop'
 
 const CATEGORIES = [
   { id: 'photographers', label: 'Photographers',  image: '/images/suppliers/photographers.jpg', query: 'wedding photographer' },
@@ -192,6 +193,8 @@ export default function Suppliers() {
   }
 
   return (
+    <>
+    <PageBackdrop src="/images/venue-types/bush.jpg" />
     <div className="max-w-7xl mx-auto px-4 py-8 animate-fade-in">
       <ListingModal open={showListingModal} onClose={() => setShowListingModal(false)} />
       <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />
@@ -279,7 +282,7 @@ export default function Suppliers() {
                 <button
                   key={city}
                   onClick={() => doSearch(city)}
-                  className="text-xs px-2.5 py-1 rounded-full border transition-colors"
+                  className="text-xs px-2.5 py-1 rounded-lg border transition-colors"
                   style={{
                     borderColor: location === city ? 'var(--color-primary)' : 'var(--color-border)',
                     background: location === city ? 'var(--color-primary-light)' : 'transparent',
@@ -418,5 +421,6 @@ export default function Suppliers() {
         </>
       )}
     </div>
+    </>
   )
 }

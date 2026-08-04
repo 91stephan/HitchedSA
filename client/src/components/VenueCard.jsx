@@ -38,7 +38,7 @@ export default function VenueCard({ venue, onAddShortlist, onCompareToggle, comp
         )}
         {/* Rating badge overlay */}
         <div
-          className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold shadow-md"
+          className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold shadow-md"
           style={{ background: 'rgba(255,255,255,0.92)', color: 'var(--color-text)' }}
         >
           <Icon name="star" size={14} filled style={{ color: 'var(--color-accent)' }} />
@@ -106,7 +106,7 @@ export default function VenueCard({ venue, onAddShortlist, onCompareToggle, comp
           {showCompare && (
             <button
               onClick={() => onCompareToggle(venue)}
-              className="text-xs px-3 py-2 rounded-full border-2 transition-all font-semibold inline-flex items-center gap-1.5"
+              className="text-xs px-3 py-2 rounded-lg border-2 transition-all font-semibold inline-flex items-center gap-1.5"
               title="Select 2–3 venues to compare side by side"
               style={{
                 borderColor: 'var(--color-accent)',
@@ -119,7 +119,7 @@ export default function VenueCard({ venue, onAddShortlist, onCompareToggle, comp
           )}
           <button
             onClick={() => onAddShortlist(venue)}
-            className="text-xs px-4 py-2 rounded-full border-2 transition-all font-semibold ml-auto inline-flex items-center gap-1.5"
+            className="text-xs px-4 py-2 rounded-lg border-2 transition-all font-semibold ml-auto inline-flex items-center gap-1.5"
             style={{
               borderColor: 'var(--color-primary)',
               background: isShortlisted

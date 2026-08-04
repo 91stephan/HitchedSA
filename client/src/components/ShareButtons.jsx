@@ -24,7 +24,7 @@ export default function ShareButtons({ title, url, label = 'Share this guide' })
         href={waHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-transform hover:scale-105"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-transform hover:scale-105"
         style={{ background: '#25D366', color: '#fff' }}
       >
         <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -35,7 +35,7 @@ export default function ShareButtons({ title, url, label = 'Share this guide' })
       <button
         type="button"
         onClick={copyLink}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-transform hover:scale-105"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-transform hover:scale-105"
         style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)', background: 'var(--color-card-bg)' }}
       >
         {copied ? <><Icon name="check" size={14} /> Copied</> : <><Icon name="link" size={14} /> Copy link</>}

@@ -4,6 +4,7 @@ import Icon from '../components/Icon'
 import IdeasIllustration from '../components/illustrations/IdeasIllustration'
 import Modal from '../components/Modal'
 import AdBanner from '../components/AdBanner'
+import PageBackdrop from '../components/PageBackdrop'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -39,7 +40,7 @@ async function pexelsSearch(term) {
 function Toast({ visible, message }) {
   return (
     <div
-      className="fixed bottom-6 right-6 z-[200] px-5 py-3 rounded-full shadow-2xl text-sm font-semibold transition-all duration-400"
+      className="fixed bottom-6 right-6 z-[200] px-5 py-3 rounded-xl shadow-2xl text-sm font-semibold transition-all duration-400"
       style={{
         background: 'var(--color-accent)',
         color: '#fff',
@@ -175,7 +176,7 @@ function BoardCard({ idea, onDelete, onEdit }) {
       {/* Card body */}
       <div className="p-3">
         <span
-          className="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium mb-2"
+          className="inline-block text-xs px-2.5 py-0.5 rounded-lg font-medium mb-2"
           style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}
         >
           {idea.category}
@@ -608,6 +609,8 @@ export default function IdeasBoard() {
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
+    <>
+    <PageBackdrop src="/images/venue-types/wine-farm.jpg" />
     <div className="max-w-7xl mx-auto px-4 py-8 animate-fade-in">
       <Toast visible={toast.visible} message={toast.message} />
 
@@ -619,7 +622,7 @@ export default function IdeasBoard() {
         </div>
         {/* Main tabs */}
         <div
-          className="flex rounded-full p-1 shrink-0"
+          className="flex rounded-xl p-1 shrink-0"
           style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
         >
           {[
@@ -630,10 +633,10 @@ export default function IdeasBoard() {
               key={t.key}
               type="button"
               onClick={() => setMainTab(t.key)}
-              className="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-150"
+              className="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150"
               style={
                 mainTab === t.key
-                  ? { background: 'var(--color-primary)', color: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }
+                  ? { background: 'color-mix(in srgb, var(--color-primary) 20%, transparent)', color: 'var(--color-text)', border: '1px solid color-mix(in srgb, var(--color-primary) 40%, transparent)' }
                   : { background: 'transparent', color: 'var(--color-text-muted)' }
               }
             >
@@ -652,7 +655,7 @@ export default function IdeasBoard() {
           <form onSubmit={handleSearch} className="flex gap-2 mb-3">
             <div className="relative flex-1">
               <input
-                className="input-field rounded-full pl-5 pr-12 py-3.5 text-base shadow-sm w-full"
+                className="input-field rounded-xl pl-5 pr-12 py-3.5 text-base shadow-sm w-full"
                 placeholder="Search wedding inspiration..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
@@ -705,10 +708,10 @@ export default function IdeasBoard() {
                 key={chip}
                 type="button"
                 onClick={() => handleChipClick(chip)}
-                className="text-xs px-4 py-2 rounded-full font-medium transition-all duration-150 whitespace-nowrap border"
+                className="text-xs px-4 py-2 rounded-lg font-medium transition-all duration-150 whitespace-nowrap border"
                 style={
                   activeChip === chip
-                    ? { background: 'var(--color-primary)', color: '#fff', borderColor: 'var(--color-primary)' }
+                    ? { background: 'color-mix(in srgb, var(--color-primary) 20%, transparent)', color: 'var(--color-text)', borderColor: 'color-mix(in srgb, var(--color-primary) 42%, transparent)' }
                     : { background: 'transparent', color: 'var(--color-text-muted)', borderColor: 'var(--color-border)' }
                 }
               >
@@ -853,5 +856,6 @@ export default function IdeasBoard() {
         onSave={handleEditSave}
       />
     </div>
+    </>
   )
 }

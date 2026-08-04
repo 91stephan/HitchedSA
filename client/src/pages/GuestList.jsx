@@ -4,6 +4,7 @@ import Icon from '../components/Icon'
 import GuestIllustration from '../components/illustrations/GuestIllustration'
 import AdBanner from '../components/AdBanner'
 import Modal from '../components/Modal'
+import PageBackdrop from '../components/PageBackdrop'
 
 const RSVP_OPTIONS = ['pending', 'confirmed', 'declined']
 const RSVP_STYLES = {
@@ -158,6 +159,8 @@ export default function GuestList() {
     })
 
   return (
+    <>
+    <PageBackdrop src="/images/articles/small-wedding-ideas-south-africa.jpg" />
     <div className="max-w-6xl mx-auto px-4 py-8 animate-fade-in">
       <div className="flex items-start justify-between mb-2" ref={formRef}>
         <div>
@@ -432,5 +435,6 @@ export default function GuestList() {
         </div>
       </Modal>
     </div>
+    </>
   )
 }

@@ -6,6 +6,7 @@ import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
 import AdBanner from '../components/AdBanner'
 import SeatingIllustration from '../components/illustrations/SeatingIllustration'
+import PageBackdrop from '../components/PageBackdrop'
 
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920&q=80'
 
@@ -177,7 +178,7 @@ function TableCard({ table, guests, selected, onSelect, onMouseDown, onEdit, onD
                 <button
                   key={guest.id}
                   onClick={(e) => { e.stopPropagation(); onUnassign(table.id, guest.id) }}
-                  className="text-xs px-2 py-0.5 rounded-full font-medium transition-all hover:opacity-70"
+                  className="text-xs px-2 py-0.5 rounded-lg font-medium transition-all hover:opacity-70"
                   style={{ background: table.color + '22', color: 'var(--color-text)', border: `1px solid ${table.color}44` }}
                   title="Click to unassign"
                 >
@@ -415,6 +416,7 @@ export default function SeatingPlanner() {
 
   return (
     <div>
+      <PageBackdrop src="/images/suppliers/caterers.jpg" />
       {/* ── Hero Banner ───────────────────────────────────────────── */}
       <div className="relative overflow-hidden no-print" style={{ minHeight: 260 }}>
         <div
@@ -464,7 +466,7 @@ export default function SeatingPlanner() {
           </button>
           {selectedTable && (
             <div
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ background: selectedTable.color + '22', color: selectedTable.color, border: `1.5px solid ${selectedTable.color}` }}
             >
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: selectedTable.color }} />
@@ -557,7 +559,7 @@ export default function SeatingPlanner() {
             >
               Unassigned
               <span
-                className="ml-2 text-xs font-normal px-2 py-0.5 rounded-full"
+                className="ml-2 text-xs font-normal px-2 py-0.5 rounded-lg"
                 style={{ background: 'var(--color-primary)', color: '#fff' }}
               >
                 {unassignedPeople.length}
@@ -750,7 +752,7 @@ export default function SeatingPlanner() {
                             {assigned.map(g => (
                               <span
                                 key={g.id}
-                                className="text-xs px-2 py-0.5 rounded-full inline-flex items-center gap-1"
+                                className="text-xs px-2 py-0.5 rounded-lg inline-flex items-center gap-1"
                                 style={{ background: table.color + '22', color: 'var(--color-text)', border: `1px solid ${table.color}44` }}
                               >
                                 {g.isCouple && <Icon name="rings" size={12} />}

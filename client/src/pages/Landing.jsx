@@ -51,14 +51,18 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="/login"
-              className="px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105"
-              style={{ background: 'var(--color-primary)', color: '#fff' }}
+              className="px-8 py-3.5 rounded-xl font-semibold text-sm transition-all hover:scale-105"
+              style={{
+                background: 'linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 68%, var(--color-accent)) 100%)',
+                color: '#ffffff',
+                boxShadow: '0 10px 26px -8px rgba(0,0,0,0.45), 0 3px 14px -4px color-mix(in srgb, var(--color-primary) 55%, transparent), inset 0 1px 0 rgba(255,255,255,0.35)',
+              }}
             >
               Get Started Free
             </Link>
             <Link
               to="/demo"
-              className="px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105"
+              className="px-8 py-3.5 rounded-xl font-semibold text-sm transition-all hover:scale-105"
               style={{ background: 'rgba(255,255,255,0.2)', border: '2px solid rgba(255,255,255,0.7)', color: '#fff', backdropFilter: 'blur(8px)' }}
             >
               View the Live Demo

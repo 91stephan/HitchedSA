@@ -24,7 +24,7 @@ function RsvpBadge({ rsvp }) {
   const s = map[rsvp] || map.pending
   return (
     <span
-      className="badge text-xs font-semibold px-2 py-0.5 rounded-full"
+      className="badge text-xs font-semibold px-2 py-0.5 rounded-lg"
       style={{ background: `color-mix(in srgb, ${s.color} 15%, transparent)`, color: s.color }}
     >
       {s.label}
@@ -186,7 +186,7 @@ export function DemoBudgetPanel() {
                 <span className="text-sm font-medium flex items-center gap-2 min-w-0" style={{ color: 'var(--color-heading)' }}>
                   <span className="truncate">{c.category}</span>
                   {c.depositPaid && (
-                    <span className="badge text-xs px-1.5 py-0.5 rounded-full inline-flex items-center gap-1 shrink-0"
+                    <span className="badge text-xs px-1.5 py-0.5 rounded-lg inline-flex items-center gap-1 shrink-0"
                       style={{ background: 'color-mix(in srgb, var(--color-success) 15%, transparent)', color: 'var(--color-success)' }}>
                       <Icon name="check" size={11} /> Deposit
                     </span>

@@ -32,7 +32,7 @@ export default function SaveStatus() {
     return (
       <div
         style={{ ...base, background: 'var(--color-card-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}
-        className="rounded-full px-3 py-1.5 text-xs font-medium shadow-md flex items-center gap-2 animate-fade-in"
+        className="rounded-lg px-3 py-1.5 text-xs font-medium shadow-md flex items-center gap-2 animate-fade-in"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" className="animate-spin" aria-hidden="true">
           <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.25" />
@@ -47,7 +47,7 @@ export default function SaveStatus() {
     return (
       <div
         style={{ ...base, background: 'var(--color-card-bg)', border: '1px solid var(--color-border)', color: 'var(--color-success)' }}
-        className="rounded-full px-3 py-1.5 text-xs font-medium shadow-md flex items-center gap-1.5 animate-fade-in"
+        className="rounded-lg px-3 py-1.5 text-xs font-medium shadow-md flex items-center gap-1.5 animate-fade-in"
       >
         <Icon name="checkCircle" size={14} />
         Saved

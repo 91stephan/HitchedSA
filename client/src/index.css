@@ -44,40 +44,59 @@
 
 @layer components {
 
-  /* ─── Buttons — pill shape with gradient ─────────────────────── */
+  /* ─── Buttons — frosted / soft (translucent tint, dark text) ─────
+     A pale translucent tint of the theme colour, dark readable text, a
+     hairline edge, a light blur and layered depth. Built from theme vars so
+     it adapts to every theme (all themes are light-background). Subtle and
+     low-key by design - buttons no longer shout. */
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.97];
-    background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 70%, var(--color-accent)) 100%);
-    color: var(--color-button-text);
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.97];
+    background: color-mix(in srgb, var(--color-primary) 22%, transparent);
+    color: var(--color-text);
     letter-spacing: 0.01em;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 16px -8px color-mix(in srgb, var(--color-primary) 55%, transparent), inset 0 1px 0 rgba(255,255,255,0.45);
   }
   .btn-primary:hover {
-    filter: brightness(1.08);
+    background: color-mix(in srgb, var(--color-primary) 32%, transparent);
+    border-color: color-mix(in srgb, var(--color-primary) 55%, transparent);
     transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 12px 24px -8px color-mix(in srgb, var(--color-primary) 60%, transparent), inset 0 1px 0 rgba(255,255,255,0.55);
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg active:scale-[0.97];
-    background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 80%, var(--color-primary)));
-    color: #fff;
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.97];
+    background: color-mix(in srgb, var(--color-accent) 24%, transparent);
+    color: var(--color-text);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 44%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 16px -8px color-mix(in srgb, var(--color-accent) 55%, transparent), inset 0 1px 0 rgba(255,255,255,0.45);
   }
-  .btn-accent:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn-accent:hover {
+    background: color-mix(in srgb, var(--color-accent) 34%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 58%, transparent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 12px 24px -8px color-mix(in srgb, var(--color-accent) 60%, transparent), inset 0 1px 0 rgba(255,255,255,0.55);
+  }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 border-2 active:scale-[0.97];
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.97];
+    border: 1px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
+    color: var(--color-text);
     background-color: transparent;
   }
   .btn-outline:hover {
-    background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, var(--color-accent)));
-    color: var(--color-button-text);
+    background: color-mix(in srgb, var(--color-primary) 16%, transparent);
+    border-color: color-mix(in srgb, var(--color-primary) 55%, transparent);
     transform: translateY(-1px);
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-full font-medium text-sm transition-all duration-200 active:scale-[0.97];
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200 active:scale-[0.97];
     color: var(--color-text-muted);
     background-color: transparent;
   }
@@ -87,11 +106,21 @@
   }
 
   .btn-danger {
-    @apply inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 shadow-md active:scale-[0.97];
-    background-color: var(--color-danger);
-    color: #fff;
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.97];
+    /* Frosted danger: pale red tint with a deep-red readable label. */
+    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
+    color: color-mix(in srgb, var(--color-danger) 75%, #000);
+    border: 1px solid color-mix(in srgb, var(--color-danger) 42%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 16px -8px color-mix(in srgb, var(--color-danger) 55%, transparent), inset 0 1px 0 rgba(255,255,255,0.45);
   }
-  .btn-danger:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn-danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 55%, transparent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 12px 24px -8px color-mix(in srgb, var(--color-danger) 60%, transparent), inset 0 1px 0 rgba(255,255,255,0.55);
+  }
 
   /* ─── Cards ───────────────────────────────────────────────────── */
 
@@ -190,30 +219,35 @@
   /* ─── Tags / Badges ───────────────────────────────────────────── */
 
   .tag {
-    @apply text-xs px-3 py-1 rounded-full font-medium;
+    @apply text-xs px-3 py-1 rounded-lg font-medium;
     background-color: var(--color-accent-light);
     color: var(--color-text);
   }
 
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-medium;
   }
 
   /* ─── Nav ─────────────────────────────────────────────────────── */
 
-  .nav-link { @apply px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-150; }
-  .nav-link.active {
-    background-color: var(--color-primary);
-    color: #ffffff; /* Always white — must be readable over any theme primary colour */
+  /* Underline tabs: no pill, no fill. Active item is marked by a coloured
+     underline set inline (colour depends on solid vs transparent navbar).
+     The transparent 2px border keeps inactive items the same height so the
+     row never shifts when an item becomes active. */
+  .nav-tab {
+    @apply px-3 py-1.5 text-sm font-medium transition-all duration-150 whitespace-nowrap;
+    border-bottom: 2px solid transparent;
   }
+  .nav-tab:hover { border-bottom-color: color-mix(in srgb, currentColor 35%, transparent); }
 
   /* ─── Tabs ────────────────────────────────────────────────────── */
 
-  .tab-btn { @apply px-5 py-2 text-sm font-medium rounded-full transition-all duration-150 border; border-color: transparent; }
+  .tab-btn { @apply px-5 py-2 text-sm font-medium rounded-xl transition-all duration-150 border; border-color: transparent; }
   .tab-btn.active {
-    background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, var(--color-accent)));
-    color: var(--color-button-text);
-    border-color: transparent;
+    /* Frosted active tab: translucent tint + dark text, matching the buttons. */
+    background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    color: var(--color-text);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
   }
   .tab-btn:not(.active) { color: var(--color-text-muted); }
   .tab-btn:not(.active):hover {

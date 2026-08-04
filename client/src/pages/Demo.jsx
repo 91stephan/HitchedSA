@@ -54,7 +54,7 @@ export default function Demo() {
           view-only. Create your free account to start planning your own.
         </p>
         <div className="mt-6">
-          <Link to="/login" className="btn-primary text-base px-8 py-3.5 inline-block" style={{ borderRadius: '9999px' }}>
+          <Link to="/login" className="btn-primary text-base px-8 py-3.5 inline-block">
             Start Planning Free
           </Link>
         </div>

@@ -61,12 +61,12 @@ export default function Auth() {
         </div>
 
         {/* Tab toggle */}
-        <div className="glass rounded-full p-1 flex gap-1 mb-5 w-full max-w-xs">
+        <div className="glass rounded-xl p-1 flex gap-1 mb-5 w-full max-w-xs">
           {['login', 'register'].map((m) => (
             <button
               key={m}
               onClick={() => { setMode(m); reset() }}
-              className="flex-1 py-2 rounded-full text-sm font-semibold transition-all duration-200"
+              className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
               style={mode === m
                 ? { background: 'rgba(255,255,255,0.9)', color: '#4A2C35' }
                 : { color: 'rgba(255,255,255,0.8)' }
@@ -136,7 +136,7 @@ export default function Auth() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-full text-base font-display font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+              className="w-full py-3 rounded-xl text-base font-display font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
               style={{
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1))',
                 border: '2px solid rgba(255,255,255,0.7)',

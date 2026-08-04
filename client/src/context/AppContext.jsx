@@ -150,6 +150,11 @@ export function AppProvider({ children }) {
   const { user } = useAuth()
 
   const [appLoading, setAppLoading] = useState(true)
+  // The id of the user whose cloud data we've finished attempting to load.
+  // Until this matches the signed-in user, routing must wait: firstLaunchDone
+  // is still its default (false) and would wrongly bounce a returning user to
+  // the "add your names" welcome page during the load.
+  const [loadedUserId, setLoadedUserId] = useState(null)
 
   // Save status shown to the user: 'idle' | 'saving' | 'saved' | 'error'.
   // Without this a failed cloud write was invisible and looked saved.
@@ -221,7 +226,7 @@ export function AppProvider({ children }) {
   // ── Load all data when user changes ──────────────────────────────────────
 
   useEffect(() => {
-    if (!user) { setAppLoading(false); return }
+    if (!user) { setAppLoading(false); setLoadedUserId(null); return }
     loadAllData(user.id)
   }, [user])
 
@@ -295,6 +300,9 @@ export function AppProvider({ children }) {
       dataLoadedRef.current = false
       setSyncStatus('error')
     } finally {
+      // Mark this user's load as attempted (success or failure) so routing can
+      // stop waiting. On success firstLaunchDone now reflects the real profile.
+      setLoadedUserId(userId)
       setAppLoading(false)
     }
   }
@@ -432,9 +440,15 @@ export function AppProvider({ children }) {
   const checklistDone    = checklist.filter((t) => t.done).length
   const checklistProgress= checklist.length > 0 ? Math.round((checklistDone / checklist.length) * 100) : 0
 
+  // Busy while auth data loads OR while a signed-in user's cloud data hasn't
+  // been loaded yet. Gating routing on this prevents the login race that dumped
+  // returning users onto the welcome/"add your names" page before their profile
+  // had loaded.
+  const appBusy = appLoading || (!!user && loadedUserId !== user.id)
+
   return (
     <AppContext.Provider value={{
-      appLoading,
+      appLoading: appBusy,
       partners,          setPartners,
       weddingDate,       setWeddingDate,
       firstLaunchDone,   completeFirstLaunch,

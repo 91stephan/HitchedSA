@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext'
 import Icon from '../components/Icon'
 import BudgetIllustration from '../components/illustrations/BudgetIllustration'
 import AdBanner from '../components/AdBanner'
+import PageBackdrop from '../components/PageBackdrop'
 
 const CATEGORY_ICONS = {
   'Venue': 'building', 'Catering': 'utensils', 'Photography & Video': 'camera',
@@ -29,6 +30,8 @@ export default function Budget() {
   }
 
   return (
+    <>
+    <PageBackdrop src="/images/articles/wedding-cost-south-africa.jpg" />
     <div className="max-w-5xl mx-auto px-4 py-8 animate-fade-in">
       <div className="flex items-center gap-6 mb-6">
         <BudgetIllustration size={100} />
@@ -200,5 +203,6 @@ export default function Budget() {
         </p>
       </div>
     </div>
+    </>
   )
 }

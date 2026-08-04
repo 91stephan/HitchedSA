@@ -5,6 +5,7 @@ import Modal from '../components/Modal'
 import FloralDivider from '../components/FloralDivider'
 import ChecklistIllustration from '../components/illustrations/ChecklistIllustration'
 import AdBanner from '../components/AdBanner'
+import PageBackdrop from '../components/PageBackdrop'
 
 // Time-based groups (when date is set)
 function getMonthsOut(weddingDate) {
@@ -143,6 +144,8 @@ export default function Checklist() {
       }))
 
   return (
+    <>
+    <PageBackdrop src="/images/suppliers/decor.jpg" />
     <div className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-5">
@@ -252,5 +255,6 @@ export default function Checklist() {
         </div>
       </Modal>
     </div>
+    </>
   )
 }

@@ -153,7 +153,7 @@ export default function Welcome() {
         {/* CTA */}
         <button
           onClick={handleSubmit}
-          className="w-full py-4 rounded-full text-lg font-display font-bold shadow-2xl transition-all duration-200 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] animate-fade-in"
+          className="w-full py-4 rounded-xl text-lg font-display font-bold shadow-2xl transition-all duration-200 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] animate-fade-in"
           style={{
             animationDelay: '0.4s',
             background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%)',
