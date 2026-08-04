@@ -9,6 +9,7 @@ export default function NotFound() {
     title: 'Page Not Found',
     description: 'The page you were looking for could not be found. Explore HitchedSA wedding guides, venues by province, and free planning tools.',
     url: '/404',
+    noindex: true,
   })
 
   return (

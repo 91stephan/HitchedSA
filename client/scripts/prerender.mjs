@@ -24,6 +24,43 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, 
 // Table Mountain reads as "South Africa"; swap for a branded 1200x630 card later.
 const DEFAULT_OG_IMAGE = 'https://hitchedsa.co.za/images/provinces/western-cape.jpg'
 
+// Site-wide brand structured data, injected on the homepage only so Google can
+// recognise HitchedSA as an entity (Organization) and the site itself (WebSite).
+// No SearchAction: the venue/supplier search is login-gated, so there is no
+// public results URL a sitelinks search box could point at.
+const HOME_STRUCTURED_DATA = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'HitchedSA',
+    url: 'https://hitchedsa.co.za',
+    logo: 'https://hitchedsa.co.za/favicon.svg',
+    description:
+      'A free, all-in-one wedding planning platform built for South African couples: venue search, budget tracker, guest list, checklist, seating planner and more.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'HitchedSA',
+    url: 'https://hitchedsa.co.za',
+  },
+]
+
+// Per-path sitemap hints, mirroring the priorities used in the old static file.
+function sitemapMeta(path) {
+  if (path === '/') return { priority: '1.0', changefreq: 'weekly' }
+  if (path === '/articles') return { priority: '0.9', changefreq: 'weekly' }
+  if (['/wedding-guide', '/wedding-venues-guide', '/wedding-venues'].includes(path))
+    return { priority: '0.9', changefreq: 'monthly' }
+  if (path.startsWith('/wedding-venues/')) return { priority: '0.9', changefreq: 'monthly' }
+  if (path.startsWith('/articles/')) return { priority: '0.8', changefreq: 'monthly' }
+  if (path === '/privacy' || path === '/terms') return { priority: '0.5', changefreq: 'yearly' }
+  return { priority: '0.7', changefreq: 'monthly' }
+}
+
+const today = new Date().toISOString().slice(0, 10)
+const sitemapUrls = []
+
 let count = 0
 for (const { path, title, description, image } of ROUTES) {
   const appHtml = render(path)
@@ -43,7 +80,12 @@ for (const { path, title, description, image } of ROUTES) {
     `<meta name="twitter:title" content="${esc(title)}" />`,
     `<meta name="twitter:description" content="${esc(description)}" />`,
     `<meta name="twitter:image" content="${esc(ogImage)}" />`,
-  ].join('\n    ')
+    path === '/'
+      ? `<script type="application/ld+json">${JSON.stringify(HOME_STRUCTURED_DATA)}</script>`
+      : '',
+  ]
+    .filter(Boolean)
+    .join('\n    ')
 
   const html = template
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>\n    ${headTags}`)
@@ -53,8 +95,23 @@ for (const { path, title, description, image } of ROUTES) {
     path === '/' ? join(distDir, 'index.html') : join(distDir, path.slice(1), 'index.html')
   mkdirSync(dirname(outFile), { recursive: true })
   writeFileSync(outFile, html)
+
+  const { priority, changefreq } = sitemapMeta(path)
+  sitemapUrls.push(
+    `  <url><loc>${canonical}</loc><lastmod>${today}</lastmod>` +
+      `<priority>${priority}</priority><changefreq>${changefreq}</changefreq></url>`
+  )
+
   count++
   console.log(`prerendered ${path} → ${outFile.slice(distDir.length)}`)
 }
 
+// Generate sitemap.xml from the same ROUTES list so it can never drift.
+const sitemap =
+  `<?xml version="1.0" encoding="UTF-8"?>\n` +
+  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  `${sitemapUrls.join('\n')}\n` +
+  `</urlset>\n`
+writeFileSync(join(distDir, 'sitemap.xml'), sitemap)
 console.log(`\n✓ prerendered ${count} public routes`)
+console.log(`✓ generated sitemap.xml with ${sitemapUrls.length} urls`)

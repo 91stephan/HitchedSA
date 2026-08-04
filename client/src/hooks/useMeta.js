@@ -24,12 +24,14 @@ function setOg(property, content) {
   el.setAttribute('content', content)
 }
 
-export function useMeta({ title, description = DEFAULT_DESC, url = '', image }) {
+export function useMeta({ title, description = DEFAULT_DESC, url = '', image, noindex = false }) {
   useEffect(() => {
     const fullTitle = title ? `${title} | HitchedSA` : DEFAULT_TITLE
     const ogImage = image ? `https://hitchedsa.co.za${image}` : DEFAULT_IMAGE
     document.title = fullTitle
     setMeta('description', description)
+    // Keep pages that should not be indexed (e.g. the 404) out of search results.
+    setMeta('robots', noindex ? 'noindex, follow' : 'index, follow')
     setOg('og:title', fullTitle)
     setOg('og:description', description)
     setOg('og:type', 'website')
@@ -42,6 +44,7 @@ export function useMeta({ title, description = DEFAULT_DESC, url = '', image }) 
     return () => {
       document.title = DEFAULT_TITLE
       setMeta('description', DEFAULT_DESC)
+      setMeta('robots', 'index, follow')
     }
-  }, [title, description, url, image])
+  }, [title, description, url, image, noindex])
 }

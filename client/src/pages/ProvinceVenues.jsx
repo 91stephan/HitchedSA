@@ -4,7 +4,17 @@ import AdBanner from '../components/AdBanner'
 import ShareButtons from '../components/ShareButtons'
 import { useMeta } from '../hooks/useMeta'
 import { PROVINCES, PROVINCE_LIST } from '../content/provinces'
+import { ARTICLES } from '../content/articles'
 import Icon from '../components/Icon'
+
+// Curated guides shown on every province page, bridging the venue and article
+// clusters so crawlers and couples move between them.
+const GUIDE_SLUGS = [
+  'wedding-cost-south-africa',
+  'best-wedding-season-south-africa',
+  'legal-requirements-marriage-south-africa',
+  'wedding-photographer-south-africa',
+]
 
 function buildSchema(p) {
   return [
@@ -301,6 +311,26 @@ export default function ProvinceVenues() {
                 Venue types, regions and the booking process across South Africa
               </p>
             </Link>
+          </div>
+        </section>
+
+        {/* Popular guides: bridge into the article cluster */}
+        <section>
+          <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--color-heading)' }}>
+            Popular Wedding Guides
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {GUIDE_SLUGS.map((slug) => ARTICLES[slug]).filter(Boolean).map((a) => (
+              <Link key={a.slug} to={`/articles/${a.slug}`} className="card p-5 block hover:shadow-md transition-shadow">
+                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--color-primary)' }}>
+                  {a.category}
+                </p>
+                <h3 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--color-heading)' }}>
+                  {a.title}
+                </h3>
+                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{a.excerpt}</p>
+              </Link>
+            ))}
           </div>
         </section>
 

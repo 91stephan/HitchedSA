@@ -16,6 +16,11 @@ import { createClient } from '@supabase/supabase-js'
 
 const FREE_WEEKLY_LIMIT = 5
 
+// Paywall temporarily disabled while the site is in AdSense review, so every
+// signed-in user gets unlimited searches and never sees an upgrade prompt.
+// Flip this back to true to re-enable the free weekly quota and Pro upsell.
+const PAYWALL_ENABLED = false
+
 const FIELD_MASKS = {
   venue:
     'places.id,places.displayName,places.formattedAddress,places.rating,places.photos,places.editorialSummary,places.nationalPhoneNumber,places.priceLevel,places.websiteUri',
@@ -99,6 +104,8 @@ export default async (req) => {
     .eq('user_id', uid)
     .maybeSingle()
   const plan = sub && sub.status === 'active' && sub.plan === 'pro' ? 'pro' : 'free'
+  // Unlimited when the paywall is off, or for genuine Pro accounts.
+  const unlimited = !PAYWALL_ENABLED || plan === 'pro'
 
   const { data: usageRow } = await admin
     .from('search_usage')
@@ -107,7 +114,7 @@ export default async (req) => {
     .eq('week_start', weekStart)
     .maybeSingle()
   const used = usageRow?.count || 0
-  const remaining = plan === 'pro' ? null : Math.max(0, FREE_WEEKLY_LIMIT - used)
+  const remaining = unlimited ? null : Math.max(0, FREE_WEEKLY_LIMIT - used)
 
   // Status check: just report plan + remaining, no search performed.
   if (action === 'status') {
@@ -120,8 +127,8 @@ export default async (req) => {
   const textQuery = (body.textQuery || '').trim()
   if (!textQuery) return json({ message: 'Please enter a location to search.' }, 400)
 
-  // 3. Enforce the free weekly quota.
-  if (plan !== 'pro' && used >= FREE_WEEKLY_LIMIT) {
+  // 3. Enforce the free weekly quota (skipped entirely while the paywall is off).
+  if (!unlimited && used >= FREE_WEEKLY_LIMIT) {
     return json({ error: 'limit', plan, remaining: 0, limit: FREE_WEEKLY_LIMIT }, 429)
   }
 
@@ -159,9 +166,9 @@ export default async (req) => {
     )
   }
 
-  // 6. Count this search against the free quota (only for free users).
+  // 6. Count this search against the free quota (only when the paywall is on).
   let newRemaining = remaining
-  if (plan !== 'pro') {
+  if (!unlimited) {
     const nextCount = used + 1
     await admin
       .from('search_usage')
